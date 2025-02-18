@@ -1,0 +1,56 @@
+[versions]
+agp = "8.8.1"
+compose-multiplatform = "1.7.0"
+kotlin = "2.1.0"
+androidx-activity = "1.10.0"
+navigation = "2.8.0-alpha10"
+landscapist = "2.3.6"
+lifecycle = "2.8.4"
+kotlinx-datetime = "0.6.1"
+kotlinx-coroutines = "1.9.0"
+koin = "4.0.0"
+ktor = "3.0.3"
+napier = "2.7.1"
+
+[libraries]
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
+
+#Lifecycle
+lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+#Kotlinx
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+
+#Koin
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin"}
+koin-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin"}
+koin-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation", version.ref = "koin"}
+
+#Ktor
+ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+#Other
+landscapist-coil = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist" }
+napier-logger = { module = "io.github.aakira:napier", version.ref = "napier"}
+
+[bundles]
+ktor = ["ktor-core", "ktor-logging", "ktor-content"]
+koin = ["koin-compose", "koin-viewmodel", "koin-viewmodel-navigation"]
+lifecycle = ["lifecycle-viewmodel", "lifecycle-runtime-compose"]
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
