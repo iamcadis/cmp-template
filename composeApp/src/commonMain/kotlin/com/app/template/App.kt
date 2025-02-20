@@ -74,9 +74,11 @@ fun App() {
             ) {
 
                 AsyncImage(
-                    data = "https://media.istockphoto.com/id/1316134499/photo/a-concept-image-of-a-magnifying-glass-on-blue-background-with-a-word-example-zoom-inside-the.jpg?s=612x612&w=0&k=20&c=sZM5HlZvHFYnzjrhaStRpex43URlxg6wwJXff3BE9VA=",
+                    data = "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.width(150.dp).height(150.dp)
+                    modifier = Modifier
+                        .width(150.dp)
+                        .height(150.dp)
                         .clickable {
                             showContent = !showContent
                         }
