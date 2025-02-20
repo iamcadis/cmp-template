@@ -24,8 +24,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import com.theme.utilities.Validator
-import com.theme.utilities.addIndicatorRequired
-import com.theme.utilities.hasClickable
+import com.theme.utilities.ext.addIndicatorRequired
+import com.theme.utilities.ext.hasClickable
 import com.theme.utilities.validate
 
 /**

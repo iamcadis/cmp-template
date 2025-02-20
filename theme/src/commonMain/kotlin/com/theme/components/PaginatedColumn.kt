@@ -34,7 +34,6 @@ fun PaginatedColumn(
     indicatorLoading: @Composable () -> Unit = { PaginatedLazyColumnDefaults.IndicatorLoading() },
     content: LazyListScope.() -> Unit
 ) {
-
     val isLastItemVisible by remember {
         derivedStateOf {
             val lastVisibleIndex = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -1

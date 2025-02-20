@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import com.theme.utilities.Validator
-import com.theme.utilities.derivedFilterBy
+import com.theme.utilities.ext.derivedFilterBy
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
