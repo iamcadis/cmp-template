@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -23,17 +22,15 @@ import com.theme.DisTheme
 
 @Composable
 fun PaginatedColumn(
-    size: Int,
-    perPage: Int,
     loading: Boolean,
     onLoadMore: () -> Unit,
     modifier: Modifier = Modifier,
-    listState: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     indicatorLoading: @Composable () -> Unit = { PaginatedLazyColumnDefaults.IndicatorLoading() },
     content: LazyListScope.() -> Unit
 ) {
+    val listState = rememberLazyListState()
     val isLastItemVisible by remember {
         derivedStateOf {
             val lastVisibleIndex = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -1
@@ -42,9 +39,7 @@ fun PaginatedColumn(
     }
 
     LaunchedEffect(isLastItemVisible) {
-        if (isLastItemVisible && size % perPage == 0 && !loading) {
-            onLoadMore()
-        }
+        if (isLastItemVisible && !loading) { onLoadMore() }
     }
 
     LazyColumn(

@@ -31,7 +31,7 @@ abstract class ViewModel<State: ViewState, Event: ViewEvent, Effect: ViewEffect>
 
     protected abstract fun initializeState(): State
 
-    open suspend fun loadInitialData() {}
+    protected open suspend fun loadInitialData() {}
 
     open fun onEvent(event: Event) {}
 
