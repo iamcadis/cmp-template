@@ -1,8 +1,8 @@
 [versions]
-agp = "8.8.1"
+agp = "8.8.2"
 compose = "1.7.3"
 kotlin = "2.1.0"
-activity = "1.10.0"
+activity = "1.10.1"
 navigation = "2.8.0-alpha10"
 landscapist = "2.4.7"
 lifecycle = "2.8.4"
@@ -10,6 +10,7 @@ kotlinx-datetime = "0.6.1"
 kotlinx-coroutines = "1.10.1"
 koin = "4.0.0"
 ktor = "3.1.0"
+mp-settings = "1.3.0"
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
@@ -29,6 +30,7 @@ koin-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", ve
 koin-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation", version.ref = "koin"}
 
 #Ktor
+ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
 ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
@@ -37,12 +39,15 @@ ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation", ve
 ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 #Other
-landscapist-coil = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist" }
+landscapist = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist" }
+mp-settings = { group = "com.russhwolf", name = "multiplatform-settings-no-arg", version.ref = "mp-settings" }
+mp-settings-coroutines = { group = "com.russhwolf", name = "multiplatform-settings-coroutines", version.ref = "mp-settings" }
 
 [bundles]
-ktor = ["ktor-core", "ktor-logging", "ktor-content"]
+ktor = ["ktor-auth", "ktor-core", "ktor-logging", "ktor-content"]
 koin = ["koin-compose", "koin-viewmodel", "koin-viewmodel-navigation"]
 lifecycle = ["lifecycle-viewmodel", "lifecycle-runtime-compose"]
+multiplatform-settings = ["mp-settings", "mp-settings-coroutines"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

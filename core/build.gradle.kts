@@ -32,6 +32,7 @@ kotlin {
             api(libs.kotlinx.coroutines)
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.lifecycle)
+            implementation(libs.bundles.multiplatform.settings)
         }
         iosMain.dependencies {
             implementation(libs.ktor.darwin)
