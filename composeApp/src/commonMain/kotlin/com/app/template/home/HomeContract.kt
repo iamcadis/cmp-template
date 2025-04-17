@@ -1,9 +1,9 @@
 package com.app.template.home
 
 import androidx.compose.runtime.Immutable
-import com.core.viewmodel.ViewEffect
-import com.core.viewmodel.ViewEvent
-import com.core.viewmodel.ViewState
+import com.core.mvi.ViewEffect
+import com.core.mvi.ViewEvent
+import com.core.mvi.ViewState
 
 class HomeContract {
     @Immutable

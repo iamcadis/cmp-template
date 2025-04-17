@@ -1,14 +1,12 @@
-package com.core.viewmodel
+package com.core.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -23,17 +21,15 @@ abstract class ViewModel<State: ViewState, Event: ViewEvent, Effect: ViewEffect>
 
     private fun createState() = _state.onStart {
         viewModelScope.launch { loadInitialData() }
-    }.stateIn(
+    }.onetimeStateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000L),
-        initialValue = initial
+        initialValue = initial,
+        stopTimeoutMillis = 5_000L
     )
 
     protected abstract fun initializeState(): State
 
     protected open suspend fun loadInitialData() {}
-
-    open fun onEvent(event: Event) {}
 
     protected fun updateState(reduce: State.() -> State) {
         _state.update(function = reduce)
@@ -42,4 +38,6 @@ abstract class ViewModel<State: ViewState, Event: ViewEvent, Effect: ViewEffect>
     protected fun sendEffect(effect: Effect) {
         _effects.trySend(effect)
     }
+
+    open fun onEvent(event: Event) {}
 }

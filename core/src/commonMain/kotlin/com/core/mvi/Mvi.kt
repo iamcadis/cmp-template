@@ -1,4 +1,4 @@
-package com.core.viewmodel
+package com.core.mvi
 
 interface ViewState
 

@@ -2,7 +2,7 @@ package com.app.template.home
 
 import com.core.network.NoContent
 import com.core.network.Repository
-import com.core.viewmodel.ViewModel
+import com.core.mvi.ViewModel
 
 class HomeViewModel(
     private val repository: Repository
