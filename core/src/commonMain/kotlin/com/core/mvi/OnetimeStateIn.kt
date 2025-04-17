@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.dropWhile
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.transformLatest
 
-fun <T> Flow<T>.onetimeStateIn(
+fun <T> Flow<T>.onlyOnceStateIn(
     scope: CoroutineScope,
     initialValue: T,
     stopTimeoutMillis: Long = 0,
@@ -23,7 +23,7 @@ fun <T> Flow<T>.onetimeStateIn(
 ): StateFlow<T> {
     return stateIn(
         scope = scope,
-        started = OnetimeWhileSubscribed(
+        started = OnlyOnceWhileSubscribed(
             stopTimeout = stopTimeoutMillis,
             replayExpiration = replayExpiration,
         ),
@@ -31,7 +31,7 @@ fun <T> Flow<T>.onetimeStateIn(
     )
 }
 
-class OnetimeWhileSubscribed(
+class OnlyOnceWhileSubscribed(
     private val stopTimeout: Long,
     private val replayExpiration: Long,
 ) : SharingStarted {
@@ -74,9 +74,8 @@ class OnetimeWhileSubscribed(
         return "SharingStarted.WhileSubscribed(${params.joinToString()})"
     }
 
-    override fun equals(other: Any?): Boolean {
-        return other is OnetimeWhileSubscribed && stopTimeout == other.stopTimeout && replayExpiration == other.replayExpiration
-    }
+    override fun equals(other: Any?) = other is OnlyOnceWhileSubscribed &&
+            stopTimeout == other.stopTimeout && replayExpiration == other.replayExpiration
 
     override fun hashCode(): Int = stopTimeout.hashCode() * 31 + replayExpiration.hashCode()
 }

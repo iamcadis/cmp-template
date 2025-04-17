@@ -20,16 +20,18 @@ abstract class ViewModel<State: ViewState, Event: ViewEvent, Effect: ViewEffect>
     val effect = _effects.receiveAsFlow()
 
     private fun createState() = _state.onStart {
-        viewModelScope.launch { loadInitialData() }
-    }.onetimeStateIn(
+        viewModelScope.launch { fetchInitialData() }
+    }.onlyOnceStateIn(
         scope = viewModelScope,
         initialValue = initial,
-        stopTimeoutMillis = 5_000L
+        stopTimeoutMillis = 5_000
     )
 
     protected abstract fun initializeState(): State
 
-    protected open suspend fun loadInitialData() {}
+    protected open suspend fun fetchInitialData() {}
+
+    internal open fun onEvent(event: Event) {}
 
     protected fun updateState(reduce: State.() -> State) {
         _state.update(function = reduce)
@@ -38,6 +40,4 @@ abstract class ViewModel<State: ViewState, Event: ViewEvent, Effect: ViewEffect>
     protected fun sendEffect(effect: Effect) {
         _effects.trySend(effect)
     }
-
-    open fun onEvent(event: Event) {}
 }
