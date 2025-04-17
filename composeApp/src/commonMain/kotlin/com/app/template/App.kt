@@ -68,9 +68,7 @@ fun App() {
                 modifier = Modifier.fillMaxWidth()
                     .padding(all = DisTheme.dimens.default),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = DisTheme.dimens.default
-                )
+                verticalArrangement = Arrangement.spacedBy(space = DisTheme.dimens.default)
             ) {
 
                 AsyncImage(
