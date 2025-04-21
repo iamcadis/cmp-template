@@ -1,5 +1,4 @@
-@file:OptIn(ExperimentalCoroutinesApi::class)
-package com.core.mvi
+package com.core.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,9 +30,9 @@ fun <T> Flow<T>.onlyOnceStateIn(
     )
 }
 
-class OnlyOnceWhileSubscribed(
+private class OnlyOnceWhileSubscribed(
     private val stopTimeout: Long,
-    private val replayExpiration: Long,
+    private val replayExpiration: Long = Long.MAX_VALUE,
 ) : SharingStarted {
 
     private val hasCollected: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -47,6 +46,7 @@ class OnlyOnceWhileSubscribed(
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun command(subscriptionCount: StateFlow<Int>): Flow<SharingCommand> =
         combine(hasCollected, subscriptionCount) { collected, counts ->
             collected to counts
@@ -63,8 +63,8 @@ class OnlyOnceWhileSubscribed(
                 }
             }
         }
-        .dropWhile { it != SharingCommand.START }
-        .distinctUntilChanged()
+            .dropWhile { it != SharingCommand.START }
+            .distinctUntilChanged()
 
     override fun toString(): String {
         val params = buildList(2) {
