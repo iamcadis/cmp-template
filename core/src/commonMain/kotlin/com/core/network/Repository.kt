@@ -5,7 +5,6 @@ import io.ktor.client.call.body
 import io.ktor.client.request.request
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class Repository(val httpClient: HttpClient) {
-
     inline fun <reified T> get(url: String, needAuth: Boolean = true): Flow<T> {
         return request(url = url, method = HttpMethod.Get, needAuth = needAuth)
     }
@@ -33,12 +31,16 @@ class Repository(val httpClient: HttpClient) {
         needAuth: Boolean = true,
         contentType: ContentType = ContentType.Application.Json
     ) = flow {
-        httpClient.request(url) {
+
+        val result = httpClient.request(url) {
             this.method = method
             this.addDataBody(contentType, data)
-            this.removeAuthorizationIf(needAuth.not())
-        }.also { res ->
-            emit(res.takeIf { it.status == HttpStatusCode.OK }?.body() ?: NoContent as T)
+            this.removeAuthorizationIf(!needAuth)
+        }.let {
+            if (it.isJson) it.body<T>() else NoContent as T
         }
+
+        emit(value = result)
+
     }.flowOn(Dispatchers.IO)
 }

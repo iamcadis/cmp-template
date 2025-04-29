@@ -3,6 +3,7 @@ package com.core.network
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.headers
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
@@ -21,3 +22,6 @@ fun HttpRequestBuilder.removeAuthorizationIf(condition: Boolean) {
         this.headers { remove(HttpHeaders.Authorization) }
     }
 }
+
+val HttpResponse.isJson: Boolean
+    get() = headers[HttpHeaders.ContentType]?.contains("application/json", true) == true

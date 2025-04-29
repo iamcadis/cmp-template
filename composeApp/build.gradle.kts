@@ -33,6 +33,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core)
             implementation(projects.theme)
+            implementation(projects.utility)
             implementation(libs.navigation)
             implementation(libs.bundles.koin)
         }

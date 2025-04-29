@@ -1,6 +1,5 @@
 package com.core.viewmodel
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -11,26 +10,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.dropWhile
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.transformLatest
 
-fun <T> Flow<T>.onlyOnceStateIn(
-    scope: CoroutineScope,
-    initialValue: T,
-    stopTimeoutMillis: Long = 0,
-    replayExpiration: Long = Long.MAX_VALUE,
-): StateFlow<T> {
-    return stateIn(
-        scope = scope,
-        started = OnlyOnceWhileSubscribed(
-            stopTimeout = stopTimeoutMillis,
-            replayExpiration = replayExpiration,
-        ),
-        initialValue = initialValue,
-    )
-}
-
-private class OnlyOnceWhileSubscribed(
+internal class OnlyOnceWhileSubscribed(
     private val stopTimeout: Long,
     private val replayExpiration: Long = Long.MAX_VALUE,
 ) : SharingStarted {

@@ -57,7 +57,7 @@ internal object HttpClient {
             HttpResponseValidator {
                 handleResponseExceptionWithRequest { exception, _ ->
                     when(exception) {
-                        is ResponseException -> throw ApiException(exception.response.body<Error>())
+                        is ResponseException -> throw ApiException(exception.response.body<ApiError>())
                         else -> throw exception
                     }
                 }

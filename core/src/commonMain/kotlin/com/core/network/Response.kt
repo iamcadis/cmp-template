@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 object NoContent
 
 @Serializable
-data class Error(val code: Int, val message: String)
+data class ApiError(val code: Int, val message: String)
 
 @Serializable
 data class AuthResponse(
@@ -15,6 +15,10 @@ data class AuthResponse(
     @SerialName("refresh_token") val refreshToken: String?,
 )
 
-class ApiException(error: Error) : Exception(
-    message = "Error code: ${error.code} with message: ${error.message}"
+class ApiException(apiError: ApiError) : Exception(
+    message = "Error code: ${apiError.code} with message: ${apiError.message}"
+)
+
+class NoInternetException() : Exception(
+    message = "There is no internet connection"
 )

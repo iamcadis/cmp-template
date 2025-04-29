@@ -13,32 +13,32 @@ import androidx.compose.ui.unit.dp
 
 /**
  * A simple example of a modal bottom sheet looks like this:
- * @param modifier Optional [Modifier] for the bottom sheet.
- * @param dismissible The state of the bottom sheet can dismiss on drag or touch outside.
- * @param shape The shape of the bottom sheet.
- * @param onDismissRequest Executes when the user clicks outside of the bottom sheet, after sheet
+ * @param onDismiss Executes when the user clicks outside of the bottom sheet, after sheet
  * animates to [Hidden].
+ * @param modifier Optional [Modifier] for the bottom sheet.
+ * @param dismissOnOutside The state of the bottom sheet can dismiss on drag or touch outside.
+ * @param shape The shape of the bottom sheet.
  * @param content The content to be displayed inside the bottom sheet.
  */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(
-    onDismissRequest: () -> Unit,
+    onDismiss: () -> Unit,
     modifier: Modifier = Modifier,
-    dismissible: Boolean = true,
+    dismissOnOutside: Boolean = true,
     shape: Shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
-        confirmValueChange = { if (!dismissible) it != Hidden else true }
+        confirmValueChange = { if (!dismissOnOutside) it != Hidden else true }
     )
 
     ModalBottomSheet(
         modifier = modifier,
         sheetState = sheetState,
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = onDismiss,
         shape = shape,
         content = content
     )

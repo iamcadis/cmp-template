@@ -124,7 +124,7 @@ fun App() {
 
                 if (showContent) {
                     BottomSheet(
-                        onDismissRequest = { showContent = false },
+                        onDismiss = { showContent = false },
                     ) {
                         Text("Content bottom sheet")
                     }
