@@ -1,0 +1,3 @@
+#include "Config.xcconfig"
+PRODUCT_BUNDLE_IDENTIFIER=$(inherited).debug
+INFOPLIST_KEY_CFBundleDisplayName=$(inherited) Debug
