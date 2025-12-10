@@ -41,14 +41,12 @@ google-tink-android = { module = "com.google.crypto.tink:tink-android", version.
 
 #KOIN
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin"}
-koin-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin"}
-koin-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation", version.ref = "koin"}
 #noinspection UnusedVersionCatalogEntry
-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"}
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"} #Used in gradle convention
 #noinspection UnusedVersionCatalogEntry
-koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-annotations"}
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-annotations"} #Used in gradle convention
 #noinspection UnusedVersionCatalogEntry
-koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-annotations"}
+koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-annotations"} #Used in gradle convention
 
 #KTOR
 ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
@@ -78,5 +76,3 @@ convention-koin-ksp = { id = "base.koin.ksp", version = "unspecified" }
 datastore = ["androidx-datastore", "androidx-datastore-preferences"]
 kotlinx = ["kotlinx-collections", "kotlinx-coroutines", "kotlinx-datetime", "kotlinx-serialization-json"]
 ktor = ["ktor-auth", "ktor-content", "ktor-core", "ktor-logging", "ktor-serialization"]
-#noinspection UnusedVersionCatalogEntry
-koin = ["koin-compose", "koin-viewmodel", "koin-viewmodel-navigation"] # Required for functionality within the feature convention plugin
