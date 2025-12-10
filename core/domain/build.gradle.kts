@@ -1,16 +1,23 @@
+import extension.addKspCompiler
+
 plugins {
     alias(libs.plugins.convention.library)
-    alias(libs.plugins.convention.koin.ksp)
+    alias(libs.plugins.convention.ksp)
+}
+
+android {
+    namespace = "com.core.domain"
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.common)
+            implementation(libs.bundles.koin.annotations)
         }
     }
 }
 
-android {
-    namespace = "com.core.domain"
+dependencies {
+    addKspCompiler(libs.koin.ksp.compiler)
 }

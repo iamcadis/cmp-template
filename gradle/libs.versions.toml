@@ -19,7 +19,6 @@ koin-annotations = "2.3.1"
 gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
-gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 androidx-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -40,13 +39,10 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 google-tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tink-android" }
 
 #KOIN
-koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin"}
-#noinspection UnusedVersionCatalogEntry
-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"} #Used in gradle convention
-#noinspection UnusedVersionCatalogEntry
-koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-annotations"} #Used in gradle convention
-#noinspection UnusedVersionCatalogEntry
-koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-annotations"} #Used in gradle convention
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotations" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-annotations" } #Used in gradle convention
 
 #KTOR
 ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
@@ -68,11 +64,12 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 
 #CONVENTION
 convention-app = { id = "base.application", version = "unspecified" }
+convention-ksp = { id = "base.ksp", version = "unspecified" }
 convention-compose = { id = "base.compose", version = "unspecified" }
 convention-library = { id = "base.library", version = "unspecified" }
-convention-koin-ksp = { id = "base.koin.ksp", version = "unspecified" }
 
 [bundles]
 datastore = ["androidx-datastore", "androidx-datastore-preferences"]
 kotlinx = ["kotlinx-collections", "kotlinx-coroutines", "kotlinx-datetime", "kotlinx-serialization-json"]
 ktor = ["ktor-auth", "ktor-content", "ktor-core", "ktor-logging", "ktor-serialization"]
+koin-annotations = ["koin-core", "koin-annotations"]

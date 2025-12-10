@@ -21,12 +21,12 @@ internal fun Project.getPluginId(alias: String): String {
     return catalogs.findPlugin(alias).get().get().pluginId
 }
 
-internal fun Project.getBundle(alias: String): Provider<ExternalModuleDependencyBundle?> {
-    return catalogs.findBundle(alias).get()
+internal fun Project.getLibrary(alias: String): Provider<MinimalExternalModuleDependency> {
+    return catalogs.findLibrary(alias).get()
 }
 
-internal fun Project.getLibrary(alias: String): Provider<MinimalExternalModuleDependency?> {
-    return catalogs.findLibrary(alias).get()
+internal fun Project.getBundle(alias: String): Provider<ExternalModuleDependencyBundle> {
+    return catalogs.findBundle(alias).get()
 }
 
 internal fun Project.configureAndroid(extension: CommonExtension<*, *, *, *, *, *>) {
