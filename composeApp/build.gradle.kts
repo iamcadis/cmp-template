@@ -22,6 +22,7 @@ kotlin {
             implementation(projects.core.common)
             implementation(projects.core.data)
             implementation(projects.core.domain)
+            implementation(projects.core.ui)
             implementation(libs.koin.compose)
             implementation(libs.lifecycle.runtime)
             implementation(libs.lifecycle.viewmodel)
