@@ -13,7 +13,7 @@ import io.ktor.http.isSuccess
 import org.koin.core.annotation.Single
 
 @Single(binds = [AuthRepository::class])
-class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
+internal class AuthRepositoryImpl(private val apiService: ApiService) : AuthRepository {
     override suspend fun login(request: LoginRequest) : LoginResponse {
         val response = apiService.post<LoginResponseDTO>(url = ApiConfig.Url.LOGIN, data = request.toDto())
         return response.toDomain()

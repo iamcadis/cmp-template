@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.convention.library)
-    alias(libs.plugins.convention.ksp)
+    alias(libs.plugins.convention.koin.ksp)
 }
 
 kotlin {

@@ -32,8 +32,8 @@ gradlePlugin {
             id = "base.library"
             implementationClass = "LibraryConventionPlugin"
         }
-        create("google.ksp") {
-            id = "base.google.ksp"
+        create("koin.ksp") {
+            id = "base.koin.ksp"
             implementationClass = "KspCompilerConventionPlugin"
         }
     }

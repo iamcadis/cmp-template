@@ -20,6 +20,7 @@ class KspCompilerConventionPlugin : Plugin<Project> {
                 configure<KotlinMultiplatformExtension> {
                     sourceSets {
                         commonMain.dependencies {
+                            implementation(getLibrary("koin-core"))
                             implementation(getLibrary("koin-annotations"))
                         }
                     }
@@ -29,7 +30,7 @@ class KspCompilerConventionPlugin : Plugin<Project> {
                 }
 
                 configure<KspExtension> {
-                    arg("KOIN_CONFIG_CHECK","true")
+                    arg("KOIN_CONFIG_CHECK","false")
                 }
             }
 

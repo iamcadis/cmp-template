@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.convention.library)
-    alias(libs.plugins.convention.ksp)
+    alias(libs.plugins.convention.koin.ksp)
 }
 
 kotlin {
@@ -12,7 +12,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.common)
             implementation(projects.core.domain)
-            implementation(libs.koin.core)
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.datastore)
         }

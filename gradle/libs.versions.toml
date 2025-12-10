@@ -40,10 +40,11 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 google-tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tink-android" }
 
 #KOIN
-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"}
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin"}
 koin-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin"}
 koin-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation", version.ref = "koin"}
+#noinspection UnusedVersionCatalogEntry
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"}
 #noinspection UnusedVersionCatalogEntry
 koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-annotations"}
 #noinspection UnusedVersionCatalogEntry
@@ -69,9 +70,9 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 
 #CONVENTION
 convention-app = { id = "base.application", version = "unspecified" }
-convention-ksp = { id = "base.google.ksp", version = "unspecified" }
 convention-compose = { id = "base.compose", version = "unspecified" }
 convention-library = { id = "base.library", version = "unspecified" }
+convention-koin-ksp = { id = "base.koin.ksp", version = "unspecified" }
 
 [bundles]
 datastore = ["androidx-datastore", "androidx-datastore-preferences"]

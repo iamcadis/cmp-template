@@ -23,7 +23,6 @@ kotlin {
             implementation(projects.core.data)
             implementation(projects.core.domain)
             implementation(libs.koin.compose)
-            implementation(libs.koin.annotations)
             implementation(libs.lifecycle.runtime)
             implementation(libs.lifecycle.viewmodel)
         }
