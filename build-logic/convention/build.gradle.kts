@@ -23,6 +23,10 @@ gradlePlugin {
             id = "base.application"
             implementationClass = "AppConventionPlugin"
         }
+        create("ksp") {
+            id = "base.ksp"
+            implementationClass = "KspConventionPlugin"
+        }
         create("compose") {
             id = "base.compose"
             implementationClass = "ComposeConventionPlugin"
@@ -31,9 +35,9 @@ gradlePlugin {
             id = "base.library"
             implementationClass = "LibraryConventionPlugin"
         }
-        create("ksp") {
-            id = "base.ksp"
-            implementationClass = "KspConventionPlugin"
+        create("feature") {
+            id = "base.feature"
+            implementationClass = "FeatureConventionPlugin"
         }
     }
 }

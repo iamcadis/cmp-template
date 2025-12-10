@@ -7,8 +7,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.common)
-            implementation(libs.lifecycle.runtime)
-            implementation(libs.lifecycle.viewmodel)
+            implementation(libs.bundles.lifecycle)
         }
     }
 }
