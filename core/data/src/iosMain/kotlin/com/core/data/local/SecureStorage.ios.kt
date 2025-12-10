@@ -42,7 +42,7 @@ import platform.darwin.noErr
 
 @OptIn(BetaInteropApi::class, ExperimentalForeignApi::class)
 @Suppress("CAST_NEVER_SUCCEEDS")
-class IOSSecureStorage : SecureStorage {
+class IosSecureStorage : SecureStorage {
 
     override suspend operator fun get(key: String): String? {
         return getValue(key)?.stringValue

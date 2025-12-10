@@ -11,7 +11,7 @@ import platform.Network.nw_path_status_satisfied
 import kotlin.concurrent.Volatile
 
 
-class IosConnectivityObserverObserver : ConnectivityObserver {
+class IosConnectivityObserver : ConnectivityObserver {
     private val monitor = nw_path_monitor_create()
 
     @Volatile

@@ -8,6 +8,7 @@ dependencies {
     compileOnly(libs.gradle.android)
     compileOnly(libs.gradle.kotlin)
     compileOnly(libs.gradle.compose)
+    compileOnly(libs.gradle.ksp)
 }
 
 tasks {
@@ -30,6 +31,10 @@ gradlePlugin {
         create("library") {
             id = "base.library"
             implementationClass = "LibraryConventionPlugin"
+        }
+        create("google.ksp") {
+            id = "base.google.ksp"
+            implementationClass = "KspCompilerConventionPlugin"
         }
     }
 }

@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 
-class AndroidConnectivityObserverObserver(private val context: Context) : ConnectivityObserver {
+class AndroidConnectivityObserver(private val context: Context) : ConnectivityObserver {
     override fun isConnected(): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = cm.activeNetwork ?: return false
