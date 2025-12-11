@@ -25,8 +25,9 @@ abstract class BaseViewModel<A : ViewAction, E : ViewEffect, S : ViewState>(
     initialState: S
 ) : ViewModel() {
 
-    private val hasInitialDataLoaded = AtomicBoolean(false)
+
     private var pendingRetryAction: (() -> Unit)? = null
+    private val hasInitialDataLoaded = AtomicBoolean(false)
 
     private val _state = MutableStateFlow(initialState)
     val state: StateFlow<S> = _state
