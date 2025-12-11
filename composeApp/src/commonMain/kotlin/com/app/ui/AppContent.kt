@@ -20,7 +20,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun AppContent(config: ScreenConfig, userHasLogin: Boolean) {
+fun AppContent(screenConfig: ScreenConfig, userHasLogin: Boolean) {
     var showContent by remember { mutableStateOf(false) }
 
     Column(
