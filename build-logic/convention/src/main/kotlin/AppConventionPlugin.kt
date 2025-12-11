@@ -4,6 +4,7 @@ import extension.addIosTarget
 import extension.configureAndroid
 import extension.getPluginId
 import extension.getProperty
+import extension.suppressDefaultWarning
 import task.generateIosConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -47,6 +48,7 @@ class AppConventionPlugin : Plugin<Project> {
                 configure<KotlinMultiplatformExtension> {
                     addAndroidTarget()
                     addIosTarget()
+                    suppressDefaultWarning()
                 }
             }
 

@@ -12,7 +12,12 @@ data class ScreenConfig(
     val confirmOnLeave: Boolean = false,
     val topBarActions: @Composable (RowScope.() -> Unit)? = null,
     val floatingButton: @Composable (() -> Unit)? = null,
-)
+) {
+
+    companion object {
+        val EMPTY = ScreenConfig()
+    }
+}
 
 @Stable
 interface ScreenProvider {

@@ -1,0 +1,64 @@
+package com.core.ui.widget
+
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import com.core.ui.provider.LocalScreenProvider
+import com.core.ui.provider.ScreenConfig
+import com.core.ui.provider.ScreenProvider
+
+
+@Composable
+fun AppContainer(
+    showLoading: Boolean = true,
+    loadingTime: Int = 700,
+    content: @Composable (ScreenConfig) -> Unit
+) {
+    val snackbarHost = remember { CustomSnackbarHostState() }
+    var screenConfig by remember { mutableStateOf(ScreenConfig.EMPTY) }
+    val screenProvider = object : ScreenProvider {
+        override fun setConfig(config: ScreenConfig) {
+            screenConfig = config
+        }
+    }
+
+    CompositionLocalProvider(
+        LocalSnackbarHostState provides snackbarHost,
+        LocalScreenProvider provides screenProvider,
+    ) {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            AnimatedContent(
+                label = "Content Transition",
+                targetState = showLoading,
+                transitionSpec = {
+                    fadeIn(animationSpec = tween(loadingTime)) +
+                            scaleIn(initialScale = 0.92f) togetherWith
+                            fadeOut(animationSpec = tween(loadingTime))
+                }
+            ) { showSplash ->
+                if (showSplash) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
+                    }
+                } else {
+                    content(screenConfig)
+                }
+            }
+        }
+    }
+}

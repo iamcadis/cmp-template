@@ -15,6 +15,14 @@ import org.koin.core.annotation.Single
 @Module
 class NetworkModule {
     @Single
+    fun provideConnectivityObserver(contextWrapper: ContextWrapper) : ConnectivityObserver {
+        return getConnectivityObserver(contextWrapper)
+    }
+
+    @Single
+    fun provideHttpClientEngine() = getHttpClientEngine()
+
+    @Single
     fun provideDispatcher() : DispatcherProvider = DefaultDispatchers()
 
     @Single
