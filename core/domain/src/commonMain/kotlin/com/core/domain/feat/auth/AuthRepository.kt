@@ -1,7 +1,4 @@
-package com.core.domain.repository
-
-import com.core.domain.model.LoginRequest
-import com.core.domain.model.LoginResponse
+package com.core.domain.feat.auth
 
 interface AuthRepository {
     suspend fun login(request: LoginRequest) : LoginResponse

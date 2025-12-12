@@ -7,7 +7,7 @@ import com.core.data.local.SecureStorage.Companion.getAccessToken
 import com.core.data.local.SecureStorage.Companion.getRefreshToken
 import com.core.data.local.SecureStorage.Companion.storeAccessToken
 import com.core.data.local.SecureStorage.Companion.storeRefreshToken
-import com.core.data.remote.dto.AuthTokenDTO
+import com.core.data.feat.auth.AuthTokenDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
@@ -74,7 +74,7 @@ internal class ApiClient(
                                 markAsRefreshTokenRequest() // Crucial: prevents infinite loops
                                 contentType(ContentType.Application.Json)
                                 setBody(mapOf("refreshToken" to oldRefreshToken))
-                            }.body<AuthTokenDTO>()
+                            }.body<AuthTokenDto>()
 
                             storage.storeAccessToken(response.accessToken)
                             response.refreshToken?.let {
