@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlin.math.max
 
 enum class ScreenSize {
     Compact,
@@ -33,5 +35,16 @@ fun rememberIsTablet(): Boolean {
 
     return remember(screenSize) {
         screenSize != ScreenSize.Compact
+    }
+}
+
+@Composable
+fun rememberAutoGridColumns(maxColumnWidth: Dp = 250.dp): Int {
+    val density = LocalDensity.current
+    val windowWidth = LocalWindowInfo.current.containerSize.width
+
+    return remember(windowWidth) {
+        val widthDp = with(density) { windowWidth.toDp() }
+        max((widthDp / maxColumnWidth).toInt(), 1)
     }
 }

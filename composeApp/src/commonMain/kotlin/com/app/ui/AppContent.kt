@@ -42,7 +42,7 @@ fun AppContent(screenConfig: ScreenConfig, userHasLogin: Boolean) {
             items(20) { index ->
                 Card {
                     Text(
-                        text = "Index ${index + 1}",
+                        text = "Index ${index + 1} Index ${index + 1} Index ${index + 1}",
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(24.dp)

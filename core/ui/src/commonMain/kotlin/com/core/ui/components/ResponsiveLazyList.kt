@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.core.ui.theme.AppTheme
+import com.core.ui.widget.rememberAutoGridColumns
 import com.core.ui.widget.rememberIsTablet
 
 @Composable
@@ -21,12 +22,12 @@ fun ResponsiveLazyList(
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
     space: Dp = AppTheme.dimens.default,
-    gridCols: Int = 3,
+    gridCols: Int = rememberAutoGridColumns(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     content: LazyGridScope.() -> Unit
 ) {
     val isTablet = rememberIsTablet()
-    val columnCount = remember(isTablet) {
+    val columnCount = remember(isTablet, gridCols) {
         if (isTablet) gridCols else 1
     }
 
