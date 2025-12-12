@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.core.ui.components.ResponsiveGroup
+import com.core.ui.theme.AppTheme
 import org.jetbrains.compose.resources.stringResource
 import template.core.ui.generated.resources.Res
 import template.core.ui.generated.resources.leave_page_message
@@ -51,12 +52,12 @@ fun ConfirmationDialog(
             ) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = AppTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = message,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = AppTheme.colors.onSurfaceVariant,
                 )
                 Spacer(Modifier.height(16.dp))
                 ResponsiveGroup(rowGap = 24.dp, layoutDirection = actionsLayoutDirectionTablet) {

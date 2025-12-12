@@ -9,12 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
+import com.core.ui.theme.AppTheme
 import com.core.ui.widget.rememberIsTablet
 
 @Composable
 fun ResponsiveGroup(
-    rowGap: Dp = 16.dp,
+    rowGap: Dp = AppTheme.dimens.default,
     layoutDirection: LayoutDirection = LayoutDirection.Ltr,
     content: @Composable (Modifier) -> Unit
 ) {

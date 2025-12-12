@@ -3,7 +3,6 @@ package com.core.ui.widget
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.core.ui.theme.AppTheme
 
 @Composable
 fun LoadingDialog(text: String) {
@@ -27,7 +27,7 @@ fun LoadingDialog(text: String) {
             CircularProgressIndicator(color = Color.White)
             Text(
                 text = text,
-                style = MaterialTheme.typography.titleMedium,
+                style = AppTheme.typography.titleMedium,
                 color = Color.White
             )
         }

@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.core.ui.theme.AppTheme
 
 enum class SnackbarType {
     INFO, ERROR, SUCCESS
@@ -75,8 +76,8 @@ fun CustomSnackbarHost(
     SnackbarHost(hostState = state.hostState, modifier = modifier) { data ->
         val (containerColor, contentColor) = when (state.currentType) {
             SnackbarType.INFO -> SnackbarDefaults.color to SnackbarDefaults.contentColor
-            SnackbarType.ERROR -> Color(0xFFEB5757) to Color.White
-            SnackbarType.SUCCESS -> Color(0xFF27AE60) to Color.White
+            SnackbarType.ERROR -> AppTheme.colors.error to AppTheme.colors.onError
+            SnackbarType.SUCCESS -> AppTheme.extendedColors.success to AppTheme.extendedColors.onSuccess
         }
 
         val actionLabel = data.visuals.actionLabel

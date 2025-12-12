@@ -13,13 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.core.ui.theme.AppTheme
 import com.core.ui.widget.rememberIsTablet
 
 @Composable
 fun ResponsiveLazyList(
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
-    space: Dp = 16.dp,
+    space: Dp = AppTheme.dimens.default,
     gridCols: Int = 3,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     content: LazyGridScope.() -> Unit

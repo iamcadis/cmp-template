@@ -24,8 +24,6 @@ import kotlin.concurrent.atomics.ExperimentalAtomicApi
 abstract class BaseViewModel<A : ViewAction, E : ViewEffect, S : ViewState>(
     initialState: S
 ) : ViewModel() {
-
-
     private var pendingRetryAction: (() -> Unit)? = null
     private val hasInitialDataLoaded = AtomicBoolean(false)
 

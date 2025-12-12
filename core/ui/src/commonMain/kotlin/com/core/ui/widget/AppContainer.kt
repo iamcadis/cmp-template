@@ -19,7 +19,10 @@ import com.core.ui.provider.ScreenProvider
 
 
 @Composable
-fun AppContainer(loading: Boolean, content: @Composable (ScreenConfig) -> Unit){
+fun AppContainer(
+    loading: Boolean,
+    content: @Composable (ScreenConfig) -> Unit
+) {
     val snackbarHost = remember { CustomSnackbarHostState() }
     var screenConfig by remember { mutableStateOf(ScreenConfig.EMPTY) }
     val screenProvider = object : ScreenProvider {
