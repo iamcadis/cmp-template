@@ -23,7 +23,6 @@ fun AppContainer(
     loading: Boolean,
     content: @Composable (ScreenConfig) -> Unit
 ) {
-    val snackbarHost = remember { CustomSnackbarHostState() }
     var screenConfig by remember { mutableStateOf(ScreenConfig.EMPTY) }
     val screenProvider = object : ScreenProvider {
         override fun setConfig(config: ScreenConfig) {
@@ -31,10 +30,7 @@ fun AppContainer(
         }
     }
 
-    CompositionLocalProvider(
-        LocalSnackbarHostState provides snackbarHost,
-        LocalScreenProvider provides screenProvider,
-    ) {
+    CompositionLocalProvider(value = LocalScreenProvider provides screenProvider) {
         Surface(modifier = Modifier.fillMaxSize()) {
             AnimatedContent(targetState = !loading) { showLoading ->
                 if (showLoading) {

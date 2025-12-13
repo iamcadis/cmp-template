@@ -1,65 +1,75 @@
 package com.app.ui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.core.ui.components.ResponsiveLazyList
+import androidx.compose.ui.backhandler.BackHandler
 import com.core.ui.provider.ScreenConfig
-import com.core.ui.theme.AppTheme
 import com.core.ui.widget.ConfirmationDialogDefault
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import com.core.ui.widget.CustomSnackbarHost
+import com.core.ui.widget.CustomSnackbarHostState
+import com.core.ui.widget.LocalSnackbarHostState
 
 @Composable
-@Preview
 fun AppContent(screenConfig: ScreenConfig, userHasLogin: Boolean) {
-    var showContent by remember { mutableStateOf(false) }
+    val snackbarHost = remember { CustomSnackbarHostState() }
+    var showLeaveConfirmation by rememberSaveable { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier.safeContentPadding().fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Button(onClick = { showContent = !showContent }) {
-            Text("Show Confirmation")
+    val goBackToPreviousScreen: () -> Unit = {
+        showLeaveConfirmation = false
+        // directly go back to previous screen
+    }
+
+    val dismissConfirmation: () -> Unit = {
+        showLeaveConfirmation = false
+    }
+
+    val backPressHandler: () -> Unit = {
+        if (screenConfig.confirmOnLeave) {
+            showLeaveConfirmation = true
+        } else {
+            goBackToPreviousScreen()
         }
+    }
 
-        ResponsiveLazyList(
-            contentPadding = PaddingValues(all = AppTheme.dimens.default)
-        ) {
-            items(20) { index ->
-                Card {
-                    Text(
-                        text = "Index ${index + 1} Index ${index + 1} Index ${index + 1}",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(24.dp)
+    CompositionLocalProvider(LocalSnackbarHostState provides snackbarHost) {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            snackbarHost = {
+                CustomSnackbarHost(state = snackbarHost)
+            },
+            topBar = {
+                if (screenConfig.showTopBar) {
+                    TopAppBar(
+                        title = { Text(text = screenConfig.pageTitle) },
+                        actions = { screenConfig.topBarActions?.let { it() } }
+                    )
+                }
+            },
+            floatingActionButton = {
+                screenConfig.floatingButton?.let { it() }
+            },
+            content = { innerPadding ->
+                BackHandler(onBack = backPressHandler)
+                AppNavigation(modifier = Modifier.padding(paddingValues = innerPadding))
+
+                if (showLeaveConfirmation) {
+                    ConfirmationDialogDefault.LeavePage(
+                        onCancel = dismissConfirmation,
+                        onConfirm = goBackToPreviousScreen
                     )
                 }
             }
-        }
-
-        if (showContent) {
-            ConfirmationDialogDefault.LeavePage(
-                onCancel = {
-                    showContent = false
-                },
-                onConfirm = {
-                    showContent = false
-                }
-            )
-        }
+        )
     }
 }
