@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 fun KotlinMultiplatformExtension.addAndroidTarget() {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 }
