@@ -12,7 +12,6 @@ fun KotlinMultiplatformExtension.addAndroidTarget() {
 }
 
 fun KotlinMultiplatformExtension.addIosTarget() {
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 }
