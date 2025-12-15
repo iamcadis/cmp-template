@@ -43,7 +43,7 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
         .onStart {
             // Load initial data only once when flow starts being collected
             if (hasInitialDataLoaded.compareAndSet(expectedValue = false, newValue = true)) {
-                analytics.logEvent(name = "open_page", params = mapOf("page" to screenName))
+                analytics.logScreen(screenName = screenName)
                 loadInitialData()
             }
         }

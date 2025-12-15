@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.convention.compose)
 }
 
+android {
+    namespace = "com.core.ui"
+}
+
 kotlin {
     sourceSets {
         commonMain.dependencies {
@@ -12,8 +16,4 @@ kotlin {
             implementation(projects.firebase.analytics)
         }
     }
-}
-
-android {
-    namespace = "com.core.ui"
 }

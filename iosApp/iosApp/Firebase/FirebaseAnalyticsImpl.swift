@@ -10,6 +10,13 @@ class FirebaseAnalyticsImpl : AnalyticsTracker {
     func logEvent(name: String, params: [String : Any]) {
         Analytics.logEvent(name, parameters: params)
     }
+
+    func logScreen(screenName: String) {
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+            AnalyticsParameterScreenName: screenName,
+            AnalyticsParameterScreenClass: "\(screenName)Screen.kt",
+        ])
+    }
     
     func setEnabled(enabled: Bool) {
         Analytics.setAnalyticsCollectionEnabled(enabled)
