@@ -1,13 +1,13 @@
 package com.core.data.remote.api
 
 import com.core.common.error.ApiError
-import com.core.common.error.ApiException
+import com.core.common.error.AppException
+import com.core.data.feat.auth.AuthTokenDto
 import com.core.data.local.SecureStorage
 import com.core.data.local.SecureStorage.Companion.getAccessToken
 import com.core.data.local.SecureStorage.Companion.getRefreshToken
 import com.core.data.local.SecureStorage.Companion.storeAccessToken
 import com.core.data.local.SecureStorage.Companion.storeRefreshToken
-import com.core.data.feat.auth.AuthTokenDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
@@ -110,14 +110,17 @@ internal class ApiClient(
 
             HttpResponseValidator {
                 handleResponseExceptionWithRequest { exception, _ ->
-                    val responseException = exception as? ResponseException
-                        ?: return@handleResponseExceptionWithRequest
+                    if (exception is ResponseException) {
+                        val error = runCatching { exception.response.body<ApiError>() }.getOrNull()
 
-                    runCatching {
-                        responseException.response.body<ApiError>()
-                    }.getOrNull()?.let { apiError ->
-                        throw ApiException(apiError = apiError)
+                        throw if (error != null) {
+                            AppException.Api(error = error)
+                        } else {
+                            AppException.General(throwable = exception)
+                        }
                     }
+
+                    throw AppException.General(throwable = exception)
                 }
             }
         }

@@ -1,7 +1,7 @@
 package com.core.data.remote.api
 
 import com.core.common.DispatcherProvider
-import com.core.common.error.NoInternetException
+import com.core.common.error.AppException
 import com.core.data.remote.ConnectivityObserver
 import com.core.data.remote.utils.NoContent
 import io.ktor.client.HttpClient
@@ -39,7 +39,7 @@ class ApiService(
     ) = withContext(dispatcher.io) {
 
         if (!connectivityObserver.isConnected()) {
-            throw NoInternetException()
+            throw AppException.NoInternet()
         }
 
         val response = httpClient.request(url) {
