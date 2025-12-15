@@ -6,8 +6,8 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
+            api(libs.bundles.lifecycle)
             implementation(projects.core.common)
-            implementation(libs.bundles.lifecycle)
         }
     }
 }

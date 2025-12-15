@@ -14,6 +14,7 @@ tink-android = "1.19.0"
 ktor = "3.3.3"
 koin = "4.1.1"
 koin-annotations = "2.3.1"
+backhandler = "1.9.3"
 
 [libraries]
 gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -21,9 +22,12 @@ gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 gradle-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-androidx-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidx-datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+#noinspection UnusedVersionCatalogEntry
+androidx-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+#noinspection UnusedVersionCatalogEntry
+backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "backhandler" }
 
 #LIFECYCLE
 lifecycle-runtime = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }

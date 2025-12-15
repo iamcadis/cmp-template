@@ -2,6 +2,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import extension.addAndroidTarget
 import extension.addIosTarget
 import extension.configureAndroid
+import extension.getLibrary
 import extension.getPluginId
 import extension.getProperty
 import extension.suppressDefaultWarning
@@ -9,6 +10,7 @@ import task.generateIosConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 
@@ -49,6 +51,20 @@ class AppConventionPlugin : Plugin<Project> {
                     addAndroidTarget()
                     addIosTarget()
                     suppressDefaultWarning()
+
+                    sourceSets {
+                        androidMain.dependencies {
+                            implementation(getLibrary("androidx-activity"))
+                        }
+                        commonMain.dependencies {
+                            implementation(project(":core:common"))
+                            implementation(project(":core:data"))
+                            implementation(project(":core:domain"))
+                            implementation(project(":core:ui"))
+                            implementation(getLibrary("backhandler"))
+                            implementation(getLibrary("koin-compose"))
+                        }
+                    }
                 }
             }
 

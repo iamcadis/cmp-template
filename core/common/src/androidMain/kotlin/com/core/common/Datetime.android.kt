@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package com.core.common
 
 import kotlinx.datetime.LocalDate
@@ -6,16 +8,15 @@ import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atDate
 import kotlinx.datetime.atTime
-import kotlinx.datetime.number
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import java.text.SimpleDateFormat
-import java.util.Calendar
+import java.util.Date
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.ExperimentalTime
 import java.util.TimeZone as JavaTimeZone
 
-@OptIn(ExperimentalTime::class)
 actual fun LocalDateTime.asString(
     format: String,
     atZone: TimeZone,
@@ -24,12 +25,12 @@ actual fun LocalDateTime.asString(
 ): String? {
     return this.toInstant(atZone)
         .toLocalDateTime(toZone)
-        .format(format = format, languageTag = languageTag, toZone = toZone)
+        .format(pattern = format, languageTag = languageTag, toZone = toZone)
 }
 
 actual fun LocalDate.asString(format: String, languageTag: String?): String? {
     return this.atTime(hour = 1, minute = 1)
-        .format(format = format, languageTag = languageTag)
+        .format(pattern = format, languageTag = languageTag)
 }
 
 actual fun LocalTime.asString(format: String, atZone: TimeZone, languageTag: String?): String? {
@@ -37,32 +38,31 @@ actual fun LocalTime.asString(format: String, atZone: TimeZone, languageTag: Str
         .asString(format = format, languageTag = languageTag, atZone = atZone)
 }
 
-private fun LocalDateTime.format(
-    format: String,
+private val formatterCache = ConcurrentHashMap<String, ThreadLocal<SimpleDateFormat>>()
+
+fun LocalDateTime.format(
+    pattern: String,
     languageTag: String?,
     toZone: TimeZone? = null
 ): String? {
-    val locale = languageTag?.let { Locale.forLanguageTag(languageTag) } ?: Locale.getDefault()
-    val calendar = Calendar.getInstance().apply {
-        toZone?.let {
-            timeZone = JavaTimeZone.getTimeZone(it.id)
-        }
+    val tag = (languageTag ?: Locale.getDefault().toLanguageTag())
+        .replace("_", "-")
 
-        with(this@format) {
-            set(Calendar.YEAR, date.year)
-            set(Calendar.MONTH, date.month.number - 1)
-            set(Calendar.DAY_OF_MONTH, date.day)
-            set(Calendar.HOUR_OF_DAY, time.hour)
-            set(Calendar.MINUTE, time.minute)
-            set(Calendar.SECOND, time.second)
-        }
-    }
+    val locale = Locale.forLanguageTag(tag)
+    val zoneId = toZone?.id ?: TimeZone.currentSystemDefault().id
+    val cacheKey = "$pattern|${locale.toLanguageTag()}|$zoneId"
 
-    return runCatching {
-        val formatter = SimpleDateFormat(format, locale)
-        toZone?.let {
-            formatter.timeZone = JavaTimeZone.getTimeZone(it.id)
-        }
-        formatter.format(calendar.time)
-    }.getOrNull()
+    val formatter = formatterCache
+        .getOrPut(cacheKey) {
+            ThreadLocal.withInitial {
+                SimpleDateFormat(pattern, locale).apply {
+                    timeZone = JavaTimeZone.getTimeZone(zoneId)
+                }
+            }
+        }.get()
+
+    val millis = this.toInstant(toZone ?: TimeZone.currentSystemDefault())
+        .toEpochMilliseconds()
+
+    return formatter?.format(Date(millis))
 }
