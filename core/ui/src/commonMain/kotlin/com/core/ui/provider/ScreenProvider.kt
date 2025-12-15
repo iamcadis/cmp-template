@@ -2,10 +2,11 @@ package com.core.ui.provider
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
 
-@Stable
+@Immutable
 data class ScreenConfig(
     val pageTitle: String = "",
     val showTopBar: Boolean = true,

@@ -3,6 +3,7 @@ package com.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.firebase.analytics.AnalyticsTracker
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.BufferOverflow
@@ -17,13 +18,23 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @OptIn(ExperimentalAtomicApi::class)
-abstract class BaseViewModel<A : ViewAction, E : ViewEffect, S : ViewState>(
+abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
     initialState: S
-) : ViewModel() {
+) : ViewModel(), KoinComponent {
+
+    protected val analytics by lazy {
+        getKoin().getOrNull<AnalyticsTracker>() ?: NoOpAnalytics
+    }
+
+    protected open val screenName = this::class.simpleName
+        ?.removeSuffix("ViewModel")
+        ?: "Unknown"
+
     private var pendingRetryAction: (() -> Unit)? = null
     private val hasInitialDataLoaded = AtomicBoolean(false)
 
@@ -32,6 +43,7 @@ abstract class BaseViewModel<A : ViewAction, E : ViewEffect, S : ViewState>(
         .onStart {
             // Load initial data only once when flow starts being collected
             if (hasInitialDataLoaded.compareAndSet(expectedValue = false, newValue = true)) {
+                analytics.logEvent(name = "open_page", params = mapOf("page" to screenName))
                 loadInitialData()
             }
         }

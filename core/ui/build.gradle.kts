@@ -7,7 +7,9 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(libs.bundles.lifecycle)
+            implementation(libs.koin.core)
             implementation(projects.core.common)
+            implementation(projects.firebase.analytics)
         }
     }
 }
