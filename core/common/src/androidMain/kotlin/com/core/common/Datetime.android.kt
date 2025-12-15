@@ -2,6 +2,7 @@
 
 package com.core.common
 
+import android.util.LruCache
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -13,7 +14,6 @@ import kotlinx.datetime.toLocalDateTime
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.ExperimentalTime
 import java.util.TimeZone as JavaTimeZone
 
@@ -38,31 +38,35 @@ actual fun LocalTime.asString(format: String, atZone: TimeZone, languageTag: Str
         .asString(format = format, languageTag = languageTag, atZone = atZone)
 }
 
-private val formatterCache = ConcurrentHashMap<String, ThreadLocal<SimpleDateFormat>>()
+private val formatterCache = LruCache<String, SimpleDateFormat>(20)
 
-fun LocalDateTime.format(
+private fun LocalDateTime.format(
     pattern: String,
     languageTag: String?,
     toZone: TimeZone? = null
 ): String? {
-    val tag = (languageTag ?: Locale.getDefault().toLanguageTag())
-        .replace("_", "-")
 
-    val locale = Locale.forLanguageTag(tag)
+    val locale = if (languageTag != null) {
+        Locale.forLanguageTag(languageTag.replace("_", "-"))
+    } else {
+        Locale.getDefault()
+    }
+
     val zoneId = toZone?.id ?: TimeZone.currentSystemDefault().id
-    val cacheKey = "$pattern|${locale.toLanguageTag()}|$zoneId"
+    val cacheKey = "$pattern|${locale.language}|$zoneId"
 
-    val formatter = formatterCache
-        .getOrPut(cacheKey) {
-            ThreadLocal.withInitial {
-                SimpleDateFormat(pattern, locale).apply {
-                    timeZone = JavaTimeZone.getTimeZone(zoneId)
-                }
+    synchronized(formatterCache) {
+        var formatter = formatterCache.get(cacheKey)
+        val millis = this.toInstant(toZone ?: TimeZone.currentSystemDefault())
+            .toEpochMilliseconds()
+
+        if (formatter == null) {
+            formatter = SimpleDateFormat(pattern, locale).apply {
+                timeZone = JavaTimeZone.getTimeZone(zoneId)
             }
-        }.get()
+            formatterCache.put(cacheKey, formatter)
+        }
 
-    val millis = this.toInstant(toZone ?: TimeZone.currentSystemDefault())
-        .toEpochMilliseconds()
-
-    return formatter?.format(Date(millis))
+        return formatter.format(Date(millis))
+    }
 }
