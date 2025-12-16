@@ -82,6 +82,7 @@
 				F3DC9C9000367DA4C4135D4F /* Sources */,
 				609935631FAF9D023F8EE2D4 /* Frameworks */,
 				23E83BEA988B5B09A6D1984C /* Resources */,
+				2BF251A12EF1353A00658002 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -165,6 +166,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
+		};
+		2BF251A12EF1353A00658002 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "RESOURCE_PATH=\"${PROJECT_DIR}/iosApp/FirebaseConfig\"\nPLIST_DESTINATION=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    cp \"${RESOURCE_PATH}/Debug-GoogleService-Info.plist\" \"${PLIST_DESTINATION}\"\nelse\n    cp \"${RESOURCE_PATH}/Release-GoogleService-Info.plist\" \"${PLIST_DESTINATION}\"\nfi\n\nif [ -f \"${PLIST_DESTINATION}\" ]; then\n    echo \"✔ Successfully copied GoogleService-Info.plist\"\nelse\n    echo \"✘ FAILED to copy GoogleService-Info.plist. Please check paths.\"\n    exit 1\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

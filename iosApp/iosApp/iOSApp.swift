@@ -1,9 +1,12 @@
 import SwiftUI
 import ComposeApp
+import FirebaseCore
 
 @main
 struct iOSApp: App {
+    
     init() {
+        FirebaseApp.configure()
         KoinKt.doInitKoin(configuration: DIContainer.nativeConfiguration)
     }
 

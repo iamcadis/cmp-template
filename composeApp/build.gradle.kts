@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     alias(libs.plugins.convention.app)
     alias(libs.plugins.convention.compose)
+    alias(libs.plugins.google.services)
 }
 
 kotlin {
