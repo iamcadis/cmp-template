@@ -12,6 +12,7 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
             freeCompilerArgs += "-Xbinary=bundleId=${findProperty("app.id")}"
+
             export(project(":firebase:analytics"))
         }
     }
