@@ -5,6 +5,6 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
     <key>NSUserTrackingUsageDescription</key>
-    <string>We use your data to improve your experience and provide personalized content.</string>
+    <string>This allows us to show you personalized content and improve app performance.</string>
 </dict>
 </plist>
