@@ -21,6 +21,10 @@ node_modules/
 # Android
 *.apk
 *.aab
+google-services.json
 
 # iOS
 *.ipa
+GoogleService-Info.plist
+Debug-GoogleService-Info.plist
+Release-GoogleService-Info.plist
