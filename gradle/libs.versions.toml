@@ -10,11 +10,12 @@ kotlinx-collections = "0.4.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.7.1"
 kotlinx-serialization="1.9.0"
-tink-android = "1.19.0"
+tink-android = "1.20.0"
 ktor = "3.3.3"
 koin = "4.1.1"
 koin-annotations = "2.3.1"
 backhandler = "1.9.3"
+firebase = "34.7.0"
 
 [libraries]
 gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -58,6 +59,10 @@ ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "k
 ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+#FIREBASE
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
