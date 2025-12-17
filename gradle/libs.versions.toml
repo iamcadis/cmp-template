@@ -4,6 +4,7 @@ kotlin = "2.2.21"
 compose = "1.9.3"
 ksp = "2.3.3"
 google-services = "4.4.4"
+firebase-crashlytics = "3.0.6"
 androidx-activity = "1.12.1"
 androidx-lifecycle = "2.9.6"
 androidx-datastore = "1.2.0"
@@ -67,6 +68,7 @@ ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-jso
 #FIREBASE
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 
 #UNIT TEST
 turbine = { module = "app.cash.turbine:turbine", version.ref = "app-cash-turbine" }
@@ -84,6 +86,7 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 mokkery = { id = "dev.mokkery", version.ref = "mokkery"}
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services"}
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics"}
 
 #CONVENTION
 convention-app = { id = "base.application", version = "unspecified" }

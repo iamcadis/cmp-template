@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.convention.app)
     alias(libs.plugins.convention.compose)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 kotlin {
@@ -18,11 +19,12 @@ kotlin {
     }
     
     sourceSets {
+        androidMain.dependencies {
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.crashlytics)
+        }
         commonMain.dependencies {
             api(project(":firebase:analytics"))
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }
