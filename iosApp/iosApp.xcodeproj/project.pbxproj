@@ -176,6 +176,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -183,7 +188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "RESOURCE_PATH=\"${PROJECT_DIR}/iosApp/FirebaseConfig\"\nPLIST_DESTINATION=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    cp \"${RESOURCE_PATH}/Debug-GoogleService-Info.plist\" \"${PLIST_DESTINATION}\"\nelse\n    cp \"${RESOURCE_PATH}/Release-GoogleService-Info.plist\" \"${PLIST_DESTINATION}\"\nfi\n\nif [ -f \"${PLIST_DESTINATION}\" ]; then\n    echo \"✔ Successfully copied GoogleService-Info.plist\"\nelse\n    echo \"✘ FAILED to copy GoogleService-Info.plist. Please check paths.\"\n    exit 1\nfi\n";
+			shellScript = "RESOURCE_PATH=\"${PROJECT_DIR}/iosApp/FirebaseConfig\"\nPLIST_DESTINATION=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    cp \"${RESOURCE_PATH}/Debug-GoogleService-Info.plist\" \"${PLIST_DESTINATION}\"\nelse\n    cp \"${RESOURCE_PATH}/Release-GoogleService-Info.plist\" \"${PLIST_DESTINATION}\"\nfi\n\nif [ -f \"${PLIST_DESTINATION}\" ]; then\n    echo \"✔ Successfully copied GoogleService-Info.plist\"\nelse\n    echo \"✘ FAILED to copy GoogleService-Info.plist. Please check paths.\"\n    exit 1\nfi\n\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
