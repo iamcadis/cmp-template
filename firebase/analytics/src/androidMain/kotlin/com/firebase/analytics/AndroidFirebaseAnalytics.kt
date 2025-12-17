@@ -26,8 +26,4 @@ class AndroidFirebaseAnalytics : AnalyticsTracker {
             param(FirebaseAnalytics.Param.SCREEN_CLASS, "${screenName}Screen.kt")
         }
     }
-
-    override fun setEnabled(enabled: Boolean) {
-        Firebase.analytics.setAnalyticsCollectionEnabled(enabled)
-    }
 }

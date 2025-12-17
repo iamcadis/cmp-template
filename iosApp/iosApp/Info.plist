@@ -4,11 +4,7 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
-    <key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
-    <false/>
     <key>FirebaseAutomaticScreenReportingEnabled</key>
     <false/>
-    <key>NSUserTrackingUsageDescription</key>
-    <string>This allows us to show you personalized content and improve app performance.</string>
 </dict>
 </plist>

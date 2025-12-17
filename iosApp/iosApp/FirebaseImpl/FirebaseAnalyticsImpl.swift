@@ -17,8 +17,4 @@ class FirebaseAnalyticsImpl : AnalyticsTracker {
             AnalyticsParameterScreenClass: "\(screenName)Screen.kt",
         ])
     }
-    
-    func setEnabled(enabled: Bool) {
-        Analytics.setAnalyticsCollectionEnabled(enabled)
-    }
 }
