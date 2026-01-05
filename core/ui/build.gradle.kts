@@ -4,10 +4,6 @@ plugins {
     alias(libs.plugins.mokkery)
 }
 
-android {
-    namespace = "com.core.ui"
-}
-
 kotlin {
     sourceSets {
         commonMain.dependencies {

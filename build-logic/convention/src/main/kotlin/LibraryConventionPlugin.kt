@@ -1,7 +1,6 @@
-import com.android.build.api.dsl.LibraryExtension
-import extension.addAndroidTarget
+import com.android.build.api.dsl.androidLibrary
 import extension.addIosTarget
-import extension.configureAndroid
+import extension.getDynamicNameSpace
 import extension.getPluginId
 import extension.suppressDefaultWarning
 import org.gradle.api.Plugin
@@ -15,20 +14,26 @@ class LibraryConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply(getPluginId(alias = "kotlinMultiplatform"))
-                apply(getPluginId(alias = "androidLibrary"))
+                apply(getPluginId(alias = "kotlinMultiplatformLibrary"))
             }
 
             with(extensions) {
-                configure<LibraryExtension> {
-                    configureAndroid(this)
-
-                    defaultConfig {
-                        consumerProguardFiles("consumer-rules.pro")
-                    }
-                }
-
                 configure<KotlinMultiplatformExtension> {
-                    addAndroidTarget()
+                    androidLibrary {
+                        namespace = getDynamicNameSpace()
+                        compileSdk = findProperty("android.targetSdk").toString().toInt()
+                        minSdk = findProperty("android.minSdk").toString().toInt()
+
+                        optimization {
+                            val proguardFile = file("consumer-rules.pro")
+                            if (proguardFile.exists()) {
+                                consumerKeepRules.files.add(proguardFile)
+                            }
+                        }
+
+                        withJava()
+                    }
+
                     addIosTarget()
                     suppressDefaultWarning()
                 }

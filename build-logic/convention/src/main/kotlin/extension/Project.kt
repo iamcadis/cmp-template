@@ -29,6 +29,12 @@ internal fun Project.getBundle(alias: String): Provider<ExternalModuleDependency
     return catalogs.findBundle(alias).get()
 }
 
+internal fun Project.getDynamicNameSpace(): String {
+    return path.replace(":", ".")
+        .replace("-", ".")
+        .let { "com$it" }
+}
+
 internal fun Project.configureAndroid(extension: CommonExtension<*, *, *, *, *, *>) {
     extension.apply {
         compileSdk = findProperty("android.targetSdk").toString().toInt()

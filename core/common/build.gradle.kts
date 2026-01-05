@@ -3,14 +3,6 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
 }
 
-android {
-    namespace = "com.core.common"
-
-    buildFeatures {
-        buildConfig = true
-    }
-}
-
 kotlin {
     sourceSets {
         commonMain.dependencies {

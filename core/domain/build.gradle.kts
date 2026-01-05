@@ -5,10 +5,6 @@ plugins {
     alias(libs.plugins.convention.ksp)
 }
 
-android {
-    namespace = "com.core.domain"
-}
-
 kotlin {
     sourceSets {
         commonMain.dependencies {

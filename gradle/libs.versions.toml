@@ -1,11 +1,11 @@
 [versions]
 agp = "8.13.2"
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 compose = "1.9.3"
 ksp = "2.3.3"
 google-services = "4.4.4"
 firebase-crashlytics = "3.0.6"
-androidx-activity = "1.12.1"
+androidx-activity = "1.12.2"
 androidx-lifecycle = "2.9.6"
 androidx-datastore = "1.2.0"
 kotlinx-collections = "0.4.0"
@@ -19,7 +19,7 @@ koin-annotations = "2.3.1"
 backhandler = "1.9.3"
 firebase = "34.7.0"
 #UNIT TEST
-mokkery = "3.0.0"
+mokkery = "3.1.1"
 kotlinx-coroutines-test = "1.10.2"
 app-cash-turbine = "1.2.1"
 
@@ -78,10 +78,10 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 mokkery = { id = "dev.mokkery", version.ref = "mokkery"}
