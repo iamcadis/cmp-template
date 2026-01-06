@@ -33,7 +33,6 @@ class ComposeConventionPlugin : Plugin<Project> {
                             implementation(compose.ui)
                             implementation(compose.components.resources)
                             implementation(compose.components.uiToolingPreview)
-                            add("debugImplementation", compose.uiTooling)
                         }
                     }
 
