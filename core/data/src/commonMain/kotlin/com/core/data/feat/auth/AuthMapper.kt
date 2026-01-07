@@ -1,7 +1,7 @@
 package com.core.data.feat.auth
 
-import com.core.domain.feat.auth.LoginRequest
-import com.core.domain.feat.auth.LoginResponse
+import com.core.domain.model.LoginRequest
+import com.core.domain.model.LoginResponse
 
 fun LoginRequest.toDto() = LoginRequestDto(email, password)
 

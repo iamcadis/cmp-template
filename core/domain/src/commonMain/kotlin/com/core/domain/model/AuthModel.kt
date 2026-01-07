@@ -1,4 +1,4 @@
-package com.core.domain.feat.auth
+package com.core.domain.model
 
 data class LoginRequest(val email: String, val password: String)
 

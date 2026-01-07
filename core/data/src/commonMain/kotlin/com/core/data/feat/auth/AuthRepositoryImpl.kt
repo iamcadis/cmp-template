@@ -3,9 +3,9 @@ package com.core.data.feat.auth
 import com.core.data.remote.api.ApiConfig
 import com.core.data.remote.api.ApiService
 import com.core.data.remote.utils.NoContent
-import com.core.domain.feat.auth.AuthRepository
-import com.core.domain.feat.auth.LoginRequest
-import com.core.domain.feat.auth.LoginResponse
+import com.core.domain.repository.AuthRepository
+import com.core.domain.model.LoginRequest
+import com.core.domain.model.LoginResponse
 import io.ktor.http.isSuccess
 import org.koin.core.annotation.Single
 

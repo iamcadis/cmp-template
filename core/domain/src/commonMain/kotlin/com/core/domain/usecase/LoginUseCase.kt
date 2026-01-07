@@ -1,5 +1,7 @@
-package com.core.domain.feat.auth
+package com.core.domain.usecase
 
+import com.core.domain.repository.AuthRepository
+import com.core.domain.model.LoginRequest
 import org.koin.core.annotation.Single
 
 @Single

@@ -1,4 +1,4 @@
-package com.core.domain.feat.download
+package com.core.domain.repository
 
 interface DownloadRepository {
     suspend fun downloadFile(

@@ -1,7 +1,7 @@
 package com.core.data.feat.download
 
 import com.core.data.remote.api.ApiService
-import com.core.domain.feat.download.DownloadRepository
+import com.core.domain.repository.DownloadRepository
 import org.koin.core.annotation.Single
 
 @Single(binds = [DownloadRepository::class])

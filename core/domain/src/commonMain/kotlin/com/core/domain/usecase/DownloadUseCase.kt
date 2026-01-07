@@ -1,5 +1,6 @@
-package com.core.domain.feat.download
+package com.core.domain.usecase
 
+import com.core.domain.repository.DownloadRepository
 import org.koin.core.annotation.Single
 
 @Single
