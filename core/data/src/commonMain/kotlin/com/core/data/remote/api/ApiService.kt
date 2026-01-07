@@ -6,8 +6,11 @@ import com.core.data.remote.ConnectivityObserver
 import com.core.data.remote.utils.NoContent
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.onDownload
+import io.ktor.client.request.get
 import io.ktor.client.request.request
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsBytes
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
@@ -30,6 +33,15 @@ class ApiService(
         method = HttpMethod.Post,
         data = data
     )
+
+    suspend fun download(
+        url: String,
+        onProgress: ((received: Long, length: Long?) -> Unit)? = null,
+    ) = httpClient.get(urlString = url) {
+        onDownload { received, length ->
+            onProgress?.invoke(received, length)
+        }
+    }.bodyAsBytes()
 
     suspend inline fun <reified T> request(
         url: String,
