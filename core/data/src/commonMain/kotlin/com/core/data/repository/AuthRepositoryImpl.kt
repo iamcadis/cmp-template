@@ -1,11 +1,14 @@
-package com.core.data.feat.auth
+package com.core.data.repository
 
+import com.core.data.remote.dto.LoginResponseDto
+import com.core.data.mapper.toDomain
+import com.core.data.mapper.toDto
 import com.core.data.remote.api.ApiConfig
 import com.core.data.remote.api.ApiService
 import com.core.data.remote.utils.NoContent
-import com.core.domain.repository.AuthRepository
 import com.core.domain.model.LoginRequest
 import com.core.domain.model.LoginResponse
+import com.core.domain.repository.AuthRepository
 import io.ktor.http.isSuccess
 import org.koin.core.annotation.Single
 

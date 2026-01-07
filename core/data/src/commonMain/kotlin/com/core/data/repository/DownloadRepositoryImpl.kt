@@ -1,4 +1,4 @@
-package com.core.data.feat.download
+package com.core.data.repository
 
 import com.core.data.remote.api.ApiService
 import com.core.domain.repository.DownloadRepository

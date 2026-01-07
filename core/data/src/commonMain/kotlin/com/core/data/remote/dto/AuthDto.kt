@@ -1,4 +1,4 @@
-package com.core.data.feat.auth
+package com.core.data.remote.dto
 
 import kotlinx.serialization.Serializable
 

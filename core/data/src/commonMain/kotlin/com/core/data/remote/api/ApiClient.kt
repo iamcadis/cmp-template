@@ -2,7 +2,7 @@ package com.core.data.remote.api
 
 import com.core.common.error.ApiError
 import com.core.common.error.AppException
-import com.core.data.feat.auth.AuthTokenDto
+import com.core.data.remote.dto.AuthTokenDto
 import com.core.data.local.SecureStorage
 import com.core.data.local.SecureStorage.Companion.getAccessToken
 import com.core.data.local.SecureStorage.Companion.getRefreshToken

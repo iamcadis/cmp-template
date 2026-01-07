@@ -1,5 +1,7 @@
-package com.core.data.feat.auth
+package com.core.data.mapper
 
+import com.core.data.remote.dto.LoginRequestDto
+import com.core.data.remote.dto.LoginResponseDto
 import com.core.domain.model.LoginRequest
 import com.core.domain.model.LoginResponse
 
