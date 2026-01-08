@@ -3,4 +3,5 @@
     <string name="yes_leave">Yes, Leave</string>
     <string name="leave_page_title">Leave this page?</string>
     <string name="leave_page_message">It looks like you have unsaved changes. If you leave now, your progress may be lost.</string>
+    <string name="msg_no_internet">No internet connection. Please check your network and try again.</string>
 </resources>

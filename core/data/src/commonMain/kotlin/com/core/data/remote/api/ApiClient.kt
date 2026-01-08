@@ -109,18 +109,11 @@ internal class ApiClient(
             }
 
             HttpResponseValidator {
-                handleResponseExceptionWithRequest { exception, _ ->
-                    if (exception is ResponseException) {
-                        val error = runCatching { exception.response.body<ApiError>() }.getOrNull()
-
-                        throw if (error != null) {
-                            AppException.Api(error = error)
-                        } else {
-                            AppException.General(throwable = exception)
-                        }
-                    }
-
-                    throw AppException.General(throwable = exception)
+                handleResponseExceptionWithRequest { cause, _ ->
+                    if (cause !is ResponseException) throw cause
+                    throw runCatching { cause.response.body<ApiError>() }.getOrNull()
+                        ?.let { AppException.Api(it) }
+                        ?: cause
                 }
             }
         }

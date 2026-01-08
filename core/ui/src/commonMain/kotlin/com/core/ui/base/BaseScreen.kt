@@ -3,30 +3,31 @@ package com.core.ui.base
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import com.core.ui.data.AppError
 import com.core.ui.data.ScreenConfig
 import com.core.ui.util.LocalScaffoldState
 import com.core.ui.widget.LoadingDialog
 
 @Composable
 fun BaseScreen(
+    error: AppError? = null,
+    askLeave: Boolean = false,
     pageTitle: String = "",
-    pageLoading: Boolean = false,
-    loadingText: String = "Please wait...",
-    confirmOnLeave: Boolean = false,
     showTopBar: Boolean = true,
+    showLoading: Boolean = false,
+    loadingText: String = "Please wait...",
     topBarActions: @Composable (RowScope.() -> Unit)? = null,
     floatingButton: @Composable (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-
     val scaffoldState = LocalScaffoldState.current
 
-    LaunchedEffect(pageTitle, showTopBar, confirmOnLeave, topBarActions, floatingButton) {
+    LaunchedEffect(askLeave, pageTitle, showTopBar, topBarActions, floatingButton) {
         scaffoldState.updateConfig(
             config = ScreenConfig(
+                askLeave = askLeave,
                 pageTitle = pageTitle,
                 showTopBar = showTopBar,
-                confirmOnLeave = confirmOnLeave,
                 topBarActions = topBarActions,
                 floatingButton = floatingButton
             )
@@ -35,7 +36,7 @@ fun BaseScreen(
 
     content()
 
-    if (pageLoading) {
+    if (showLoading) {
         LoadingDialog(text = loadingText)
     }
 }

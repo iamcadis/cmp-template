@@ -1,5 +1,6 @@
 package com.app.ui
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -20,6 +21,6 @@ fun NavigationHost(
         LocalScaffoldState provides scaffoldState,
         LocalSnackbarHostState provides snackbarHostState
     ) {
-
+        Text("TESTING")
     }
 }

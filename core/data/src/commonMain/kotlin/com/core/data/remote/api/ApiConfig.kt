@@ -1,10 +1,10 @@
 package com.core.data.remote.api
 
-import com.core.common.Platform
+import com.core.common.isDebuggingMode
 
 object ApiConfig {
 
-    val baseUrl = when(Platform.isDebug) {
+    val baseUrl = when(isDebuggingMode) {
         true -> "https://dummyjson.com/"
         false -> "https://api.real.com/"
     }

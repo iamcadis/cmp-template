@@ -2,13 +2,13 @@ package com.core.ui.data
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 
-@Immutable
+@Stable
 data class ScreenConfig(
+    val askLeave: Boolean = false,
     val pageTitle: String = "",
     val showTopBar: Boolean = true,
-    val confirmOnLeave: Boolean = false,
     val topBarActions: @Composable (RowScope.() -> Unit)? = null,
     val floatingButton: @Composable (() -> Unit)? = null,
 )
