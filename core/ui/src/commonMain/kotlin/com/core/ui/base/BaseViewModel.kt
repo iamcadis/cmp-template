@@ -22,10 +22,15 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import kotlin.time.Clock
 
 abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
     initialState: S
 ) : ViewModel(), KoinComponent {
+
+    // Threshold to prevent double navigation
+    private var lastNavTime = 0L
+    private val navDelayThreshold = 500L
 
     protected val analytics by lazy {
         getKoin().getOrNull<AnalyticsTracker>() ?: NoOpAnalytics
@@ -76,6 +81,14 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
 
     protected fun sendEffect(effect: E) {
         _effect.trySend(effect)
+    }
+
+    protected fun sendNavEffect(effect: E) {
+        val currentTime = Clock.System.now().toEpochMilliseconds()
+        if (currentTime - lastNavTime > navDelayThreshold) {
+            lastNavTime = currentTime
+            sendEffect(effect)
+        }
     }
 
     protected open fun sendError(error: Throwable) {

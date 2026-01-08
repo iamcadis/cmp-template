@@ -2,9 +2,9 @@ package com.core.ui.base
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import com.core.ui.theme.LocalScreenProvider
+import androidx.compose.runtime.LaunchedEffect
 import com.core.ui.data.ScreenConfig
+import com.core.ui.util.LocalScaffoldState
 import com.core.ui.widget.LoadingDialog
 
 @Composable
@@ -18,11 +18,12 @@ fun BaseScreen(
     floatingButton: @Composable (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-    val screenProvider = LocalScreenProvider.current
 
-    SideEffect {
-        screenProvider.setConfig(
-            ScreenConfig(
+    val scaffoldState = LocalScaffoldState.current
+
+    LaunchedEffect(pageTitle, showTopBar, confirmOnLeave, topBarActions, floatingButton) {
+        scaffoldState.updateConfig(
+            config = ScreenConfig(
                 pageTitle = pageTitle,
                 showTopBar = showTopBar,
                 confirmOnLeave = confirmOnLeave,

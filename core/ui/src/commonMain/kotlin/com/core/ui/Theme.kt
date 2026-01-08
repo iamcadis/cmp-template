@@ -3,11 +3,15 @@ package com.core.ui
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
+import com.core.ui.data.Dimension
+import com.core.ui.data.ExtendedColorScheme
+import com.core.ui.data.ScreenType
 import com.core.ui.theme.CompactDimension
 import com.core.ui.theme.ExpandedDimension
 import com.core.ui.theme.LocalDimens
@@ -17,20 +21,17 @@ import com.core.ui.theme.darkColorScheme
 import com.core.ui.theme.extendedDarkColorScheme
 import com.core.ui.theme.extendedLightColorScheme
 import com.core.ui.theme.lightColorScheme
-import com.core.ui.data.Dimension
-import com.core.ui.data.ExtendedColorScheme
-import com.core.ui.data.ScreenType
 import com.core.ui.util.rememberScreenType
 
 @Composable
 fun AppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    isDarkMode: Boolean = isSystemInDarkTheme(),
+    screenType: ScreenType = rememberScreenType(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) darkColorScheme else lightColorScheme
-    val extendedColorScheme = if (darkTheme) extendedDarkColorScheme else extendedLightColorScheme
+    val colors = if (isDarkMode) darkColorScheme else lightColorScheme
+    val extendedColorScheme = if (isDarkMode) extendedDarkColorScheme else extendedLightColorScheme
 
-    val screenType = rememberScreenType()
     val dimensions = remember(screenType) {
         when(screenType) {
             ScreenType.Compact -> CompactDimension
@@ -43,7 +44,9 @@ fun AppTheme(
         LocalDimens provides dimensions,
         LocalExtendedColorScheme provides extendedColorScheme
     ) {
-        MaterialTheme(colorScheme = colors, content = content)
+        MaterialTheme(colorScheme = colors) {
+            Surface(content = content)
+        }
     }
 }
 

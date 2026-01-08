@@ -63,6 +63,7 @@ class AppConventionPlugin : Plugin<Project> {
                             implementation(project(":core:ui"))
                             implementation(getLibrary("backhandler"))
                             implementation(getLibrary("koin-compose"))
+                            implementation(getLibrary("koin-viewmodel"))
                         }
                     }
                 }

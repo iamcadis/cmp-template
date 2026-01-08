@@ -1,13 +1,19 @@
 package com.core.ui.util
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
+import com.core.ui.base.ViewEffect
 import com.core.ui.data.ScreenType
+import kotlinx.coroutines.flow.Flow
 import kotlin.math.max
 
 @Composable
@@ -43,6 +49,16 @@ fun rememberScreenType(): ScreenType {
             screenSize.width < 600.dp -> ScreenType.Compact
             screenSize.width < 840.dp -> ScreenType.Medium
             else -> ScreenType.Expanded
+        }
+    }
+}
+
+@Composable
+fun <T: ViewEffect> LaunchedViewEffect(flow: Flow<T>, onEvent: (T) -> Unit) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(flow, lifecycleOwner.lifecycle) {
+        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collect(onEvent)
         }
     }
 }
