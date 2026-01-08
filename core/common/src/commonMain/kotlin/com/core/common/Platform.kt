@@ -1,5 +1,3 @@
 package com.core.common
 
-expect object Platform {
-    val isDebug: Boolean
-}
+expect val isDebuggingMode: Boolean

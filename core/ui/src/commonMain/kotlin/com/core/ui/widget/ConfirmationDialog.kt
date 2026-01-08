@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.core.ui.components.ResponsiveGroup
+import com.core.ui.component.ResponsiveGroup
 import com.core.ui.theme.AppTheme
 import org.jetbrains.compose.resources.stringResource
 import template.core.ui.generated.resources.Res

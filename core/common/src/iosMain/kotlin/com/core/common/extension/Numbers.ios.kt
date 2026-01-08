@@ -1,4 +1,4 @@
-package com.core.common
+package com.core.common.extension
 
 import platform.Foundation.NSLocale
 import platform.Foundation.NSNumber

@@ -1,6 +1,4 @@
-@file:OptIn(ExperimentalTime::class)
-
-package com.core.common
+package com.core.common.extension
 
 import android.util.LruCache
 import kotlinx.datetime.LocalDate
@@ -14,7 +12,6 @@ import kotlinx.datetime.toLocalDateTime
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.time.ExperimentalTime
 import java.util.TimeZone as JavaTimeZone
 
 actual fun LocalDateTime.asString(

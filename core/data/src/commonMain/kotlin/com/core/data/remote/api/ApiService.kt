@@ -1,6 +1,6 @@
 package com.core.data.remote.api
 
-import com.core.common.DispatcherProvider
+import com.core.common.provider.DispatcherProvider
 import com.core.common.error.AppException
 import com.core.data.remote.ConnectivityObserver
 import com.core.data.remote.utils.NoContent

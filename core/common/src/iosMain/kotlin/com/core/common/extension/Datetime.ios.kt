@@ -1,4 +1,4 @@
-package com.core.common
+package com.core.common.extension
 
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime

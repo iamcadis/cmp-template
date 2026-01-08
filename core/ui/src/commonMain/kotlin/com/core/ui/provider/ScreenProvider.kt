@@ -20,7 +20,6 @@ data class ScreenConfig(
     }
 }
 
-@Stable
 interface ScreenProvider {
     fun setConfig(config: ScreenConfig)
 }

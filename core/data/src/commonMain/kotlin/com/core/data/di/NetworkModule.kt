@@ -1,8 +1,8 @@
 package com.core.data.di
 
-import com.core.common.DefaultDispatchers
-import com.core.common.DispatcherProvider
-import com.core.common.Platform
+import com.core.common.isDebuggingMode
+import com.core.common.provider.DispatcherProvider
+import com.core.common.provider.DefaultDispatcher
 import com.core.data.local.SecureStorage
 import com.core.data.remote.ConnectivityObserver
 import com.core.data.remote.api.ApiClient
@@ -23,7 +23,7 @@ class NetworkModule {
     fun provideHttpClientEngine() = getHttpClientEngine()
 
     @Single
-    fun provideDispatcher() : DispatcherProvider = DefaultDispatchers()
+    fun provideDispatcher() : DispatcherProvider = DefaultDispatcher()
 
     @Single
     fun provideHttpClient(
@@ -32,7 +32,7 @@ class NetworkModule {
     ) : HttpClient = ApiClient(
         engine = engine,
         storage = storage,
-        isDebug = Platform.isDebug
+        isDebug = isDebuggingMode
     ).client
 
     @Single

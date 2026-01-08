@@ -1,6 +1,4 @@
 package com.core.common
 
-actual object Platform {
-    actual val isDebug: Boolean
-        get() = true
-}
+actual val isDebuggingMode: Boolean
+    get() = true

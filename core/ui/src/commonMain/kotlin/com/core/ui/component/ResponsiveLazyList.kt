@@ -1,4 +1,4 @@
-package com.core.ui.components
+package com.core.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

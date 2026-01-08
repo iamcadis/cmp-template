@@ -1,4 +1,4 @@
-package com.core.common
+package com.core.common.extension
 
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -6,7 +6,6 @@ import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
 /**
  * Returns the current LocalDateTime in the specified time zone.
@@ -14,7 +13,6 @@ import kotlin.time.ExperimentalTime
  * @param timeZone The time zone to use. Defaults to the system's default time zone.
  * @return The current LocalDateTime.
  */
-@OptIn(ExperimentalTime::class)
 fun LocalDateTime.Companion.current(
     timeZone: TimeZone = TimeZone.currentSystemDefault()
 ): LocalDateTime {

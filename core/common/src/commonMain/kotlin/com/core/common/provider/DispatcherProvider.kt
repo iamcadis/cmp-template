@@ -1,4 +1,4 @@
-package com.core.common
+package com.core.common.provider
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +10,7 @@ interface DispatcherProvider {
     val default: CoroutineDispatcher
 }
 
-class DefaultDispatchers : DispatcherProvider {
+class DefaultDispatcher : DispatcherProvider {
     override val io: CoroutineDispatcher = Dispatchers.IO
     override val main: CoroutineDispatcher = Dispatchers.Main
     override val default: CoroutineDispatcher = Dispatchers.Default
