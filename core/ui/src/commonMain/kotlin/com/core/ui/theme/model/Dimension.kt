@@ -1,10 +1,10 @@
-package com.core.ui.theme.foundation
+package com.core.ui.theme.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.unit.Dp
 
 @Immutable
-data class Dimens(
+data class Dimension(
     val extraSmall: Dp,
     val small: Dp,
     val medium: Dp,

@@ -1,4 +1,4 @@
-package com.core.ui.theme.foundation
+package com.core.ui.theme.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color

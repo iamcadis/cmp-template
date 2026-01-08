@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
-import com.core.ui.theme.foundation.Dimens
-import com.core.ui.theme.foundation.ExtendedColorScheme
+import com.core.ui.theme.model.Dimension
+import com.core.ui.theme.model.ExtendedColorScheme
 import com.core.ui.widget.ScreenSize
 import com.core.ui.widget.rememberScreenSize
 
@@ -24,9 +24,9 @@ fun AppTheme(
     val screenSize = rememberScreenSize()
     val dimensions = remember(screenSize) {
         when(screenSize) {
-            ScreenSize.Compact -> CompactDimens
-            ScreenSize.Medium -> MediumDimens
-            ScreenSize.Expanded -> ExpandedDimens
+            ScreenSize.Compact -> CompactDimension
+            ScreenSize.Medium -> MediumDimension
+            ScreenSize.Expanded -> ExpandedDimension
         }
     }
 
@@ -49,7 +49,7 @@ object AppTheme {
         @ReadOnlyComposable
         get() = LocalExtendedColorScheme.current
 
-    val dimens: Dimens
+    val dimens: Dimension
         @Composable
         @ReadOnlyComposable
         get() = LocalDimens.current

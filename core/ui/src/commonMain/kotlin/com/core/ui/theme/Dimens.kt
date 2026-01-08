@@ -2,9 +2,9 @@ package com.core.ui.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.dp
-import com.core.ui.theme.foundation.Dimens
+import com.core.ui.theme.model.Dimension
 
-val CompactDimens = Dimens(
+internal val CompactDimension = Dimension(
     extraSmall = 4.dp,
     small = 8.dp,
     medium = 12.dp,
@@ -14,7 +14,7 @@ val CompactDimens = Dimens(
     superLarge = 48.dp
 )
 
-val MediumDimens = Dimens(
+internal val MediumDimension = Dimension(
     extraSmall = 4.dp,
     small = 8.dp,
     medium = 16.dp,
@@ -24,7 +24,7 @@ val MediumDimens = Dimens(
     superLarge = 64.dp
 )
 
-val ExpandedDimens = Dimens(
+internal val ExpandedDimension = Dimension(
     extraSmall = 8.dp,
     small = 12.dp,
     medium = 24.dp,
@@ -34,4 +34,4 @@ val ExpandedDimens = Dimens(
     superLarge = 96.dp
 )
 
-val LocalDimens = staticCompositionLocalOf { CompactDimens }
+internal val LocalDimens = staticCompositionLocalOf { CompactDimension }
