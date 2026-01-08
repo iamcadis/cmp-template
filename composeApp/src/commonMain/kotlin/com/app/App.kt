@@ -17,9 +17,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.ui.AppContent
 import com.core.data.local.LocalStorage
 import com.core.ui.AppTheme
-import com.core.ui.util.LocalScreenProvider
-import com.core.ui.model.ScreenConfig
-import com.core.ui.util.ScreenProvider
+import com.core.ui.data.ScreenConfig
+import com.core.ui.theme.LocalScreenProvider
+import com.core.ui.theme.ScreenProvider
 import org.koin.compose.koinInject
 
 @Composable

@@ -3,8 +3,8 @@ package com.core.ui.base
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import com.core.ui.util.LocalScreenProvider
-import com.core.ui.model.ScreenConfig
+import com.core.ui.theme.LocalScreenProvider
+import com.core.ui.data.ScreenConfig
 import com.core.ui.widget.LoadingDialog
 
 @Composable

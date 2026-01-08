@@ -1,4 +1,4 @@
-package com.core.ui.model
+package com.core.ui.data
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable

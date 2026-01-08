@@ -4,7 +4,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.core.ui.model.ExtendedColorScheme
+import com.core.ui.data.ExtendedColorScheme
 
 internal val lightColorScheme = lightColorScheme(
     primary = Color(0xFF12512E),

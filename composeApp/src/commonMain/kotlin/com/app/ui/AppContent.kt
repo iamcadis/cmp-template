@@ -14,7 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
-import com.core.ui.model.ScreenConfig
+import com.core.ui.data.ScreenConfig
 import com.core.ui.widget.ConfirmationDialogDefault
 import com.core.ui.component.CustomSnackbarHost
 import com.core.ui.component.CustomSnackbarHostState

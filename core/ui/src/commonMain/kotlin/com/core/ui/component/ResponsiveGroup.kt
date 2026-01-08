@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import com.core.ui.AppTheme
-import com.core.ui.util.ScreenType
+import com.core.ui.data.ScreenType
 import com.core.ui.util.rememberScreenType
 
 @Composable

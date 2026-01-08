@@ -21,7 +21,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.core.ui.component.ResponsiveGroup
 import com.core.ui.AppTheme
-import com.core.ui.util.ScreenType
+import com.core.ui.data.ScreenType
 import com.core.ui.util.rememberScreenType
 import org.jetbrains.compose.resources.stringResource
 import template.core.ui.generated.resources.Res

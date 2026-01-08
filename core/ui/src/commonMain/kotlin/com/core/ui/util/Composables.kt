@@ -7,22 +7,17 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.core.ui.data.ScreenType
 import kotlin.math.max
 
-enum class ScreenType {
-    Compact, Medium, Expanded
-}
-
 @Composable
-fun rememberScreenType(): ScreenType {
-    val screenSize = rememberScreenSize()
+fun rememberGridColumns(maxColumnWidth: Dp = 250.dp): Int {
+    val density = LocalDensity.current
+    val windowWidth = LocalWindowInfo.current.containerSize.width
 
-    return remember(screenSize) {
-        when {
-            screenSize.width < 600.dp -> ScreenType.Compact
-            screenSize.width < 840.dp -> ScreenType.Medium
-            else -> ScreenType.Expanded
-        }
+    return remember(windowWidth) {
+        val widthDp = with(density) { windowWidth.toDp() }
+        max((widthDp / maxColumnWidth).toInt(), 1)
     }
 }
 
@@ -40,12 +35,14 @@ fun rememberScreenSize(): DpSize {
 }
 
 @Composable
-fun rememberAutoGridColumns(maxColumnWidth: Dp = 250.dp): Int {
-    val density = LocalDensity.current
-    val windowWidth = LocalWindowInfo.current.containerSize.width
+fun rememberScreenType(): ScreenType {
+    val screenSize = rememberScreenSize()
 
-    return remember(windowWidth) {
-        val widthDp = with(density) { windowWidth.toDp() }
-        max((widthDp / maxColumnWidth).toInt(), 1)
+    return remember(screenSize) {
+        when {
+            screenSize.width < 600.dp -> ScreenType.Compact
+            screenSize.width < 840.dp -> ScreenType.Medium
+            else -> ScreenType.Expanded
+        }
     }
 }

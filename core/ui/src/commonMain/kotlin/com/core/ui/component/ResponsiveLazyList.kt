@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.core.ui.AppTheme
-import com.core.ui.util.ScreenType
-import com.core.ui.util.rememberAutoGridColumns
+import com.core.ui.data.ScreenType
+import com.core.ui.util.rememberGridColumns
 import com.core.ui.util.rememberScreenType
 
 @Composable
@@ -23,7 +23,7 @@ fun ResponsiveLazyList(
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
     space: Dp = AppTheme.dimens.default,
-    gridCols: Int = rememberAutoGridColumns(),
+    gridCols: Int = rememberGridColumns(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     content: LazyGridScope.() -> Unit
 ) {

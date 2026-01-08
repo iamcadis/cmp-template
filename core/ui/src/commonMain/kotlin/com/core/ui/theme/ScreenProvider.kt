@@ -1,7 +1,7 @@
-package com.core.ui.util
+package com.core.ui.theme
 
 import androidx.compose.runtime.compositionLocalOf
-import com.core.ui.model.ScreenConfig
+import com.core.ui.data.ScreenConfig
 
 interface ScreenProvider {
     fun setConfig(config: ScreenConfig)
@@ -10,4 +10,3 @@ interface ScreenProvider {
 val LocalScreenProvider = compositionLocalOf<ScreenProvider> {
     error("ScreenConfigProvider not found!")
 }
-

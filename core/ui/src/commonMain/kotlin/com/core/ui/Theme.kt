@@ -17,9 +17,9 @@ import com.core.ui.theme.darkColorScheme
 import com.core.ui.theme.extendedDarkColorScheme
 import com.core.ui.theme.extendedLightColorScheme
 import com.core.ui.theme.lightColorScheme
-import com.core.ui.model.Dimension
-import com.core.ui.model.ExtendedColorScheme
-import com.core.ui.util.ScreenType
+import com.core.ui.data.Dimension
+import com.core.ui.data.ExtendedColorScheme
+import com.core.ui.data.ScreenType
 import com.core.ui.util.rememberScreenType
 
 @Composable
