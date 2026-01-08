@@ -52,6 +52,7 @@ internal class ApiClient(
             install(ContentNegotiation) {
                 json(json = Json {
                     isLenient = true
+                    explicitNulls = true
                     encodeDefaults = true
                     ignoreUnknownKeys = true
                     allowStructuredMapKeys = true
