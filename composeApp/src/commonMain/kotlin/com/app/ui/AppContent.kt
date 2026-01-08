@@ -14,11 +14,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
-import com.core.ui.provider.ScreenConfig
+import com.core.ui.model.ScreenConfig
 import com.core.ui.widget.ConfirmationDialogDefault
-import com.core.ui.widget.CustomSnackbarHost
-import com.core.ui.widget.CustomSnackbarHostState
-import com.core.ui.widget.LocalSnackbarHostState
+import com.core.ui.component.CustomSnackbarHost
+import com.core.ui.component.CustomSnackbarHostState
+import com.core.ui.component.LocalSnackbarHostState
 
 @Composable
 fun AppContent(screenConfig: ScreenConfig, userHasLogin: Boolean) {

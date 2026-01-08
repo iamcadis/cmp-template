@@ -1,4 +1,4 @@
-package com.core.ui.widget
+package com.core.ui.component
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material3.BottomSheetDefaults

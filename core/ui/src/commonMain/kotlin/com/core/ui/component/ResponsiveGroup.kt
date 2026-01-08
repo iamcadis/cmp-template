@@ -9,8 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
-import com.core.ui.theme.AppTheme
-import com.core.ui.widget.rememberIsTablet
+import com.core.ui.AppTheme
+import com.core.ui.util.ScreenType
+import com.core.ui.util.rememberScreenType
 
 @Composable
 fun ResponsiveGroup(
@@ -18,9 +19,8 @@ fun ResponsiveGroup(
     layoutDirection: LayoutDirection = LayoutDirection.Ltr,
     content: @Composable (Modifier) -> Unit
 ) {
-    val isTablet = rememberIsTablet()
-
-    if (isTablet) {
+    val screenType = rememberScreenType()
+    if (screenType != ScreenType.Compact) {
         CompositionLocalProvider(value = LocalLayoutDirection provides layoutDirection) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

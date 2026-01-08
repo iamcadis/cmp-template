@@ -20,7 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.core.ui.component.ResponsiveGroup
-import com.core.ui.theme.AppTheme
+import com.core.ui.AppTheme
+import com.core.ui.util.ScreenType
+import com.core.ui.util.rememberScreenType
 import org.jetbrains.compose.resources.stringResource
 import template.core.ui.generated.resources.Res
 import template.core.ui.generated.resources.leave_page_message
@@ -37,8 +39,8 @@ fun ConfirmationDialog(
     dialogProperties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
     actionsLayoutDirectionTablet: LayoutDirection = LayoutDirection.Rtl
 ) {
-    val isTablet = rememberIsTablet()
-    val maxDialogWidth = if (isTablet) 550.dp else Dp.Unspecified
+    val screenType = rememberScreenType()
+    val maxDialogWidth = if (screenType != ScreenType.Compact) 550.dp else Dp.Unspecified
 
     Dialog(onDismissRequest = onDismiss, properties = dialogProperties) {
         Surface(

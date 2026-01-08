@@ -1,4 +1,4 @@
-package com.core.ui.theme.model
+package com.core.ui.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.unit.Dp

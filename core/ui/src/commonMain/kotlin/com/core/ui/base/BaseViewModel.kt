@@ -1,4 +1,5 @@
-@file:Suppress("unused")
+@file:OptIn(ExperimentalAtomicApi::class)
+
 package com.core.ui.base
 
 import androidx.lifecycle.ViewModel
@@ -22,7 +23,6 @@ import org.koin.core.component.KoinComponent
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
-@OptIn(ExperimentalAtomicApi::class)
 abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
     initialState: S
 ) : ViewModel(), KoinComponent {
@@ -105,4 +105,9 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
         _effect.close()
         pendingRetryAction = null
     }
+}
+
+object NoOpAnalytics : AnalyticsTracker {
+    override fun logEvent(name: String, params: Map<String, Any?>) {}
+    override fun logScreen(screenName: String) {}
 }

@@ -13,9 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.core.ui.theme.AppTheme
-import com.core.ui.widget.rememberAutoGridColumns
-import com.core.ui.widget.rememberIsTablet
+import com.core.ui.AppTheme
+import com.core.ui.util.ScreenType
+import com.core.ui.util.rememberAutoGridColumns
+import com.core.ui.util.rememberScreenType
 
 @Composable
 fun ResponsiveLazyList(
@@ -26,9 +27,9 @@ fun ResponsiveLazyList(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     content: LazyGridScope.() -> Unit
 ) {
-    val isTablet = rememberIsTablet()
-    val columnCount = remember(isTablet, gridCols) {
-        if (isTablet) gridCols else 1
+    val screenType = rememberScreenType()
+    val columnCount = remember(screenType, gridCols) {
+        if (screenType != ScreenType.Compact) gridCols else 1
     }
 
     LazyVerticalGrid(

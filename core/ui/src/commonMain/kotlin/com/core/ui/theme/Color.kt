@@ -4,7 +4,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.core.ui.theme.model.ExtendedColorScheme
+import com.core.ui.model.ExtendedColorScheme
 
 internal val lightColorScheme = lightColorScheme(
     primary = Color(0xFF12512E),
@@ -83,7 +83,7 @@ internal val darkColorScheme = darkColorScheme(
     surfaceContainerHighest = Color(0xFF323632),
 )
 
-internal val extendedLight = ExtendedColorScheme(
+internal val extendedLightColorScheme = ExtendedColorScheme(
     success = Color(0xFF4C6700),
     onSuccess = Color(0xFFFFFFFF),
     successContainer = Color(0xFFA2D608),
@@ -98,7 +98,7 @@ internal val extendedLight = ExtendedColorScheme(
     onDangerContainer = Color(0xFFFFFBFF),
 )
 
-internal val extendedDark = ExtendedColorScheme(
+internal val extendedDarkColorScheme = ExtendedColorScheme(
     success = Color(0xFFBDF334),
     onSuccess = Color(0xFF263500),
     successContainer = Color(0xFFA2D608),
@@ -114,4 +114,4 @@ internal val extendedDark = ExtendedColorScheme(
 )
 
 
-internal val LocalExtendedColorScheme = staticCompositionLocalOf { extendedLight }
+internal val LocalExtendedColorScheme = staticCompositionLocalOf { extendedLightColorScheme }

@@ -1,4 +1,4 @@
-package com.core.ui.theme
+package com.core.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -8,31 +8,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
-import com.core.ui.theme.model.Dimension
-import com.core.ui.theme.model.ExtendedColorScheme
-import com.core.ui.widget.ScreenSize
-import com.core.ui.widget.rememberScreenSize
+import com.core.ui.theme.CompactDimension
+import com.core.ui.theme.ExpandedDimension
+import com.core.ui.theme.LocalDimens
+import com.core.ui.theme.LocalExtendedColorScheme
+import com.core.ui.theme.MediumDimension
+import com.core.ui.theme.darkColorScheme
+import com.core.ui.theme.extendedDarkColorScheme
+import com.core.ui.theme.extendedLightColorScheme
+import com.core.ui.theme.lightColorScheme
+import com.core.ui.model.Dimension
+import com.core.ui.model.ExtendedColorScheme
+import com.core.ui.util.ScreenType
+import com.core.ui.util.rememberScreenType
 
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-
     val colors = if (darkTheme) darkColorScheme else lightColorScheme
-    val extended = if (darkTheme) extendedDark else extendedLight
-    val screenSize = rememberScreenSize()
-    val dimensions = remember(screenSize) {
-        when(screenSize) {
-            ScreenSize.Compact -> CompactDimension
-            ScreenSize.Medium -> MediumDimension
-            ScreenSize.Expanded -> ExpandedDimension
+    val extendedColorScheme = if (darkTheme) extendedDarkColorScheme else extendedLightColorScheme
+
+    val screenType = rememberScreenType()
+    val dimensions = remember(screenType) {
+        when(screenType) {
+            ScreenType.Compact -> CompactDimension
+            ScreenType.Medium -> MediumDimension
+            ScreenType.Expanded -> ExpandedDimension
         }
     }
 
     CompositionLocalProvider(
         LocalDimens provides dimensions,
-        LocalExtendedColorScheme provides extended
+        LocalExtendedColorScheme provides extendedColorScheme
     ) {
         MaterialTheme(colorScheme = colors, content = content)
     }

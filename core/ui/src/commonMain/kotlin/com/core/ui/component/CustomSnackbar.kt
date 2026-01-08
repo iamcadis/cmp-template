@@ -1,4 +1,4 @@
-package com.core.ui.widget
+package com.core.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.core.ui.theme.AppTheme
+import com.core.ui.AppTheme
 
 enum class SnackbarType {
     INFO, ERROR, SUCCESS

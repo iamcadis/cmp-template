@@ -2,7 +2,7 @@ package com.core.ui.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.dp
-import com.core.ui.theme.model.Dimension
+import com.core.ui.model.Dimension
 
 internal val CompactDimension = Dimension(
     extraSmall = 4.dp,

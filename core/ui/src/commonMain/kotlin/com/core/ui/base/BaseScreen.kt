@@ -2,28 +2,22 @@ package com.core.ui.base
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.core.ui.provider.LocalScreenProvider
-import com.core.ui.provider.ScreenConfig
+import com.core.ui.util.LocalScreenProvider
+import com.core.ui.model.ScreenConfig
 import com.core.ui.widget.LoadingDialog
 
 @Composable
-fun <S : ViewState, A : ViewAction, E : ViewEffect> BaseScreen(
-    viewModel: BaseViewModel<S, A, E>,
+fun BaseScreen(
     pageTitle: String = "",
-    showTopBar: Boolean = true,
+    pageLoading: Boolean = false,
+    loadingText: String = "Please wait...",
     confirmOnLeave: Boolean = false,
-    pageLoadingText: String = "Please wait...",
+    showTopBar: Boolean = true,
     topBarActions: @Composable (RowScope.() -> Unit)? = null,
     floatingButton: @Composable (() -> Unit)? = null,
-    onEffect: (effect: E) -> Unit = { },
-    content: @Composable (state: S, dispatch: (A) -> Unit) -> Unit
+    content: @Composable () -> Unit
 ) {
-
-    val state by viewModel.state.collectAsStateWithLifecycle()
     val screenProvider = LocalScreenProvider.current
 
     SideEffect {
@@ -38,13 +32,9 @@ fun <S : ViewState, A : ViewAction, E : ViewEffect> BaseScreen(
         )
     }
 
-    LaunchedEffect(viewModel) {
-        viewModel.effect.collect(collector = onEffect)
-    }
+    content()
 
-    content(state, viewModel::handleAction)
-
-    if (state.pageLoading) {
-        LoadingDialog(text = pageLoadingText)
+    if (pageLoading) {
+        LoadingDialog(text = loadingText)
     }
 }
