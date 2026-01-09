@@ -4,10 +4,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
-import com.core.ui.component.CustomSnackbarHostState
-import com.core.ui.component.LocalSnackbarHostState
-import com.core.ui.util.LocalScaffoldState
-import com.core.ui.util.ScaffoldState
+import com.core.presentation.component.CustomSnackbarHostState
+import com.core.presentation.component.LocalSnackbarHostState
+import com.core.presentation.util.LocalScaffoldState
+import com.core.presentation.util.ScaffoldState
 
 @Composable
 fun NavigationHost(

@@ -2,7 +2,7 @@ package com.compose.app
 
 import androidx.lifecycle.viewModelScope
 import com.core.data.local.LocalStorage
-import com.core.ui.base.BaseViewModel
+import com.core.presentation.base.BaseViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.stateIn

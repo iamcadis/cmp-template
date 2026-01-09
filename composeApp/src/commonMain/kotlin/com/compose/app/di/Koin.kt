@@ -2,7 +2,6 @@ package com.compose.app.di
 
 import com.compose.app.AppViewModel
 import com.core.data.di.DataModule
-import com.core.domain.di.DomainModule
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.core.module.Module
@@ -16,14 +15,10 @@ val appModule: Module = module {
     viewModelOf(::AppViewModel)
 }
 
-val coreModule: Module = module {
-    includes(DataModule().module, DomainModule().module, appModule)
-}
-
 fun initKoin(configuration : KoinAppDeclaration? = null) {
     startKoin {
         includes(configuration)
-        modules(coreModule)
+        modules(DataModule().module, appModule)
         printLogger(Level.DEBUG)
     }
 }

@@ -1,0 +1,117 @@
+package com.core.presentation.theme
+
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
+import com.core.presentation.data.ExtendedColorScheme
+
+internal val lightColorScheme = lightColorScheme(
+    primary = Color(0xFF12512E),
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFF2E6A44),
+    onPrimaryContainer = Color(0xFFA8E8B8),
+    secondary = Color(0xFF4D6452),
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFFCCE6CF),
+    onSecondaryContainer = Color(0xFF516856),
+    tertiary = Color(0xFF1F4876),
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFF3A608F),
+    onTertiaryContainer = Color(0xFFC2DAFF),
+    error = Color(0xFFBA1A1A),
+    onError = Color(0xFFFFFFFF),
+    errorContainer = Color(0xFFFFDAD6),
+    onErrorContainer = Color(0xFF93000A),
+    background = Color(0xFFF8FAF4),
+    onBackground = Color(0xFF191C19),
+    surface = Color(0xFFF8FAF4),
+    onSurface = Color(0xFF191C19),
+    surfaceVariant = Color(0xFFDCE5DA),
+    onSurfaceVariant = Color(0xFF404941),
+    outline = Color(0xFF707971),
+    outlineVariant = Color(0xFFC0C9BF),
+    scrim = Color(0xFF000000),
+    inverseSurface = Color(0xFF2E312E),
+    inverseOnSurface = Color(0xFFEFF1EC),
+    inversePrimary = Color(0xFF96D5A6),
+    surfaceDim = Color(0xFFD8DBD5),
+    surfaceBright = Color(0xFFF8FAF4),
+    surfaceContainerLowest = Color(0xFFFFFFFF),
+    surfaceContainerLow = Color(0xFFF2F4EF),
+    surfaceContainer = Color(0xFFECEFE9),
+    surfaceContainerHigh = Color(0xFFE7E9E3),
+    surfaceContainerHighest = Color(0xFFE1E3DE),
+)
+
+
+internal val darkColorScheme = darkColorScheme(
+    primary = Color(0xFF96D5A6),
+    onPrimary = Color(0xFF00391C),
+    primaryContainer = Color(0xFF2E6A44),
+    onPrimaryContainer = Color(0xFFA8E8B8),
+    secondary = Color(0xFFB3CDB7),
+    onSecondary = Color(0xFF1F3525),
+    secondaryContainer = Color(0xFF354C3B),
+    onSecondaryContainer = Color(0xFFA2BBA6),
+    tertiary = Color(0xFFA4C9FE),
+    onTertiary = Color(0xFF00315C),
+    tertiaryContainer = Color(0xFF3A608F),
+    onTertiaryContainer = Color(0xFFC2DAFF),
+    error = Color(0xFFFFB4AB),
+    onError = Color(0xFF690005),
+    errorContainer = Color(0xFF93000A),
+    onErrorContainer = Color(0xFFFFDAD6),
+    background = Color(0xFF111411),
+    onBackground = Color(0xFFE1E3DE),
+    surface = Color(0xFF111411),
+    onSurface = Color(0xFFE1E3DE),
+    surfaceVariant = Color(0xFF404941),
+    onSurfaceVariant = Color(0xFFC0C9BF),
+    outline = Color(0xFF8A938A),
+    outlineVariant = Color(0xFF404941),
+    scrim = Color(0xFF000000),
+    inverseSurface = Color(0xFFE1E3DE),
+    inverseOnSurface = Color(0xFF2E312E),
+    inversePrimary = Color(0xFF2E6A44),
+    surfaceDim = Color(0xFF111411),
+    surfaceBright = Color(0xFF373A36),
+    surfaceContainerLowest = Color(0xFF0C0F0C),
+    surfaceContainerLow = Color(0xFF191C19),
+    surfaceContainer = Color(0xFF1D201D),
+    surfaceContainerHigh = Color(0xFF272B27),
+    surfaceContainerHighest = Color(0xFF323632),
+)
+
+internal val extendedLightColorScheme = ExtendedColorScheme(
+    success = Color(0xFF4C6700),
+    onSuccess = Color(0xFFFFFFFF),
+    successContainer = Color(0xFFA2D608),
+    onSuccessContainer = Color(0xFF425900),
+    warning = Color(0xFF805600),
+    onWarning = Color(0xFFFFFFFF),
+    warningContainer = Color(0xFFFFBA44),
+    onWarningContainer = Color(0xFF704B00),
+    danger = Color(0xFFBB0014),
+    onDanger = Color(0xFFFFFFFF),
+    dangerContainer = Color(0xFFE51B23),
+    onDangerContainer = Color(0xFFFFFBFF),
+)
+
+internal val extendedDarkColorScheme = ExtendedColorScheme(
+    success = Color(0xFFBDF334),
+    onSuccess = Color(0xFF263500),
+    successContainer = Color(0xFFA2D608),
+    onSuccessContainer = Color(0xFF425900),
+    warning = Color(0xFFFFDEB0),
+    onWarning = Color(0xFF442C00),
+    warningContainer = Color(0xFFFFBA44),
+    onWarningContainer = Color(0xFF704B00),
+    danger = Color(0xFFFFB4AB),
+    onDanger = Color(0xFF690006),
+    dangerContainer = Color(0xFFFF544B),
+    onDangerContainer = Color(0xFF470003),
+)
+
+
+internal val LocalExtendedColorScheme = staticCompositionLocalOf { extendedLightColorScheme }

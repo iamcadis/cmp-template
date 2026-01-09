@@ -34,9 +34,8 @@ include(":composeApp")
 
 //Core
 include(":core:common")
-include(":core:domain")
 include(":core:data")
-include(":core:ui")
+include(":core:presentation")
 
 //Firebase
 include(":firebase:analytics")

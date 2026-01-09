@@ -14,7 +14,6 @@ kotlin {
             }
             commonMain.dependencies {
                 implementation(projects.core.common)
-                implementation(projects.core.domain)
                 implementation(libs.bundles.ktor)
                 implementation(libs.bundles.datastore)
                 implementation(libs.bundles.koin.annotations)

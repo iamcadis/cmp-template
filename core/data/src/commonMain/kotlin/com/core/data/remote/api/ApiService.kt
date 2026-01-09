@@ -28,7 +28,7 @@ class ApiService(
         method = HttpMethod.Get
     )
 
-    suspend inline fun <reified T> post(url: String, data: Any?) = request<T>(
+    suspend inline fun <reified T> post(url: String, data: Any? = null) = request<T>(
         url = url,
         method = HttpMethod.Post,
         data = data

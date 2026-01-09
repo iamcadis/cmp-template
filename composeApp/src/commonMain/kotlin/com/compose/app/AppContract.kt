@@ -1,9 +1,9 @@
 package com.compose.app
 
 import androidx.compose.runtime.Immutable
-import com.core.ui.base.ViewAction
-import com.core.ui.base.ViewEffect
-import com.core.ui.base.ViewState
+import com.core.presentation.base.ViewAction
+import com.core.presentation.base.ViewEffect
+import com.core.presentation.base.ViewState
 
 object AppContract {
 
