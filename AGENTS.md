@@ -35,8 +35,6 @@ Located in `core/`:
 
 ### 3. Application Module
 Located in `composeApp/`:
-- **Android**: `src/androidMain` (Manifest, Activity).
-- **iOS**: `src/iosMain` (ViewControllers).
 - **Common**: `src/commonMain` (DI initialization, Root Navigation).
 
 ## Coding Conventions & Patterns

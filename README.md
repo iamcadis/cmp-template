@@ -24,8 +24,8 @@ To connect the android app to your Firebase project, you'll need to add the `goo
 2.  In the "Your apps" card, select the Android app.
 3.  Download the `google-services.json` file.
 4.  Place the file in the following locations:
-    *   For the debug build, place it in `composeApp/src/debug/`.
-    *   For the release build, place it in `composeApp/src/release/`.
+    *   For the debug build, place it in `androidApp/src/debug/`.
+    *   For the release build, place it in `androidApp/src/release/`.
 
 ### Firebase iOS Setup
 To connect the iOS app to your Firebase project, you'll need to add the `GoogleService-Info.plist` file.
