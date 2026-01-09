@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.core.presentation.component.ResponsiveGroup
-import com.core.presentation.AppTheme
+import com.core.presentation.theme.AppTheme
 import com.core.presentation.data.ScreenType
 import com.core.presentation.util.rememberScreenType
 import org.jetbrains.compose.resources.stringResource

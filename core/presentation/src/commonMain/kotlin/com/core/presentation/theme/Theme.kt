@@ -1,4 +1,4 @@
-package com.core.presentation
+package com.core.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -12,15 +12,6 @@ import androidx.compose.runtime.remember
 import com.core.presentation.data.Dimension
 import com.core.presentation.data.ExtendedColorScheme
 import com.core.presentation.data.ScreenType
-import com.core.presentation.theme.CompactDimension
-import com.core.presentation.theme.ExpandedDimension
-import com.core.presentation.theme.LocalDimens
-import com.core.presentation.theme.LocalExtendedColorScheme
-import com.core.presentation.theme.MediumDimension
-import com.core.presentation.theme.darkColorScheme
-import com.core.presentation.theme.extendedDarkColorScheme
-import com.core.presentation.theme.extendedLightColorScheme
-import com.core.presentation.theme.lightColorScheme
 import com.core.presentation.util.rememberScreenType
 
 @Composable
@@ -51,6 +42,11 @@ fun AppTheme(
 }
 
 object AppTheme {
+    val typography: Typography
+        @Composable
+        @ReadOnlyComposable
+        get() = MaterialTheme.typography
+
     val colors: ColorScheme
         @Composable
         @ReadOnlyComposable
@@ -65,9 +61,4 @@ object AppTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalDimens.current
-
-    val typography: Typography
-        @Composable
-        @ReadOnlyComposable
-        get() = MaterialTheme.typography
 }

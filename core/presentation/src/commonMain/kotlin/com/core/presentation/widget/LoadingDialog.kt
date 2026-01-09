@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.core.presentation.AppTheme
+import com.core.presentation.theme.AppTheme
 
 @Composable
 fun LoadingDialog(text: String) {

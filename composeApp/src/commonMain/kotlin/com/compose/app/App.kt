@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.compose.app.ui.NavigationHost
-import com.core.presentation.AppTheme
+import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.LaunchedViewEffect
 import org.koin.compose.viewmodel.koinViewModel
 

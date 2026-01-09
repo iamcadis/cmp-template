@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.core.presentation.AppTheme
+import com.core.presentation.theme.AppTheme
 import com.core.presentation.data.ScreenType
 import com.core.presentation.util.rememberGridColumns
 import com.core.presentation.util.rememberScreenType

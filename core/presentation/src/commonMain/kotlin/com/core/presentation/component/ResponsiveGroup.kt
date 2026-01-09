@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
-import com.core.presentation.AppTheme
+import com.core.presentation.theme.AppTheme
 import com.core.presentation.data.ScreenType
 import com.core.presentation.util.rememberScreenType
 

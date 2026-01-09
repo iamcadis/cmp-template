@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.core.presentation.AppTheme
+import com.core.presentation.theme.AppTheme
 
 enum class SnackbarType {
     INFO, ERROR, SUCCESS
