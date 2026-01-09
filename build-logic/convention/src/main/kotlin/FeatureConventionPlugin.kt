@@ -13,9 +13,9 @@ class FeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("base.ksp")
-                apply("base.compose")
-                apply("base.library")
+                apply("base.kmp.ksp")
+                apply("base.kmp.compose")
+                apply("base.kmp.library")
             }
 
             with(extensions) {

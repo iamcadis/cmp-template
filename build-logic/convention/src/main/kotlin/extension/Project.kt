@@ -1,6 +1,6 @@
 package extension
 
-import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ExternalModuleDependencyBundle
@@ -25,31 +25,58 @@ internal fun Project.getLibrary(alias: String): Provider<MinimalExternalModuleDe
     return catalogs.findLibrary(alias).get()
 }
 
+internal fun Project.getBomLibrary(alias: String): Provider<MinimalExternalModuleDependency> {
+    return project.dependencies.platform(getLibrary(alias))
+}
+
 internal fun Project.getBundle(alias: String): Provider<ExternalModuleDependencyBundle> {
     return catalogs.findBundle(alias).get()
 }
 
 internal fun Project.getDynamicNameSpace(): String {
-    return path.replace(":", ".")
-        .replace("-", ".")
+    return path
+        .replace(oldValue = ":", newValue = ".")
+        .replace(oldValue = "-", newValue = ".")
+        .replace(regex = Regex(pattern = "([a-z])([A-Z])"), replacement = "$1.$2")
         .let { "com$it" }
 }
 
-internal fun Project.configureAndroid(extension: CommonExtension<*, *, *, *, *, *>) {
+internal fun Project.configureAndroid(extension: ApplicationExtension) {
     extension.apply {
         compileSdk = findProperty("android.targetSdk").toString().toInt()
 
         defaultConfig {
             minSdk = findProperty("android.minSdk").toString().toInt()
+            targetSdk = getProperty("android.targetSdk").toInt()
         }
+
+        buildTypes {
+            debug {
+                applicationIdSuffix = ".debug"
+            }
+            release {
+                isMinifyEnabled = true
+                isShrinkResources = true
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            }
+        }
+
         packaging {
             resources {
                 excludes += "/META-INF/{AL2.0,LGPL2.1}"
             }
         }
+
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
+        }
+
+        buildFeatures {
+            compose = true
         }
     }
 }

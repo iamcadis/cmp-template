@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.convention.library)
-    alias(libs.plugins.convention.compose)
+    alias(libs.plugins.convention.kmp.library)
+    alias(libs.plugins.convention.kmp.compose)
     alias(libs.plugins.mokkery)
 }
 

@@ -29,6 +29,7 @@ dependencyResolutionManagement {
     }
 }
 
+include(":androidApp")
 include(":composeApp")
 
 //Core
@@ -39,5 +40,3 @@ include(":core:ui")
 
 //Firebase
 include(":firebase:analytics")
-
-//Features

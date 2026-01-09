@@ -1,8 +1,8 @@
 import extension.addKspCompiler
 
 plugins {
-    alias(libs.plugins.convention.library)
-    alias(libs.plugins.convention.ksp)
+    alias(libs.plugins.convention.kmp.library)
+    alias(libs.plugins.convention.kmp.ksp)
 }
 
 kotlin {

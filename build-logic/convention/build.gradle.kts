@@ -19,24 +19,24 @@ tasks {
 
 gradlePlugin {
     plugins {
-        create("application") {
-            id = "base.application"
-            implementationClass = "AppConventionPlugin"
+        create("android-application") {
+            id = "base.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
         }
         create("ksp") {
-            id = "base.ksp"
+            id = "base.kmp.ksp"
             implementationClass = "KspConventionPlugin"
         }
         create("compose") {
-            id = "base.compose"
+            id = "base.kmp.compose"
             implementationClass = "ComposeConventionPlugin"
         }
         create("library") {
-            id = "base.library"
+            id = "base.kmp.library"
             implementationClass = "LibraryConventionPlugin"
         }
         create("feature") {
-            id = "base.feature"
+            id = "base.kmp.feature"
             implementationClass = "FeatureConventionPlugin"
         }
     }

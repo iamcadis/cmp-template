@@ -1,6 +1,6 @@
-package com.app.di
+package com.compose.app.di
 
-import com.app.AppViewModel
+import com.compose.app.AppViewModel
 import com.core.data.di.DataModule
 import com.core.domain.di.DomainModule
 import org.koin.core.context.startKoin

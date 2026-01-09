@@ -1,4 +1,4 @@
-package com.app
+package com.compose.app
 
 import androidx.compose.runtime.Immutable
 import com.core.ui.base.ViewAction

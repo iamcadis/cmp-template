@@ -18,6 +18,7 @@ koin = "4.1.1"
 koin-annotations = "2.3.1"
 backhandler = "1.9.3"
 firebase = "34.7.0"
+
 #UNIT TEST
 mokkery = "3.1.1"
 kotlinx-coroutines-test = "1.10.2"
@@ -28,6 +29,7 @@ gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
 
+#ANDROIDX + BACKHANDLER
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidx-datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 #noinspection UnusedVersionCatalogEntry
@@ -49,6 +51,8 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 google-tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tink-android" }
 
 #KOIN
+#noinspection UnusedVersionCatalogEntry
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotations" }
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
@@ -68,6 +72,7 @@ ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-jso
 #FIREBASE
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+#noinspection UnusedVersionCatalogEntry
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 
 #UNIT TEST
@@ -85,15 +90,16 @@ kotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", 
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 mokkery = { id = "dev.mokkery", version.ref = "mokkery"}
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services"}
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics"}
 
 #CONVENTION
-convention-app = { id = "base.application", version = "unspecified" }
-convention-ksp = { id = "base.ksp", version = "unspecified" }
-convention-compose = { id = "base.compose", version = "unspecified" }
-convention-library = { id = "base.library", version = "unspecified" }
-convention-feature = { id = "base.feature", version = "unspecified" }
+convention-android-application = { id = "base.android.application", version = "unspecified" }
+convention-kmp-ksp = { id = "base.kmp.ksp", version = "unspecified" }
+convention-kmp-compose = { id = "base.kmp.compose", version = "unspecified" }
+convention-kmp-library = { id = "base.kmp.library", version = "unspecified" }
+convention-kmp-feature = { id = "base.kmp.feature", version = "unspecified" }
 
 [bundles]
 datastore = ["androidx-datastore", "androidx-datastore-preferences"]
@@ -101,7 +107,6 @@ kotlinx = ["kotlinx-collections", "kotlinx-coroutines", "kotlinx-datetime", "kot
 ktor = ["ktor-auth", "ktor-content", "ktor-core", "ktor-logging", "ktor-serialization"]
 koin-annotations = ["koin-annotations", "koin-core"]
 lifecycle = ["lifecycle-runtime", "lifecycle-viewmodel"]
+test = ["koin-test", "kotlin-test", "kotlinx-coroutines-test", "turbine"]
 #noinspection UnusedVersionCatalogEntry
 koin = ["koin-annotations", "koin-compose", "koin-viewmodel", "koin-viewmodel-navigation"]
-#noinspection UnusedVersionCatalogEntry
-test = ["koin-test", "kotlin-test", "kotlinx-coroutines-test", "turbine"]

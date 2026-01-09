@@ -2,11 +2,11 @@ import com.android.build.api.dsl.androidLibrary
 import extension.addIosTarget
 import extension.getDynamicNameSpace
 import extension.getPluginId
+import extension.setDefaultJvmTarget
 import extension.suppressDefaultWarning
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 @Suppress("unused")
@@ -35,7 +35,7 @@ class LibraryConventionPlugin : Plugin<Project> {
                         withJava()
 
                         compilerOptions {
-                            jvmTarget.set(JvmTarget.JVM_17)
+                            setDefaultJvmTarget()
                         }
                     }
 

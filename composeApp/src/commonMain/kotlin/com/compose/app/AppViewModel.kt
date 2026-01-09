@@ -1,4 +1,4 @@
-package com.app
+package com.compose.app
 
 import androidx.lifecycle.viewModelScope
 import com.core.data.local.LocalStorage

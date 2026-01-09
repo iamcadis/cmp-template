@@ -8,3 +8,7 @@ fun DependencyHandlerDelegate.addKspCompiler(dependencyNotation: Any) {
     add("kspIosArm64", dependencyNotation)
     add("kspIosSimulatorArm64", dependencyNotation)
 }
+
+fun DependencyHandlerDelegate.implementation(dependencyNotation: Any) {
+    add("implementation", dependencyNotation)
+}

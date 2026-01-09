@@ -4,7 +4,7 @@ import extension.generateFile
 import extension.getProperty
 import org.gradle.api.Project
 
-internal fun Project.generateIosConfig() {
+fun Project.generateIosConfig() {
     val iosConfigDir = rootDir.resolve("iosApp/Configuration")
     val generateIosConfig = tasks.register("GenerateIosConfig") {
         generateFile(

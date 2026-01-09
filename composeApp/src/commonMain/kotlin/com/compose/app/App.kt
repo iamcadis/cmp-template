@@ -1,9 +1,9 @@
-package com.app
+package com.compose.app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.app.ui.NavigationHost
+import com.compose.app.ui.NavigationHost
 import com.core.ui.AppTheme
 import com.core.ui.util.LaunchedViewEffect
 import org.koin.compose.viewmodel.koinViewModel

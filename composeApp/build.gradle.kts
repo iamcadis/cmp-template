@@ -1,10 +1,9 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import task.generateIosConfig
 
 plugins {
-    alias(libs.plugins.convention.app)
-    alias(libs.plugins.convention.compose)
-    alias(libs.plugins.google.services)
-    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.convention.kmp.library)
+    alias(libs.plugins.convention.kmp.compose)
 }
 
 kotlin {
@@ -19,30 +18,19 @@ kotlin {
     }
     
     sourceSets {
-        androidMain.dependencies {
-            implementation(project.dependencies.platform(libs.firebase.bom))
-            implementation(libs.firebase.crashlytics)
-        }
         commonMain.dependencies {
             api(project(":firebase:analytics"))
+            implementation(project(":core:common"))
+            implementation(project(":core:data"))
+            implementation(project(":core:domain"))
+            implementation(project(":core:ui"))
+            implementation(libs.backhandler)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.viewmodel)
         }
     }
-}
 
-android {
-    namespace = "com.app"
-
-    defaultConfig {
-        applicationId = findProperty("app.id").toString()
-    }
-    buildTypes {
-        val name = findProperty("app.name").toString()
-
-        debug {
-            resValue("string", "display_name", "$name Debug")
-        }
-        release {
-            resValue("string", "display_name", name)
-        }
+    afterEvaluate {
+        generateIosConfig()
     }
 }
