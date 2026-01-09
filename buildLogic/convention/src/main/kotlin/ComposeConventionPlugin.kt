@@ -13,8 +13,8 @@ class ComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(getPluginId(alias = "composeMultiplatform"))
-                apply(getPluginId(alias = "composeCompiler"))
+                apply(getPluginId(alias = "compose-compiler"))
+                apply(getPluginId(alias = "compose-multiplatform"))
             }
 
             with(extensions) {

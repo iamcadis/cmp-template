@@ -14,8 +14,8 @@ class LibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(getPluginId(alias = "kotlinMultiplatform"))
-                apply(getPluginId(alias = "kotlinMultiplatformLibrary"))
+                apply(getPluginId(alias = "kotlin-multiplatform"))
+                apply(getPluginId(alias = "kotlin-multiplatform-library"))
             }
 
             with(extensions) {
