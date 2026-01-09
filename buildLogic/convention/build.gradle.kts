@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.convention.build_logic"
+group = "com.build.logic"
 
 dependencies {
     compileOnly(libs.gradle.android)
