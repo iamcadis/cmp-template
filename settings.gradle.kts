@@ -31,11 +31,8 @@ dependencyResolutionManagement {
 
 include(":androidApp")
 include(":composeApp")
-
-//Core
 include(":core:common")
 include(":core:data")
 include(":core:presentation")
-
-//Firebase
 include(":firebase:analytics")
+include(":features:auth")
