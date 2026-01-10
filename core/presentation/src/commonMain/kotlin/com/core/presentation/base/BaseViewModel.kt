@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.core.presentation.data.AppError
 import com.core.presentation.util.toAppError
 import com.firebase.analytics.AnalyticsTracker
+import com.firebase.analytics.NoOpAnalyticsTracker
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
@@ -30,7 +31,7 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
 ) : ViewModel(), KoinComponent {
 
     protected val analytics by lazy {
-        getKoin().getOrNull<AnalyticsTracker>() ?: NoOpAnalytics
+        getKoin().getOrNull<AnalyticsTracker>() ?: NoOpAnalyticsTracker
     }
 
     protected open val screenName = this::class.simpleName
@@ -74,7 +75,7 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
 
     protected open fun loadInitialData() {}
 
-    protected fun sendEffect(effect: E) {
+    protected fun postEffect(effect: E) {
         _effect.trySend(effect)
     }
 
@@ -122,7 +123,3 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
     }
 }
 
-object NoOpAnalytics : AnalyticsTracker {
-    override fun logEvent(name: String, params: Map<String, Any?>) {}
-    override fun logScreen(screenName: String) {}
-}

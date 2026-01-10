@@ -7,8 +7,8 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            api(libs.bundles.lifecycle)
             implementation(libs.koin.core)
+            implementation(libs.bundles.lifecycle)
             implementation(projects.core.common)
             implementation(projects.firebase.analytics)
         }

@@ -44,7 +44,7 @@ class BaseViewModelTest : KoinTest {
         fun triggerUpdate(newData: String) = updateState { copy(data = newData) }
 
         // Expose protected method 'sendEffect'
-        fun triggerEffect() = sendEffect(TestEffect.ShowSnackbar)
+        fun triggerEffect() = postEffect(TestEffect.ShowSnackbar)
 
         // Expose protected method 'launchSafe' and 'sendError'
         fun triggerSafeLaunch(shouldFail: Boolean = false, onRetry: (() -> Unit)? = null) {

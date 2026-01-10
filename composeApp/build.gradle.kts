@@ -19,13 +19,19 @@ kotlin {
     
     sourceSets {
         commonMain.dependencies {
-            api(project(":firebase:analytics"))
-            implementation(project(":core:common"))
-            implementation(project(":core:data"))
-            implementation(project(":core:presentation"))
+            api(projects.firebase.analytics)
+            implementation(projects.navigation)
+            implementation(projects.core.common)
+            implementation(projects.core.data)
+            implementation(projects.core.presentation)
+
+            // dependencies
             implementation(libs.backhandler)
             implementation(libs.koin.compose)
-            implementation(libs.koin.viewmodel)
+
+            // features
+            implementation(projects.features.auth)
+            implementation(projects.features.home)
         }
     }
 

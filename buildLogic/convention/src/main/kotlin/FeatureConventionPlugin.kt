@@ -22,6 +22,7 @@ class FeatureConventionPlugin : Plugin<Project> {
                 configure<KotlinMultiplatformExtension> {
                     sourceSets {
                         commonMain.dependencies {
+                            implementation(project(":navigation"))
                             implementation(project(":core:common"))
                             implementation(project(":core:data"))
                             implementation(project(":core:presentation"))

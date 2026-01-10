@@ -1,30 +1,39 @@
 package com.compose.app
 
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.compose.app.ui.NavigationHost
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.navigation.compose.rememberNavController
+import com.compose.app.ui.NavHost
+import com.compose.app.util.BackPressHandler
 import com.core.presentation.theme.AppTheme
-import com.core.presentation.util.LaunchedViewEffect
-import org.koin.compose.viewmodel.koinViewModel
+import com.core.presentation.widget.ConfirmationDialogDefault
 
 @Composable
 fun App() {
-    val appViewModel = koinViewModel<AppViewModel>()
-    val authenticated by appViewModel.userId.collectAsStateWithLifecycle()
-
-    LaunchedViewEffect(appViewModel.effect) { effect ->
-        when (effect) {
-            AppContract.Effect.NavigateBack -> {}
-        }
+    val navController = rememberNavController()
+    var showConfirmation by rememberSaveable { mutableStateOf(false) }
+    val backPressHandler = remember(navController) {
+        BackPressHandler(navController) { showConfirmation = it }
     }
 
     AppTheme {
-        NavigationHost(
-            authenticated = authenticated,
-            onBackPressed = {
-                appViewModel.handleAction(AppContract.Action.GoBack)
+        Surface {
+            NavHost(
+                navController = navController,
+                onBackPressed = backPressHandler.backPressed
+            )
+
+            if (showConfirmation) {
+                ConfirmationDialogDefault.LeavePage(
+                    onCancel = backPressHandler.cancelLeaving,
+                    onConfirm = backPressHandler.confirmLeaving,
+                )
             }
-        )
+        }
     }
 }
