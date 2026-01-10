@@ -39,7 +39,7 @@ fun NavHost(
                     config = scaffoldState.screenConfig,
                     canGoBack = navController.canGoBack(),
                     onBackPressed = {
-                        onBackPressed(scaffoldState.screenConfig.askLeave)
+                        onBackPressed(scaffoldState.screenConfig.confirmOnBack)
                     }
                 )
             },
@@ -52,7 +52,7 @@ fun NavHost(
         ) {
 
             BackHandler(enabled = navController.canGoBack()) {
-                onBackPressed(scaffoldState.screenConfig.askLeave)
+                onBackPressed(scaffoldState.screenConfig.confirmOnBack)
             }
 
             CompositionLocalProvider(value = LocalNavController provides navController) {

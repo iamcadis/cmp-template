@@ -6,9 +6,9 @@ import androidx.compose.runtime.Stable
 
 @Stable
 data class ScreenConfig(
-    val askLeave: Boolean = false,
     val pageTitle: String = "",
     val showTopBar: Boolean = true,
+    val confirmOnBack: Boolean = false,
     val topBarActions: @Composable (RowScope.() -> Unit)? = null,
     val floatingButton: @Composable (() -> Unit)? = null,
 )

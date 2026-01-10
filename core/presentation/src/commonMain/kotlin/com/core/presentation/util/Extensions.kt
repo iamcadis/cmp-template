@@ -2,25 +2,23 @@ package com.core.presentation.util
 
 import com.core.common.error.AppException
 import com.core.presentation.data.AppError
+import org.jetbrains.compose.resources.getString
+import template.core.presentation.generated.resources.Res
+import template.core.presentation.generated.resources.err_no_internet
 
-fun Throwable.toAppError(
-    noInternetMessage: String,
-    onClearError: () -> Unit,
-    onRetry: () -> Unit
-) = when (this) {
+internal suspend fun Throwable.toAppError(onClear: () -> Unit, onRetry: () -> Unit) = when (this) {
     is AppException.NoInternet -> AppError(
-        message = noInternetMessage,
-        action = {
-            onRetry()
-            onClearError()
-        }
+        message = getString(Res.string.err_no_internet),
+        fullPage = true,
+        clearError = onClear,
+        retryAction = onRetry
     )
     is AppException.Api -> AppError(
-        message = error.message ?: "An unknown error occurred",
-        action = onClearError
+        message = error.getTranslatedMessage(),
+        clearError = onClear,
     )
     else -> AppError(
         message = message ?: "An unknown error occurred",
-        action = onClearError
+        clearError = onClear,
     )
 }

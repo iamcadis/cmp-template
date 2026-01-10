@@ -19,10 +19,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.getString
 import org.koin.core.component.KoinComponent
-import template.core.presentation.generated.resources.Res
-import template.core.presentation.generated.resources.msg_no_internet
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
@@ -68,7 +65,9 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
         )
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        sendError(throwable = throwable)
+        launchSafe {
+            sendError(error = throwable.toAppError(onClear = ::clearError, onRetry = ::retry))
+        }
     }
 
     open fun handleAction(action: A) {}
@@ -79,15 +78,8 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
         _effect.trySend(effect)
     }
 
-    protected fun sendError(throwable: Throwable) {
-        viewModelScope.launch {
-            val newError = throwable.toAppError(
-                noInternetMessage = getString(Res.string.msg_no_internet),
-                onClearError = ::clearError,
-                onRetry = ::retry
-            )
-            _appError.update { newError }
-        }
+    protected fun sendError(error: AppError) {
+        _appError.update { error }
     }
 
     protected fun updateState(transform: S.() -> S) {
