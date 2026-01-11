@@ -21,7 +21,7 @@ fun SplashScreen() {
     val navController = LocalNavController.current
 
     LaunchedEffect(Unit) {
-        delay(timeMillis = 200)
+        delay(timeMillis = 300)
         val route = if (local.userId.first() == null) {
             NavRoute.Login
         } else {
