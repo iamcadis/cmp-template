@@ -1,6 +1,12 @@
 package com.navigation
 
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.navigation.NavController
 import kotlinx.serialization.Serializable
+
+val LocalNavController = staticCompositionLocalOf<NavController> {
+    error("CompositionLocal LocalNavController not present")
+}
 
 sealed interface NavRoute {
     @Serializable

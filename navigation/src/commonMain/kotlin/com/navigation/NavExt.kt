@@ -1,13 +1,8 @@
 package com.navigation
 
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavOptionsBuilder
-
-val LocalNavController = staticCompositionLocalOf<NavController> {
-    error("CompositionLocal LocalNavController not present")
-}
 
 fun NavController.canGoBack(): Boolean {
     return previousBackStackEntry != null
