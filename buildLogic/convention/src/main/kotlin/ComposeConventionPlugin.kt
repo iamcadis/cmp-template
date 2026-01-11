@@ -18,21 +18,24 @@ class ComposeConventionPlugin : Plugin<Project> {
             }
 
             with(extensions) {
-                val compose = getByType<ComposeExtension>().dependencies
-
                 configure<KotlinMultiplatformExtension> {
+                    val compose = getByType<ComposeExtension>().dependencies
+
                     sourceSets {
                         androidMain.dependencies {
                             implementation(compose.preview)
                         }
-                        commonMain.dependencies {
-                            implementation(compose.runtime)
-                            implementation(compose.foundation)
-                            implementation(compose.material3)
-                            implementation(compose.materialIconsExtended)
-                            implementation(compose.ui)
-                            implementation(compose.components.resources)
-                            implementation(compose.components.uiToolingPreview)
+                        commonMain {
+                            resources.srcDirs("src/commonMain/composeResources")
+                            dependencies {
+                                implementation(compose.runtime)
+                                implementation(compose.foundation)
+                                implementation(compose.material3)
+                                implementation(compose.materialIconsExtended)
+                                implementation(compose.ui)
+                                implementation(compose.components.resources)
+                                implementation(compose.components.uiToolingPreview)
+                            }
                         }
                     }
 

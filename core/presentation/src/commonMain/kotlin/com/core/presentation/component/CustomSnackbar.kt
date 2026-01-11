@@ -109,7 +109,7 @@ fun CustomSnackbarHost(
             }
 
         Snackbar(
-            modifier = modifier.padding(12.dp),
+            modifier = modifier.padding(all = AppTheme.dimens.medium),
             action = actionComposable,
             dismissAction = dismissActionComposable,
             actionOnNewLine = actionOnNewLine,

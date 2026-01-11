@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.core.presentation.component.ResponsiveGroup
+import com.core.presentation.component.Group
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.data.ScreenType
 import com.core.presentation.util.rememberScreenType
@@ -46,11 +46,11 @@ fun ConfirmationDialog(
         Surface(
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.widthIn(max = maxDialogWidth)
-                .padding(all = 24.dp)
+                .padding(all = AppTheme.dimens.large)
         ) {
             Column(
-                modifier = Modifier.padding(24.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                modifier = Modifier.padding(all = AppTheme.dimens.large),
+                verticalArrangement = Arrangement.spacedBy(space = AppTheme.dimens.extraSmall)
             ) {
                 Text(
                     text = title,
@@ -61,8 +61,8 @@ fun ConfirmationDialog(
                     text = message,
                     color = AppTheme.colors.onSurfaceVariant,
                 )
-                Spacer(Modifier.height(16.dp))
-                ResponsiveGroup(rowGap = 24.dp, layoutDirection = actionsLayoutDirectionTablet) {
+                Spacer(Modifier.height(height = AppTheme.dimens.default))
+                Group(rowGap = AppTheme.dimens.large, rowLayoutDirection = actionsLayoutDirectionTablet) {
                     actions(it)
                 }
             }

@@ -19,7 +19,7 @@ import com.core.presentation.util.rememberGridColumns
 import com.core.presentation.util.rememberScreenType
 
 @Composable
-fun ResponsiveLazyList(
+fun LazyListView(
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
     space: Dp = AppTheme.dimens.default,

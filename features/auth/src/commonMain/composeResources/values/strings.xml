@@ -1,0 +1,7 @@
+<resources>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="login_instruction">Login to your Account</string>
+    <string name="login_instruction_caption">Enter your email and password to login</string>
+    <string name="login_asking_for_register">Don't have an account?</string>
+</resources>

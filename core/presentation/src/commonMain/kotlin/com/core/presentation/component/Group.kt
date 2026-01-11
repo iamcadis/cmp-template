@@ -14,14 +14,14 @@ import com.core.presentation.data.ScreenType
 import com.core.presentation.util.rememberScreenType
 
 @Composable
-fun ResponsiveGroup(
+fun Group(
     rowGap: Dp = AppTheme.dimens.default,
-    layoutDirection: LayoutDirection = LayoutDirection.Ltr,
+    rowLayoutDirection: LayoutDirection = LayoutDirection.Ltr,
     content: @Composable (Modifier) -> Unit
 ) {
     val screenType = rememberScreenType()
     if (screenType != ScreenType.Compact) {
-        CompositionLocalProvider(value = LocalLayoutDirection provides layoutDirection) {
+        CompositionLocalProvider(value = LocalLayoutDirection provides rowLayoutDirection) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(space = rowGap),
