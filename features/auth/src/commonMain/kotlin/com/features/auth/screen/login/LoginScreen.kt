@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -40,78 +41,96 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.core.presentation.base.BaseScreen
+import com.core.presentation.theme.AppTheme
+import com.core.presentation.util.LaunchedViewEffect
+import com.navigation.LocalNavController
+import com.navigation.navigate
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun LoginScreen() {
+    val navController = LocalNavController.current
+    val viewModel = koinViewModel<LoginViewModel>()
+
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val error by viewModel.appError.collectAsStateWithLifecycle()
+
+    LaunchedViewEffect(viewModel.effect) { effect ->
+        when(effect) {
+            is LoginContract.Effect.NavigateToHome -> {
+                navController.navigate(destination = effect.route)
+            }
+            is LoginContract.Effect.NavigateToRegister -> {
+                // Navigate to register screen
+            }
+        }
+    }
+
     BaseScreen(
-        showTopBar = false
+        error = error,
+        showTopBar = false,
+        showLoading = state.loading
     ) {
-        LoginContent()
+        LoginContent(state = state, onAction = viewModel::handleAction)
     }
 }
 
 @Composable
-private fun LoginContent() {
-    // These states would typically be provided by a ViewModel in an MVI architecture
-    var email by remember { mutableStateOf("Loisbecket@gmail.com") }
-    var password by remember { mutableStateOf("********") }
+private fun LoginContent(
+    state: LoginContract.State,
+    onAction: (LoginContract.Action) -> Unit
+) {
     var passwordVisible by remember { mutableStateOf(false) }
     var rememberMe by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            // TODO: Replace with AppTheme.dimens.paddingLarge
-            .padding(horizontal = 24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .imePadding()
+            .padding(horizontal = AppTheme.dimens.default),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(space = AppTheme.dimens.default)
     ) {
         Spacer(modifier = Modifier.weight(0.5f))
 
-        // App Logo
         Icon(
-            // Using an AutoMirrored Shield as a placeholder for your logo
             imageVector = Icons.Filled.Shield,
             contentDescription = "App Logo",
-            // TODO: Replace with AppTheme.dimens.iconSizeLarge
             modifier = Modifier.size(64.dp),
             tint = MaterialTheme.colorScheme.primary
         )
-        // TODO: Replace with AppTheme.dimens.spaceLarge
         Spacer(modifier = Modifier.height(32.dp))
-
-        // Header
         Text(
             text = "Sign in to your Account",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
         )
-        // TODO: Replace with AppTheme.dimens.spaceSmall
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "Enter your email and password to log in",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        // TODO: Replace with AppTheme.dimens.spaceExtraLarge
-        Spacer(modifier = Modifier.height(40.dp))
 
-        // Email Input
+        Spacer(modifier = Modifier.height(height = AppTheme.dimens.extraLarge))
+
         OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
+            value = state.email,
+            onValueChange = { onAction(LoginContract.Action.EmailChanged(it)) },
             label = { Text("Email") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
-        // TODO: Replace with AppTheme.dimens.spaceMedium
-        Spacer(modifier = Modifier.height(16.dp))
+
+        Spacer(modifier = Modifier.height(height = AppTheme.dimens.default))
 
         // Password Input
         OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
+            value = state.password,
+            onValueChange = { onAction(LoginContract.Action.PasswordChanged(it)) },
             label = { Text("Password") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
@@ -147,13 +166,10 @@ private fun LoginContent() {
 
         // Log In Button
         Button(
-            onClick = { /* TODO: Handle Login */ },
-            modifier = Modifier
-                .fillMaxWidth()
-                // TODO: Replace with AppTheme.dimens.buttonHeight
-                .height(50.dp),
-            // TODO: Replace with AppTheme.dimens.radiusMedium
-            shape = RoundedCornerShape(12.dp)
+            onClick = {
+                onAction(LoginContract.Action.RequestLogin)
+            },
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Log In", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
         }
@@ -218,14 +234,12 @@ private fun LoginContent() {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Sign Up
         Row(
-            // TODO: Replace with AppTheme.dimens.paddingMedium
-            modifier = Modifier.padding(bottom = 16.dp),
+            modifier = Modifier.padding(bottom = AppTheme.dimens.default),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Don't have an account?", style = MaterialTheme.typography.bodyMedium)
-            TextButton(onClick = { /* TODO: Navigate to Sign Up */ }) {
+            TextButton(onClick = { onAction(LoginContract.Action.OpenRegister) }) {
                 Text("Sign Up")
             }
         }

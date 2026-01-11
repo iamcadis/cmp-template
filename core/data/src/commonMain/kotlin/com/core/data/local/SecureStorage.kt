@@ -2,7 +2,7 @@ package com.core.data.local
 
 interface SecureStorage {
     suspend fun get(key: String) : String?
-    suspend fun set(key: String, value: String) : Boolean
+    suspend fun set(key: String, value: String?) : Boolean
     suspend fun remove(key: String) : Boolean
 
     companion object {
@@ -14,7 +14,7 @@ interface SecureStorage {
             return get("access_token")
         }
 
-        suspend fun SecureStorage.storeRefreshToken(token: String) : Boolean {
+        suspend fun SecureStorage.storeRefreshToken(token: String?) : Boolean {
             return set("refresh_token", token)
         }
 

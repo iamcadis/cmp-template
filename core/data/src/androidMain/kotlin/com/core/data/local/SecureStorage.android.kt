@@ -55,7 +55,9 @@ class AndroidSecureStorage(
         }
     }
 
-    override suspend fun set(key: String, value: String) : Boolean {
+    override suspend fun set(key: String, value: String?) : Boolean {
+        if (value.isNullOrBlank()) return false
+
         val encryptedBytes = aead.encrypt(value.toByteArray(), null)
         val encryptedBase64 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             JavaBase64.getEncoder().encodeToString(encryptedBytes)

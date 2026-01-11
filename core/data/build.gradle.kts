@@ -3,6 +3,7 @@ import extension.addKspCompiler
 plugins {
     alias(libs.plugins.convention.kmp.library)
     alias(libs.plugins.convention.kmp.ksp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {

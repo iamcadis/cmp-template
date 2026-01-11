@@ -48,7 +48,9 @@ class IosSecureStorage : SecureStorage {
         return getValue(key)?.stringValue
     }
 
-    override suspend fun set(key: String, value: String) : Boolean {
+    override suspend fun set(key: String, value: String?) : Boolean {
+        if (value.isNullOrBlank()) return false
+
         return if (existsObject(key)) {
             update(key, value.toNSData())
         } else {

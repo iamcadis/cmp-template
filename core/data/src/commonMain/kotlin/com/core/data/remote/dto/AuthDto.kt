@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AuthTokenDto(
-    val accessToken: String,
-    val refreshToken: String?
+    val accessToken: String = "",
+    val refreshToken: String? = null
 )
 
 @Serializable
@@ -16,7 +16,7 @@ data class LoginRequestDto(
 
 @Serializable
 data class LoginResponseDto(
-    val userId: Int,
-    val accessToken: String,
-    val refreshToken: String?
+    val userId: Int = -1,
+    val accessToken: String = "",
+    val refreshToken: String? = null
 )

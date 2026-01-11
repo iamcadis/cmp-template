@@ -53,6 +53,9 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
             initialValue = initialState
         )
 
+    val currentState: S
+        get() = state.value
+
     private val _effect = Channel<E>(Channel.BUFFERED)
     val effect = _effect.receiveAsFlow()
 
@@ -65,7 +68,7 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
         )
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        launchSafe {
+        viewModelScope.launch {
             sendError(error = throwable.toAppError(onClear = ::clearError, onRetry = ::retry))
         }
     }

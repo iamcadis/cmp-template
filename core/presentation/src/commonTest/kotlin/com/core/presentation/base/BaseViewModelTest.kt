@@ -1,6 +1,7 @@
 package com.core.presentation.base
 
 import app.cash.turbine.test
+import com.core.common.error.AppException
 import com.core.presentation.data.AppError
 import com.firebase.analytics.AnalyticsTracker
 import dev.mokkery.answering.returns
@@ -26,6 +27,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -47,9 +49,14 @@ class BaseViewModelTest : KoinTest {
         fun triggerEffect() = postEffect(TestEffect.ShowSnackbar)
 
         // Expose protected method 'launchSafe' and 'sendError'
-        fun triggerSafeLaunch(shouldFail: Boolean = false, onRetry: (() -> Unit)? = null) {
-            launchSafe(onRetry) {
-                if (shouldFail) throw RuntimeException("KMP Error")
+        fun triggerSafeLaunch(
+            shouldFail: Boolean = false,
+            onRetry: (() -> Unit)? = null,
+            block: suspend () -> Unit = {}
+        ) {
+            launchSafe(onRetry = onRetry) {
+                if (shouldFail) throw AppException.NoInternet()
+                block()
                 updateState { copy(data = "Success") }
             }
         }
@@ -153,18 +160,22 @@ class BaseViewModelTest : KoinTest {
 
             // 2. Trigger a failing action with a retry mechanism
             viewModel.triggerSafeLaunch(shouldFail = true, onRetry = retryAction)
+            advanceUntilIdle()
 
             // 3. Assert an AppError is emitted
             val error = awaitItem()
             assertIs<AppError>(error)
-            assertEquals("KMP Error", error.message)
 
             // 4. Invoke the error's action and verify it triggers the retry
-            error.action()
+            val retry = error.retryAction
+            assertNotNull(retry, "Retry action should not be null")
+
+            retry()
             assertEquals(1, retryCount, "Retry action should be called once.")
 
-            // 5. Verify that the retry action is a one-off
-            error.action()
+            // 5. Verify that the retry action is a one-off by invoking it again.
+            // The underlying pending action in the ViewModel should have been consumed.
+            retry()
             assertEquals(1, retryCount, "Retry action should not be called again.")
         }
     }
@@ -177,6 +188,8 @@ class BaseViewModelTest : KoinTest {
 
             // Trigger an error
             viewModel.triggerSafeLaunch(shouldFail = true)
+            advanceUntilIdle()
+
             assertIs<AppError>(awaitItem(), "An AppError should be emitted")
 
             // Clear the error
