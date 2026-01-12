@@ -47,6 +47,7 @@ internal fun Project.configureAndroid(extension: ApplicationExtension) {
 
         androidResources {
             val locales = findProperty("android.localeSupport").toString()
+                .replace(" ", "")
             localeFilters.addAll(locales.split(","))
         }
         defaultConfig {

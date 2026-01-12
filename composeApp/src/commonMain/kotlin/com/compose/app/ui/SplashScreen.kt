@@ -29,7 +29,7 @@ fun SplashScreen() {
         }
 
         navController.navigate(destination = route) {
-            popUpTo(id = 0) { inclusive = true }
+            popUpTo(route = NavRoute.Splash) { inclusive = true }
             launchSingleTop = true
         }
     }
