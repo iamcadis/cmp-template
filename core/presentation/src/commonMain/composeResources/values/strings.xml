@@ -7,5 +7,4 @@
     <string name="err_unknown">An unknown error occurred.</string>
     <string name="err_no_internet">No internet connection. Please check your network and try again.</string>
     <string name="err_expired_session">Authentication has expired, please login again.</string>
-    <string name="err_field_required">%1$s is required</string>
 </resources>

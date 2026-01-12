@@ -18,13 +18,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import com.core.common.extension.orDefault
 import com.core.presentation.data.Validator
-import com.core.presentation.theme.AppTheme
-import com.core.presentation.util.annotatedLabel
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
-import org.jetbrains.compose.resources.stringResource
-import template.core.presentation.generated.resources.Res
-import template.core.presentation.generated.resources.err_field_required
 
 @Composable
 fun TextField(
@@ -33,7 +28,6 @@ fun TextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     validators: PersistentList<Validator> = persistentListOf(),
-    required: Boolean = false,
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
@@ -53,39 +47,29 @@ fun TextField(
     shape: Shape = OutlinedTextFieldDefaults.shape,
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
 ) {
-    val msgFieldRequired = stringResource(
-        Res.string.err_field_required,
-        label.lowercase().replaceFirstChar { it.uppercase() }
-    )
-
-    val labelView = label.takeUnless { it.isBlank() }
-        ?.let { text ->
-            @Composable { Text(text = text.annotatedLabel(required, color = AppTheme.colors.error)) }
-        }
-
-    val placeholderView = placeholder?.takeUnless { it.isBlank() }
-        ?.let { text ->
-            @Composable { Text(text = text) }
-        }
-
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val validator = remember(value, required, validators) {
-        if (required && value.isBlank()) {
-            Validator(isError = true, message = msgFieldRequired)
-        } else {
-            validators.firstOrNull(Validator::isError).orDefault(Validator.Empty)
-        }
+    val validator = remember(value, validators) {
+        validators.firstOrNull(Validator::isError).orDefault(Validator.Empty)
     }
 
     val isError = remember(value, isFocused, validator) {
         validator.isError && (isFocused || value.isNotEmpty())
     }
 
+    val labelView = remember(label) {
+        label.takeUnless { it.isBlank() }
+            ?.let { @Composable { Text(text = it) } }
+    }
+
+    val placeholderView = remember(placeholder) {
+        placeholder?.takeUnless { it.isBlank() }
+            ?.let { @Composable { Text(text = it) } }
+    }
+
     val supportingTextView = remember(isError, supportingText, validator) {
-        val msg = if (isError) validator.message else supportingText
-        msg?.takeIf { it.isNotBlank() }?.let { nonBlank ->
-            @Composable { Text(nonBlank) }
-        }
+        val message = if (isError) validator.message else supportingText
+        message?.takeIf { it.isNotBlank() }
+            ?.let { @Composable { Text(text = it) } }
     }
 
     OutlinedTextField(

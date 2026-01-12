@@ -116,7 +116,6 @@ private fun LoginContent(
             },
             modifier = Modifier.fillMaxWidth(),
             validators = loginValidators.getValue("email"),
-            required = true,
             singleLine = true,
         )
         TextField(
@@ -127,7 +126,6 @@ private fun LoginContent(
             },
             modifier = Modifier.fillMaxWidth(),
             validators = loginValidators.getValue("password"),
-            required = true,
             singleLine = true,
         )
         Spacer(modifier = Modifier.height(height = AppTheme.dimens.default))

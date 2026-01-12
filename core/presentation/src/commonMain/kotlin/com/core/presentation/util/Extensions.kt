@@ -1,9 +1,5 @@
 package com.core.presentation.util
 
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
 import com.core.common.error.AppException
 import com.core.presentation.data.AppError
 import org.jetbrains.compose.resources.getString
@@ -25,9 +21,4 @@ internal suspend fun Throwable.toAppError(onClear: () -> Unit, onRetry: () -> Un
         message = message ?: "An unknown error occurred",
         clearError = onClear,
     )
-}
-
-internal fun String.annotatedLabel(required: Boolean, color: Color) = buildAnnotatedString {
-    append(this@annotatedLabel)
-    if (required) withStyle(style = SpanStyle(color = color)) { append("*") }
 }
