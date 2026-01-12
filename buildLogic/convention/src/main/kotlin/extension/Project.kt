@@ -45,11 +45,14 @@ internal fun Project.configureAndroid(extension: ApplicationExtension) {
     extension.apply {
         compileSdk = findProperty("android.targetSdk").toString().toInt()
 
+        androidResources {
+            val locales = findProperty("android.localeSupport").toString()
+            localeFilters.addAll(locales.split(","))
+        }
         defaultConfig {
             minSdk = findProperty("android.minSdk").toString().toInt()
             targetSdk = getProperty("android.targetSdk").toInt()
         }
-
         buildTypes {
             debug {
                 applicationIdSuffix = ".debug"
@@ -63,18 +66,15 @@ internal fun Project.configureAndroid(extension: ApplicationExtension) {
                 )
             }
         }
-
         packaging {
             resources {
                 excludes += "/META-INF/{AL2.0,LGPL2.1}"
             }
         }
-
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
         }
-
         buildFeatures {
             compose = true
         }
