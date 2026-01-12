@@ -62,3 +62,12 @@ fun <T: ViewEffect> LaunchedViewEffect(effect: Flow<T>, onEvent: (T) -> Unit) {
         }
     }
 }
+
+@Composable
+fun <T> ConditionalView(
+    value: T?,
+    nullContent: @Composable () -> Unit,
+    nonNullContent: @Composable (T) -> Unit
+) {
+   if (value == null) nullContent() else nonNullContent(value)
+}

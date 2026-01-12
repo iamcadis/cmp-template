@@ -7,6 +7,10 @@ plugins {
 android {
     namespace = "com.app"
 
+    androidResources {
+        val locales = findProperty("android.localeSupport").toString()
+        localeFilters.addAll(locales.split(","))
+    }
     defaultConfig {
         applicationId = findProperty("app.id").toString()
         versionCode = findProperty("version.code").toString().toInt()
