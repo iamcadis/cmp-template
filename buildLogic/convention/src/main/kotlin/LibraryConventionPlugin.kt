@@ -24,6 +24,7 @@ class LibraryConventionPlugin : Plugin<Project> {
                         namespace = getDynamicNameSpace()
                         compileSdk = findProperty("android.targetSdk").toString().toInt()
                         minSdk = findProperty("android.minSdk").toString().toInt()
+                        androidResources.enable = true
 
                         optimization {
                             val proguardFile = file("consumer-rules.pro")

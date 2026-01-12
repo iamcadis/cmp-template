@@ -3,8 +3,14 @@
     <string name="yes_leave">Yes, Leave</string>
     <string name="leave_page_title">Leave this page?</string>
     <string name="leave_page_message">It looks like you have unsaved changes. If you leave now, your progress may be lost.</string>
-    <!-- Default error message -->
+    <!-- Error message -->
     <string name="err_unknown">An unknown error occurred.</string>
     <string name="err_no_internet">No internet connection. Please check your network and try again.</string>
     <string name="err_expired_session">Authentication has expired, please login again.</string>
+    <!-- Auth module -->
+    <string name="login">Login</string>
+    <string name="login_instruction">Login to your Account</string>
+    <string name="login_instruction_caption">Enter your email and password to login</string>
+    <string name="login_asking_for_register">Don't have an account?</string>
+    <string name="register">Register</string>
 </resources>

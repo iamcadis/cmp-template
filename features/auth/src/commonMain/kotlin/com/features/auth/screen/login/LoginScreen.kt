@@ -35,14 +35,14 @@ import com.core.presentation.util.LaunchedViewEffect
 import com.core.presentation.util.getValue
 import com.navigation.LocalNavController
 import com.navigation.navigate
+import com.resources.Res
+import com.resources.login
+import com.resources.login_asking_for_register
+import com.resources.login_instruction
+import com.resources.login_instruction_caption
+import com.resources.register
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import template.features.auth.generated.resources.Res
-import template.features.auth.generated.resources.login
-import template.features.auth.generated.resources.login_asking_for_register
-import template.features.auth.generated.resources.login_instruction
-import template.features.auth.generated.resources.login_instruction_caption
-import template.features.auth.generated.resources.register
 
 @Composable
 internal fun LoginScreen() {

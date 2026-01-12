@@ -9,6 +9,8 @@ android {
 
     defaultConfig {
         applicationId = findProperty("app.id").toString()
+        versionCode = findProperty("version.code").toString().toInt()
+        versionName = findProperty("version.name").toString()
     }
     buildTypes {
         val name = findProperty("app.name").toString()

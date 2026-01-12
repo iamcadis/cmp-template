@@ -32,6 +32,7 @@ dependencyResolutionManagement {
 include(":androidApp")
 include(":composeApp")
 include(":navigation")
+include(":resources")
 include(":core:common")
 include(":core:data")
 include(":core:presentation")

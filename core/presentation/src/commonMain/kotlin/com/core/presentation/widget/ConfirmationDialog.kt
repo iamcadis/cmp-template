@@ -23,12 +23,12 @@ import com.core.presentation.component.Group
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.data.ScreenType
 import com.core.presentation.util.rememberScreenType
+import com.resources.Res
+import com.resources.leave_page_message
+import com.resources.leave_page_title
+import com.resources.stay_here
+import com.resources.yes_leave
 import org.jetbrains.compose.resources.stringResource
-import template.core.presentation.generated.resources.Res
-import template.core.presentation.generated.resources.leave_page_message
-import template.core.presentation.generated.resources.leave_page_title
-import template.core.presentation.generated.resources.stay_here
-import template.core.presentation.generated.resources.yes_leave
 
 @Composable
 fun ConfirmationDialog(

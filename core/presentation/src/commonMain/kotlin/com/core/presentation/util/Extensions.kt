@@ -2,9 +2,9 @@ package com.core.presentation.util
 
 import com.core.common.error.AppException
 import com.core.presentation.data.AppError
+import com.resources.Res
+import com.resources.err_no_internet
 import org.jetbrains.compose.resources.getString
-import template.core.presentation.generated.resources.Res
-import template.core.presentation.generated.resources.err_no_internet
 
 internal suspend fun Throwable.toAppError(onClear: () -> Unit, onRetry: () -> Unit) = when (this) {
     is AppException.NoInternet -> AppError(

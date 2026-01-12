@@ -2,10 +2,10 @@ package com.core.presentation.util
 
 import com.core.common.error.ApiError
 import com.core.common.extension.orDefault
+import com.resources.Res
+import com.resources.err_expired_session
+import com.resources.err_unknown
 import org.jetbrains.compose.resources.getString
-import template.core.presentation.generated.resources.Res
-import template.core.presentation.generated.resources.err_expired_session
-import template.core.presentation.generated.resources.err_unknown
 
 suspend fun ApiError.getTranslatedMessage() : String {
     val newMessage = mapOf(
