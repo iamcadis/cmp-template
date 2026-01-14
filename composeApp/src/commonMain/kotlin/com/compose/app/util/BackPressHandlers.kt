@@ -4,17 +4,17 @@ import androidx.navigation.NavController
 
 class BackPressHandlers(
     private val navController: NavController,
-    private val setShowConfirmation: (Boolean) -> Unit
+    private val showLeaveConfirmation: (Boolean) -> Unit
 ) {
     val backPressed: (Boolean) -> Unit = { needConfirmation ->
-        if (needConfirmation) setShowConfirmation(true)
+        if (needConfirmation) showLeaveConfirmation(true)
         else navController.popBackStack()
     }
 
-    val cancelLeaving: () -> Unit = { setShowConfirmation(false) }
+    val cancelLeaving: () -> Unit = { showLeaveConfirmation(false) }
 
     val confirmLeaving: () -> Unit = {
-        setShowConfirmation(false)
+        showLeaveConfirmation(false)
         navController.popBackStack()
     }
 }

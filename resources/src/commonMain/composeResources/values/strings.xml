@@ -1,6 +1,6 @@
 <resources>
-    <string name="stay_here">Stay Here</string>
-    <string name="yes_leave">Yes, Leave</string>
+    <string name="stay_here">Stay here</string>
+    <string name="yes_leave">Yes, leave</string>
     <string name="leave_page_title">Leave this page?</string>
     <string name="leave_page_message">It looks like you have unsaved changes. If you leave now, your progress may be lost.</string>
     <!-- Error message -->

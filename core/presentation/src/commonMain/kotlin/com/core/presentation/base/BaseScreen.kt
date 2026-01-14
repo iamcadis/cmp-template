@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import com.core.presentation.component.LocalSnackbarHostState
 import com.core.presentation.component.SnackbarType
 import com.core.presentation.data.AppError
+import com.core.presentation.data.Confirmation
 import com.core.presentation.data.ScreenConfig
 import com.core.presentation.util.LocalScaffoldState
 import com.core.presentation.widget.LoadingDialog
@@ -29,6 +30,7 @@ fun BaseScreen(
     showLoading: Boolean = false,
     loadingText: String = "Please wait...",
     confirmOnBack: Boolean = false,
+    backConfirmationData: Confirmation? = null,
     topBarActions: @Composable (RowScope.() -> Unit)? = null,
     floatingButton: @Composable (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit
@@ -49,6 +51,12 @@ fun BaseScreen(
                 floatingButton = currentFloatingButton
             )
         )
+    }
+
+    LaunchedEffect(backConfirmationData) {
+        backConfirmationData?.let {
+            scaffoldState.setBackConfirmationData(it)
+        }
     }
 
     LaunchedEffect(error) {

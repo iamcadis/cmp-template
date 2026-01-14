@@ -20,14 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.core.presentation.component.Group
-import com.core.presentation.theme.AppTheme
+import com.core.presentation.data.Confirmation
 import com.core.presentation.data.ScreenType
+import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.rememberScreenType
-import com.resources.Res
-import com.resources.leave_page_message
-import com.resources.leave_page_title
-import com.resources.stay_here
-import com.resources.yes_leave
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -73,22 +69,26 @@ fun ConfirmationDialog(
 object ConfirmationDialogDefault {
 
     @Composable
-    fun LeavePage(onCancel: () -> Unit, onConfirm: () -> Unit) {
+    fun LeavePage(
+        data: Confirmation,
+        onCancel: () -> Unit,
+        onConfirm: () -> Unit
+    ) {
         ConfirmationDialog(
-            title = stringResource(Res.string.leave_page_title),
-            message = stringResource(Res.string.leave_page_message),
+            title = stringResource(data.titleRes),
+            message = stringResource(data.messageRes),
             actions = { modifier ->
                 Button(
                     onClick = onConfirm,
                     modifier = modifier
                 ) {
-                    Text(text = stringResource(Res.string.yes_leave))
+                    Text(text = stringResource(data.positiveLabelRes))
                 }
                 OutlinedButton(
                     onClick = onCancel,
                     modifier = modifier
                 ) {
-                    Text(text = stringResource(Res.string.stay_here))
+                    Text(text = stringResource(data.negativeLabelRes))
                 }
             }
         )

@@ -25,7 +25,7 @@ fun NavHost(scaffoldState: ScaffoldState) {
     val navController = rememberNavController()
     val snackbarHostState = remember { CustomSnackbarHostState() }
     val backPressHandlers = remember(navController) {
-        BackPressHandlers(navController, scaffoldState::setShowConfirmation)
+        BackPressHandlers(navController, scaffoldState::showLeaveConfirmation)
     }
 
     CompositionLocalProvider(value = LocalSnackbarHostState provides snackbarHostState) {
@@ -60,6 +60,7 @@ fun NavHost(scaffoldState: ScaffoldState) {
 
             if (scaffoldState.confirmOnBack) {
                 ConfirmationDialogDefault.LeavePage(
+                    data = scaffoldState.confirmationData,
                     onCancel = backPressHandlers.cancelLeaving,
                     onConfirm = backPressHandlers.confirmLeaving,
                 )
