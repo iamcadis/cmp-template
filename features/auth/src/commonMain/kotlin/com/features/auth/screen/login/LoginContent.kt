@@ -44,7 +44,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginAction) -> Unit = {}) {
     val focusManager = LocalFocusManager.current
-    val validators by getLoginValidators(state)
+    val validators by getLoginValidators(state.email, state.password)
 
     Column(
         verticalArrangement = Arrangement.spacedBy(

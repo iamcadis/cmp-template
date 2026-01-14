@@ -13,19 +13,20 @@ import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun getLoginValidators(
-    state: LoginState
-) = remember(state.email, state.password) {
+    email: String,
+    password: String
+) = remember(email, password) {
     createValidators(
         "email" to persistentListOf(
             Validator(
-                isError = state.email.isBlank(),
+                isError = email.isBlank(),
                 messageRes = Res.string.err_field_required,
                 formatArgs = listOf(Translatable.Resource(Res.string.email))
             )
         ),
         "password" to persistentListOf(
             Validator(
-                isError = state.password.isBlank(),
+                isError = password.isBlank(),
                 messageRes = Res.string.err_field_required,
                 formatArgs = listOf(Translatable.Resource(Res.string.password))
             )
