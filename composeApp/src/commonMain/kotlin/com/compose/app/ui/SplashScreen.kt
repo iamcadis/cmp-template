@@ -8,7 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.core.data.local.LocalStorage
-import com.navigation.LocalNavController
+import com.navigation.LocalNavigator
 import com.navigation.NavRoute
 import com.navigation.navigate
 import kotlinx.coroutines.delay
@@ -18,7 +18,7 @@ import org.koin.compose.koinInject
 @Composable
 fun SplashScreen() {
     val local = koinInject<LocalStorage>()
-    val navController = LocalNavController.current
+    val navigator = LocalNavigator.current
 
     LaunchedEffect(Unit) {
         delay(timeMillis = 300)
@@ -28,7 +28,7 @@ fun SplashScreen() {
             NavRoute.Home
         }
 
-        navController.navigate(destination = route) {
+        navigator.navigate(destination = route) {
             popUpTo(route = NavRoute.Splash) { inclusive = true }
             launchSingleTop = true
         }

@@ -4,7 +4,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.navigation.NavController
 import kotlinx.serialization.Serializable
 
-val LocalNavController = staticCompositionLocalOf<NavController> {
+val LocalNavigator = staticCompositionLocalOf<NavController> {
     error("CompositionLocal LocalNavController not present")
 }
 

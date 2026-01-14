@@ -14,7 +14,7 @@ compose {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            api(compose.components.resources)
+            api(libs.compose.resources)
         }
     }
 }

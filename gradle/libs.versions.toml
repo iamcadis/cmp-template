@@ -1,7 +1,7 @@
 [versions]
 agp = "8.13.2"
 kotlin = "2.3.0"
-compose = "1.9.3"
+compose = "1.10.0"
 ksp = "2.3.3"
 google-services = "4.4.4"
 firebase-crashlytics = "3.0.6"
@@ -16,9 +16,11 @@ tink-android = "1.20.0"
 ktor = "3.3.3"
 koin = "4.1.1"
 koin-annotations = "2.3.1"
-backhandler = "1.9.3"
+backhandler = "1.10.0"
 firebase = "34.7.0"
 navigation = "2.9.1"
+material3 = "1.9.0"
+material-icons = "1.7.3"
 
 #UNIT TEST
 mokkery = "3.1.1"
@@ -83,6 +85,15 @@ koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 
+#COMPOSE
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose"}
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3"}
+compose-material-icons = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "material-icons"}
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose"}
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose"}
+compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose"}
+compose-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -112,3 +123,5 @@ lifecycle = ["lifecycle-runtime", "lifecycle-viewmodel"]
 test = ["koin-test", "kotlin-test", "kotlinx-coroutines-test", "turbine"]
 #noinspection UnusedVersionCatalogEntry
 koin = ["koin-annotations", "koin-compose", "koin-viewmodel", "koin-viewmodel-navigation"]
+#noinspection UnusedVersionCatalogEntry
+compose = ["compose-foundation", "compose-material-icons", "compose-material3", "compose-runtime", "compose-ui", "compose-ui-tooling-preview"]

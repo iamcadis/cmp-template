@@ -33,7 +33,7 @@ import com.core.presentation.component.TextField
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.LaunchedViewEffect
 import com.core.presentation.util.getValue
-import com.navigation.LocalNavController
+import com.navigation.LocalNavigator
 import com.navigation.navigate
 import com.resources.Res
 import com.resources.login
@@ -46,7 +46,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun LoginScreen() {
-    val navController = LocalNavController.current
+    val navController = LocalNavigator.current
     val viewModel = koinViewModel<LoginViewModel>()
 
     val state by viewModel.state.collectAsStateWithLifecycle()

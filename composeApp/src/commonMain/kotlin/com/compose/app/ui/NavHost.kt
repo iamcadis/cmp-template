@@ -16,7 +16,7 @@ import com.core.presentation.component.CustomSnackbarHostState
 import com.core.presentation.component.LocalSnackbarHostState
 import com.core.presentation.util.LocalScaffoldState
 import com.core.presentation.util.ScaffoldState
-import com.navigation.LocalNavController
+import com.navigation.LocalNavigator
 import com.navigation.NavRoute
 import com.navigation.canGoBack
 
@@ -55,7 +55,7 @@ fun NavHost(
                 onBackPressed(scaffoldState.screenConfig.confirmOnBack)
             }
 
-            CompositionLocalProvider(value = LocalNavController provides navController) {
+            CompositionLocalProvider(value = LocalNavigator provides navController) {
                 NavHost(
                     modifier = Modifier.padding(it),
                     navController = navController,
