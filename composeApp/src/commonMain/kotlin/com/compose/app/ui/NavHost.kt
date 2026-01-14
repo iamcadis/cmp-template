@@ -7,30 +7,28 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.compose.app.allRoutes
+import com.compose.app.util.BackPressHandlers
 import com.core.presentation.component.CustomSnackbarHost
 import com.core.presentation.component.CustomSnackbarHostState
 import com.core.presentation.component.LocalSnackbarHostState
-import com.core.presentation.util.LocalScaffoldState
 import com.core.presentation.util.ScaffoldState
+import com.core.presentation.widget.ConfirmationDialogDefault
 import com.navigation.LocalNavigator
 import com.navigation.NavRoute
 import com.navigation.canGoBack
 
 @Composable
-fun NavHost(
-    navController: NavHostController,
-    onBackPressed: (showConfirmation: Boolean) -> Unit
-) {
-    val scaffoldState = remember { ScaffoldState() }
+fun NavHost(scaffoldState: ScaffoldState) {
+    val navController = rememberNavController()
     val snackbarHostState = remember { CustomSnackbarHostState() }
+    val backPressHandlers = remember(navController) {
+        BackPressHandlers(navController, scaffoldState::setShowConfirmation)
+    }
 
-    CompositionLocalProvider(
-        LocalScaffoldState provides scaffoldState,
-        LocalSnackbarHostState provides snackbarHostState
-    ) {
+    CompositionLocalProvider(value = LocalSnackbarHostState provides snackbarHostState) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
@@ -38,7 +36,7 @@ fun NavHost(
                     config = scaffoldState.screenConfig,
                     canGoBack = navController.canGoBack(),
                     onBackPressed = {
-                        onBackPressed(scaffoldState.screenConfig.confirmOnBack)
+                        backPressHandlers.backPressed(scaffoldState.screenConfig.confirmOnBack)
                     }
                 )
             },
@@ -51,13 +49,20 @@ fun NavHost(
         ) {
 
             BackHandler(enabled = navController.canGoBack()) {
-                onBackPressed(scaffoldState.screenConfig.confirmOnBack)
+                backPressHandlers.backPressed(scaffoldState.screenConfig.confirmOnBack)
             }
 
             CompositionLocalProvider(value = LocalNavigator provides navController) {
                 NavHost(navController = navController, startDestination = NavRoute.Splash) {
                     allRoutes(navController = navController)
                 }
+            }
+
+            if (scaffoldState.confirmOnBack) {
+                ConfirmationDialogDefault.LeavePage(
+                    onCancel = backPressHandlers.cancelLeaving,
+                    onConfirm = backPressHandlers.confirmLeaving,
+                )
             }
         }
     }

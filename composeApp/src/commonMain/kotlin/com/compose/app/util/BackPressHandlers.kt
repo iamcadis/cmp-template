@@ -2,12 +2,12 @@ package com.compose.app.util
 
 import androidx.navigation.NavController
 
-class BackPressHandler(
+class BackPressHandlers(
     private val navController: NavController,
     private val setShowConfirmation: (Boolean) -> Unit
 ) {
-    val backPressed: (Boolean) -> Unit = { askLeave ->
-        if (askLeave) setShowConfirmation(true)
+    val backPressed: (Boolean) -> Unit = { needConfirmation ->
+        if (needConfirmation) setShowConfirmation(true)
         else navController.popBackStack()
     }
 
