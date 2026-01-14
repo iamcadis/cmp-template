@@ -80,7 +80,7 @@ fun BaseScreen(
             if (isError && !error?.message.isNullOrBlank()) {
                 Text(text = error.message)
             } else {
-                content(this)
+                content()
             }
         }
     }
