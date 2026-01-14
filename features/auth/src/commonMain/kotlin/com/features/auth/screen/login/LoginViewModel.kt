@@ -15,15 +15,15 @@ class LoginViewModel (
     private val login: LoginUseCase,
     private val localStorage: LocalStorage,
     private val secureStorage: SecureStorage,
-) : BaseViewModel<LoginContract.State, LoginContract.Action, LoginContract.Effect>(
-    initialState = LoginContract.State()
+) : BaseViewModel<LoginState, LoginAction, LoginEffect>(
+    initialState = LoginState()
 ) {
-    override fun handleAction(action: LoginContract.Action) {
+    override fun handleAction(action: LoginAction) {
         when(action) {
-            is LoginContract.Action.EmailChanged -> updateEmail(action.value)
-            is LoginContract.Action.PasswordChanged -> updatePassword(action.value)
-            LoginContract.Action.OpenRegister -> openRegisterPage()
-            LoginContract.Action.RequestLogin -> requestLogin()
+            is LoginAction.EmailChanged -> updateEmail(action.value)
+            is LoginAction.PasswordChanged -> updatePassword(action.value)
+            LoginAction.OpenRegister -> openRegisterPage()
+            LoginAction.RequestLogin -> requestLogin()
         }
     }
 
@@ -49,7 +49,7 @@ class LoginViewModel (
                     localStorage.storeUserId(it.userId)
                     secureStorage.storeAccessToken(it.accessToken)
                     secureStorage.storeRefreshToken(it.refreshToken)
-                    postEffect(effect = LoginContract.Effect.NavigateToHome(route = NavRoute.Home))
+                    postEffect(effect = LoginEffect.NavigateToHome(route = NavRoute.Home))
                 }
             } finally {
                 updateState { copy(loading = false) }

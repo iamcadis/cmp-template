@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
-import com.core.common.extension.orDefault
 import com.core.presentation.data.Validator
+import com.core.presentation.util.resolveValidatorMessage
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -49,27 +49,27 @@ fun TextField(
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
     val validator = remember(value, validators) {
-        validators.firstOrNull(Validator::isError).orDefault(Validator.Empty)
+        validators.firstOrNull(Validator::isError)
     }
 
     val isError = remember(value, isFocused, validator) {
-        validator.isError && (isFocused || value.isNotEmpty())
+        validator?.isError == true && (isFocused || value.isNotEmpty())
     }
 
     val labelView = remember(label) {
-        label.takeUnless { it.isBlank() }
-            ?.let { @Composable { Text(text = it) } }
+        label.takeUnless { it.isBlank() }?.let { @Composable { Text(text = it) } }
     }
 
     val placeholderView = remember(placeholder) {
-        placeholder?.takeUnless { it.isBlank() }
-            ?.let { @Composable { Text(text = it) } }
+        placeholder?.let { @Composable { Text(text = it) } }
     }
 
     val supportingTextView = remember(isError, supportingText, validator) {
-        val message = if (isError) validator.message else supportingText
-        message?.takeIf { it.isNotBlank() }
-            ?.let { @Composable { Text(text = it) } }
+        if (isError) {
+            validator?.let { @Composable { Text(text = resolveValidatorMessage(it)) } }
+        } else {
+            supportingText?.let { @Composable { Text(text = it) } }
+        }
     }
 
     OutlinedTextField(

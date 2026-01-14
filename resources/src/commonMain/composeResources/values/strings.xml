@@ -7,10 +7,15 @@
     <string name="err_unknown">An unknown error occurred.</string>
     <string name="err_no_internet">No internet connection. Please check your network and try again.</string>
     <string name="err_expired_session">Authentication has expired, please login again.</string>
+    <!-- Validations -->
+    <string name="err_field_required">The %1$s field is required.</string>
+    <string name="err_field_not_valid_format">The %1$s format is invalid.</string>
     <!-- Auth module -->
     <string name="login">Login</string>
     <string name="login_instruction">Login to your Account</string>
     <string name="login_instruction_caption">Enter your email and password to login</string>
     <string name="login_asking_for_register">Don't have an account?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
     <string name="register">Register</string>
 </resources>

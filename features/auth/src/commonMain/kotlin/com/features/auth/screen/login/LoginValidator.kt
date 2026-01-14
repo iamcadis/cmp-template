@@ -1,24 +1,34 @@
 package com.features.auth.screen.login
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import com.core.presentation.data.Translatable
 import com.core.presentation.data.Validator
-import com.core.presentation.util.addValidators
+import com.core.presentation.util.createValidators
+import com.resources.Res
+import com.resources.email
+import com.resources.err_field_required
+import com.resources.password
 import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-fun loginValidators(state: LoginContract.State) = addValidators(
-//    "email" to persistentListOf(
-//        Validator(
-//            isError = state.phone.isBlank(),
-//            message = stringResource(Res.string.err_number_is_required)
-//        ),
-//        Validator(
-//            isError = state.phone.length !in 9..12,
-//            message = stringResource(Res.string.err_number_is_not_valid)
-//        ),
-//        Validator(
-//            isError = state.errorNumberNotExist,
-//            message = stringResource(Res.string.number_not_registered)
-//        ),
-//    )
-)
+internal fun getLoginValidators(
+    state: LoginState
+) = remember(state.email, state.password) {
+    createValidators(
+        "email" to persistentListOf(
+            Validator(
+                isError = state.email.isBlank(),
+                messageRes = Res.string.err_field_required,
+                formatArgs = listOf(Translatable.Resource(Res.string.email))
+            )
+        ),
+        "password" to persistentListOf(
+            Validator(
+                isError = state.password.isBlank(),
+                messageRes = Res.string.err_field_required,
+                formatArgs = listOf(Translatable.Resource(Res.string.password))
+            )
+        )
+    )
+}
