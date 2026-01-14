@@ -4,11 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -17,7 +14,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults.ContentPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -51,20 +47,21 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
     val validators by getLoginValidators(state)
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .imePadding()
-            .padding(all = AppTheme.dimens.default),
         verticalArrangement = Arrangement.spacedBy(
             space = AppTheme.dimens.default,
             alignment = Alignment.CenterVertically
-        )
+        ),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = AppTheme.dimens.default)
+            .imePadding()
     ) {
         Icon(
             imageVector = Icons.Filled.Shield,
             contentDescription = "App Logo",
             tint = AppTheme.colors.primary,
-            modifier = Modifier.size(64.dp)
+            modifier = Modifier
+                .size(64.dp)
                 .align(Alignment.CenterHorizontally)
         )
         Text(
@@ -76,7 +73,8 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
             text = stringResource(Res.string.login_instruction_caption),
             style = AppTheme.typography.bodyMedium,
             color = AppTheme.colors.onSurfaceVariant,
-            modifier = Modifier.offset(y = -(AppTheme.dimens.medium))
+            modifier = Modifier
+                .offset(y = -(AppTheme.dimens.medium))
         )
         TextField(
             label = stringResource(Res.string.email),
@@ -84,12 +82,13 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
             onValueChange = {
                 onAction(LoginAction.EmailChanged(it))
             },
-            modifier = Modifier.fillMaxWidth(),
             validators = validators.getValue("email"),
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Email
-            )
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
         )
         TextField(
             label = stringResource(Res.string.password),
@@ -97,12 +96,13 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
             onValueChange = {
                 onAction(LoginAction.PasswordChanged(it))
             },
-            modifier = Modifier.fillMaxWidth(),
             validators = validators.getValue("password"),
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password
-            )
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
         )
         Button(
             enabled = validators.validate(),
@@ -110,16 +110,16 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 focusManager.clearFocus()
                 onAction(LoginAction.RequestLogin)
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = AppTheme.dimens.small)
         ) {
             Text(text = stringResource(Res.string.login))
         }
         Row(
             modifier = Modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .offset(y = -(AppTheme.dimens.default))
-                .consumeWindowInsets(insets = WindowInsets.ime),
+                .offset(y = -(AppTheme.dimens.small))
+                .align(alignment = Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -130,7 +130,6 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 onClick = { onAction(LoginAction.OpenRegister) },
                 contentPadding = PaddingValues(
                     horizontal = AppTheme.dimens.extraSmall,
-                    vertical = ContentPadding.calculateTopPadding(),
                 )
             ) {
                 Text(text = stringResource(Res.string.register))

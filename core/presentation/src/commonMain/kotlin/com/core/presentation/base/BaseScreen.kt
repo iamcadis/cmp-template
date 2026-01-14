@@ -63,14 +63,14 @@ fun BaseScreen(
         label = "FullPageError"
     ) { isError ->
         Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
                 .safeDrawingPadding()
-                .navigationBarsPadding(),
-            contentAlignment = Alignment.Center,
+                .navigationBarsPadding()
         ) {
-            if (isError) {
-                Text(text = error?.message.orEmpty())
+            if (isError && !error?.message.isNullOrBlank()) {
+                Text(text = error.message)
             } else {
                 content(this)
             }
