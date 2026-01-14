@@ -1,5 +1,8 @@
 package com.compose.app.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -15,27 +18,27 @@ fun NavTopBar(
     canGoBack: Boolean,
     onBackPressed: () -> Unit
 ) {
-    if (!config.showTopBar) return
-
-    TopAppBar(
-        title = {
-            Text(text = config.pageTitle)
-        },
-        navigationIcon = {
-            if (canGoBack) {
-                IconButton(
-                    onClick = onBackPressed,
-                    content = {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Go back to previous page"
-                        )
-                    }
-                )
+    AnimatedVisibility(visible = config.showTopBar, enter = fadeIn(), exit = fadeOut()) {
+        TopAppBar(
+            title = {
+                Text(text = config.pageTitle)
+            },
+            navigationIcon = {
+                if (canGoBack) {
+                    IconButton(
+                        onClick = onBackPressed,
+                        content = {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back"
+                            )
+                        }
+                    )
+                }
+            },
+            actions = {
+                config.topBarActions?.invoke(this)
             }
-        },
-        actions = {
-            config.topBarActions?.invoke(this)
-        },
-    )
+        )
+    }
 }

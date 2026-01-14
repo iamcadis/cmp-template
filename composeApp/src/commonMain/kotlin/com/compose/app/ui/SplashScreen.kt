@@ -8,6 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.core.data.local.LocalStorage
+import com.core.presentation.base.BaseScreen
 import com.navigation.LocalNavigator
 import com.navigation.NavRoute
 import com.navigation.navigate
@@ -34,7 +35,9 @@ fun SplashScreen() {
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator()
+    BaseScreen(showTopBar = false) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
     }
 }

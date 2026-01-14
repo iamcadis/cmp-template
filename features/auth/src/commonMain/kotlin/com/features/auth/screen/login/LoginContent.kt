@@ -4,8 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -114,8 +117,9 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
         }
         Row(
             modifier = Modifier
+                .align(alignment = Alignment.CenterHorizontally)
                 .offset(y = -(AppTheme.dimens.default))
-                .align(Alignment.CenterHorizontally),
+                .consumeWindowInsets(insets = WindowInsets.ime),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

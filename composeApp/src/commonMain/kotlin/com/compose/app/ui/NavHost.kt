@@ -1,7 +1,6 @@
 package com.compose.app.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -56,11 +55,7 @@ fun NavHost(
             }
 
             CompositionLocalProvider(value = LocalNavigator provides navController) {
-                NavHost(
-                    modifier = Modifier.padding(it),
-                    navController = navController,
-                    startDestination = NavRoute.Splash
-                ) {
+                NavHost(navController = navController, startDestination = NavRoute.Splash) {
                     allRoutes(navController = navController)
                 }
             }

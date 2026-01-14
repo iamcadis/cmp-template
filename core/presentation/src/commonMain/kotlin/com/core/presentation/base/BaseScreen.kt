@@ -2,8 +2,11 @@ package com.core.presentation.base
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,7 +31,7 @@ fun BaseScreen(
     confirmOnBack: Boolean = false,
     topBarActions: @Composable (RowScope.() -> Unit)? = null,
     floatingButton: @Composable (() -> Unit)? = null,
-    content: @Composable () -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     val scaffoldState = LocalScaffoldState.current
     val snackbarHostState = LocalSnackbarHostState.current
@@ -59,12 +62,18 @@ fun BaseScreen(
         targetState = error != null && error.fullPage,
         label = "FullPageError"
     ) { isError ->
-        if (isError) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(error?.message.orEmpty())
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .safeDrawingPadding()
+                .navigationBarsPadding(),
+            contentAlignment = Alignment.Center,
+        ) {
+            if (isError) {
+                Text(text = error?.message.orEmpty())
+            } else {
+                content(this)
             }
-        } else {
-            content()
         }
     }
 
