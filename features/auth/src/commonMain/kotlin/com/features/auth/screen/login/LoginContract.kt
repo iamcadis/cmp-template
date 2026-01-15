@@ -14,10 +14,18 @@ data class LoginState(
 ) : ViewState
 
 sealed interface LoginAction: ViewAction {
-    data class EmailChanged(val value: String): LoginAction
-    data class PasswordChanged(val value: String): LoginAction
-    data object OpenRegister: LoginAction
-    data object RequestLogin: LoginAction
+    sealed interface CallApi: LoginAction, ViewAction.CallApi {
+        data object Login: CallApi
+    }
+
+    sealed interface SideEffect: LoginAction, ViewAction.SideEffect {
+        data object OpenRegister: SideEffect
+    }
+
+    sealed interface UpdateData: LoginAction, ViewAction.UpdateData {
+        data class Email(val email: String): UpdateData
+        data class Password(val password: String): UpdateData
+    }
 }
 
 sealed interface LoginEffect: ViewEffect {

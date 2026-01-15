@@ -75,7 +75,7 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 label = stringResource(Res.string.email),
                 value = state.email,
                 onValueChange = {
-                    onAction(LoginAction.EmailChanged(it))
+                    onAction(LoginAction.UpdateData.Email(it))
                 },
                 validators = validators.getValue("email"),
                 keyboardOptions = KeyboardOptions(
@@ -88,7 +88,7 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 label = stringResource(Res.string.password),
                 value = state.password,
                 onValueChange = {
-                    onAction(LoginAction.PasswordChanged(it))
+                    onAction(LoginAction.UpdateData.Password(it))
                 },
                 validators = validators.getValue("password"),
                 keyboardOptions = KeyboardOptions(
@@ -101,7 +101,7 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
         Button(
             enabled = validators.validate(),
             onClick = {
-                onAction(LoginAction.RequestLogin)
+                onAction(LoginAction.CallApi.Login)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -120,7 +120,9 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 style = AppTheme.typography.bodyMedium
             )
             TextButton(
-                onClick = { onAction(LoginAction.OpenRegister) },
+                onClick = {
+                    onAction(LoginAction.SideEffect.OpenRegister)
+                },
                 contentPadding = PaddingValues(
                     horizontal = AppTheme.dimens.extraSmall,
                 )

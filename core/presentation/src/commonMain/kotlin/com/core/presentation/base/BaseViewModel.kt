@@ -8,7 +8,6 @@ import com.core.presentation.data.AppError
 import com.core.presentation.util.toAppError
 import com.firebase.analytics.AnalyticsTracker
 import com.firebase.analytics.NoOpAnalyticsTracker
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -67,13 +66,19 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
             initialValue = null
         )
 
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        viewModelScope.launch {
-            sendError(error = throwable.toAppError(onClear = ::clearError, onRetry = ::retry))
+    open fun handleAction(action: A) {
+        when(action) {
+            is ViewAction.CallApi -> onCallApi(action)
+            is ViewAction.SideEffect -> onSideEffect(action)
+            is ViewAction.UpdateData -> onUpdateData(action)
         }
     }
 
-    open fun handleAction(action: A) {}
+    protected open fun onCallApi(action: ViewAction.CallApi) {}
+
+    protected open fun onSideEffect(action: ViewAction.SideEffect) {}
+
+    protected open fun onUpdateData(action: ViewAction.UpdateData) {}
 
     protected open fun loadInitialData() {}
 
@@ -81,20 +86,24 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
         _effect.trySend(effect)
     }
 
-    protected fun sendError(error: AppError) {
-        _appError.update { error }
+    protected fun sendError(throwable: Throwable) {
+        viewModelScope.launch {
+            _appError.update { throwable.toAppError(onClear = ::clearError, onRetry = ::retry) }
+        }
     }
 
     protected fun updateState(transform: S.() -> S) {
         _state.update(transform)
     }
 
-    protected fun launchSafe(
+    protected fun launchWithRetry(
         onRetry: (() -> Unit)? = null,
+        onStart: (() -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
     ) {
-        viewModelScope.launch(exceptionHandler) {
+        viewModelScope.launch {
             onRetry?.let { pendingRetryAction = it }
+            onStart?.invoke()
             block()
         }
     }
@@ -115,6 +124,18 @@ abstract class BaseViewModel<S : ViewState, A : ViewAction, E : ViewEffect>(
         super.onCleared()
         _effect.close()
         pendingRetryAction = null
+    }
+
+    protected inline fun <reified T> ViewAction.CallApi.runAs(block: (T) -> Unit) {
+        if (this is T) block(this)
+    }
+
+    protected inline fun <reified T> ViewAction.SideEffect.runAs(block: (T) -> Unit) {
+        if (this is T) block(this)
+    }
+
+    protected inline fun <reified T> ViewAction.UpdateData.runAs(block: (T) -> Unit) {
+        if (this is T) block(this)
     }
 }
 

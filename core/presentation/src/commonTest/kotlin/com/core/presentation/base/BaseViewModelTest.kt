@@ -54,8 +54,11 @@ class BaseViewModelTest : KoinTest {
             onRetry: (() -> Unit)? = null,
             block: suspend () -> Unit = {}
         ) {
-            launchSafe(onRetry = onRetry) {
-                if (shouldFail) throw AppException.NoInternet()
+            launchWithRetry(onRetry = onRetry) {
+                if (shouldFail) {
+                    sendError(AppException.NoInternet())
+                    return@launchWithRetry
+                }
                 block()
                 updateState { copy(data = "Success") }
             }
