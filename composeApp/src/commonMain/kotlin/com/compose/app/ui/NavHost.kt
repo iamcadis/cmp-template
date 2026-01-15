@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.compose.app.allRoutes
+import com.compose.app.buildNavigationRoutes
 import com.compose.app.util.BackPressHandlers
 import com.core.presentation.component.CustomSnackbarHost
 import com.core.presentation.component.CustomSnackbarHostState
@@ -58,7 +58,7 @@ fun NavHost(scaffoldState: ScaffoldState) {
 
             CompositionLocalProvider(value = LocalNavigator provides navController) {
                 NavHost(navController = navController, startDestination = NavRoute.Splash) {
-                    allRoutes(navController = navController)
+                    buildNavigationRoutes()
                 }
             }
 

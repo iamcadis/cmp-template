@@ -7,6 +7,7 @@ import com.core.presentation.base.BaseScreen
 import com.core.presentation.util.LaunchedViewEffect
 import com.navigation.LocalNavigator
 import com.navigation.navigate
+import com.navigation.navigateAsTop
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -20,10 +21,10 @@ internal fun LoginScreen() {
     LaunchedViewEffect(viewModel.effect) { effect ->
         when(effect) {
             is LoginEffect.NavigateToHome -> {
-                navController.navigate(destination = effect.route)
+                navController.navigateAsTop(destination = effect.route)
             }
             is LoginEffect.NavigateToRegister -> {
-                // Navigate to register screen
+                navController.navigate(destination = effect.route)
             }
         }
     }

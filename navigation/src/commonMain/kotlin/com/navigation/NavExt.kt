@@ -2,6 +2,7 @@ package com.navigation
 
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptionsBuilder
 
 fun NavController.canGoBack(): Boolean {
@@ -13,7 +14,18 @@ fun NavController.navigate(
     navOptionsBuilder: NavOptionsBuilder.() -> Unit = {}
 ) {
     if (currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
-        this.navigate(route = destination, builder = navOptionsBuilder)
+        navigate(route = destination, builder = navOptionsBuilder)
+    }
+}
+
+fun NavController.navigateAsTop(destination: NavRoute) {
+    val rootRoute = graph.findStartDestination().id
+
+    if (currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+        navigate(route = destination) {
+            popUpTo(route = rootRoute) { inclusive = true }
+            launchSingleTop = true
+        }
     }
 }
 
