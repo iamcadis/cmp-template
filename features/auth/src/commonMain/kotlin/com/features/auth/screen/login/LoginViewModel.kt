@@ -33,17 +33,18 @@ class LoginViewModel (
     }
 
     private fun login() {
-        launchWithRetry(
-            onRetry = { login() },
-            onStart = { updateState { copy(loading = true) } }
-        ) {
+        launchWithRetry(onRetry = ::login, onStart = ::showLoading) {
             authRepository.login(data = currentState.toDto())
-                .onFailure(::sendError)
-                .onFinally(::hideLoading)
+                .onFailure(action = ::sendError)
+                .onFinally(action = ::hideLoading)
                 .onSuccess {
                     postEffect(effect = LoginEffect.NavigateToHome(route = NavRoute.Home))
                 }
         }
+    }
+
+    private fun showLoading() {
+        updateState { copy(loading = true) }
     }
 
     private fun hideLoading() {
