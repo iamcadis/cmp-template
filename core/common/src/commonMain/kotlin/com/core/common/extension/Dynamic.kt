@@ -9,4 +9,4 @@ fun <T> Result<T>.onFinally(action: () -> Unit): Result<T> {
     return this
 }
 
-fun <T> Result<T>.onSuccessNavigate(navigate: () -> Unit): Result<T> = onSuccess { navigate() }
+fun <T> Result<T>.onSuccess(navigate: () -> Unit): Result<T> = onSuccess { navigate() }
