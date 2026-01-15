@@ -1,6 +1,7 @@
 package com.compose.app.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -41,7 +42,10 @@ fun NavHost(scaffoldState: ScaffoldState) {
                 )
             },
             snackbarHost = {
-                CustomSnackbarHost(state = snackbarHostState)
+                CustomSnackbarHost(
+                    state = snackbarHostState,
+                    modifier = Modifier.imePadding()
+                )
             },
             floatingActionButton = {
                 scaffoldState.screenConfig.floatingButton?.invoke()

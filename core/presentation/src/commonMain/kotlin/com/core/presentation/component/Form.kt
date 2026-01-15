@@ -17,7 +17,7 @@ import com.core.presentation.theme.AppTheme
 
 @Composable
 fun Form(
-    clearFocus: Boolean,
+    clearFocus: Boolean = false,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: @Composable ColumnScope.() -> Unit

@@ -15,7 +15,7 @@ class LoginViewModel (
 
     override fun onCallApi(action: ViewAction.CallApi) = action.runAs<LoginAction.CallApi> {
         when(it) {
-            LoginAction.CallApi.Login -> validateAuth()
+            LoginAction.CallApi.Login -> login()
         }
     }
 
@@ -32,14 +32,14 @@ class LoginViewModel (
         }
     }
 
-    private fun validateAuth() {
+    private fun login() {
         launchWithRetry(
-            onRetry = { validateAuth() },
+            onRetry = { login() },
             onStart = { updateState { copy(loading = true) } }
         ) {
             authRepository.login(data = currentState.toDto())
-                .onFinally(::hideLoading)
                 .onFailure(::sendError)
+                .onFinally(::hideLoading)
                 .onSuccess {
                     postEffect(effect = LoginEffect.NavigateToHome(route = NavRoute.Home))
                 }
