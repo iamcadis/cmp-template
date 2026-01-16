@@ -21,7 +21,7 @@ class ScaffoldState(
     var screenConfig by mutableStateOf(initialScreenConfig)
         private set
 
-    var confirmOnBack by mutableStateOf(initialConfirmOnBack)
+    var showLeaveConfirmation by mutableStateOf(initialConfirmOnBack)
         private set
 
     var confirmationData by mutableStateOf(initialConfirmationData)
@@ -32,7 +32,7 @@ class ScaffoldState(
     }
 
     fun showLeaveConfirmation(show: Boolean) {
-        confirmOnBack = show
+        showLeaveConfirmation = show
     }
 
     fun setBackConfirmationData(confirmation: Confirmation) {
@@ -42,7 +42,7 @@ class ScaffoldState(
     companion object {
         val Saver: Saver<ScaffoldState, *> = listSaver(
             save = {
-                listOf(it.confirmOnBack)
+                listOf(it.showLeaveConfirmation)
             },
             restore = {
                 ScaffoldState(

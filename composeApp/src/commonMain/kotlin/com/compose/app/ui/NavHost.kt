@@ -15,7 +15,8 @@ import com.core.presentation.component.CustomSnackbarHost
 import com.core.presentation.component.CustomSnackbarHostState
 import com.core.presentation.component.LocalSnackbarHostState
 import com.core.presentation.util.ScaffoldState
-import com.core.presentation.widget.ConfirmationDialogDefault
+import com.core.presentation.util.ShowViewIf
+import com.core.presentation.widget.ConfirmationLeavePage
 import com.navigation.LocalNavigator
 import com.navigation.NavRoute
 import com.navigation.canGoBack
@@ -54,16 +55,21 @@ fun NavHost(scaffoldState: ScaffoldState) {
             },
         ) {
 
-            NavHost(navController = navController, startDestination = NavRoute.Splash) {
-                buildNavigationRoutes()
-            }
+            NavHost(
+                navController = navController,
+                startDestination = NavRoute.Splash,
+                builder = { buildNavigationRoutes() }
+            )
 
-            NavBack {
-                backPressHandlers.backPressed(scaffoldState.screenConfig.confirmOnBack)
-            }
+            NavBack(
+                canGoBack = { navController.canGoBack() },
+                onNavigateBack = {
+                    backPressHandlers.backPressed(scaffoldState.screenConfig.confirmOnBack)
+                }
+            )
 
-            if (scaffoldState.confirmOnBack) {
-                ConfirmationDialogDefault.LeavePage(
+            ShowViewIf(visible = scaffoldState.showLeaveConfirmation) {
+                ConfirmationLeavePage(
                     data = scaffoldState.confirmationData,
                     onCancel = backPressHandlers.cancelLeaving,
                     onConfirm = backPressHandlers.confirmLeaving,

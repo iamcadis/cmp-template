@@ -66,31 +66,28 @@ fun ConfirmationDialog(
     }
 }
 
-object ConfirmationDialogDefault {
-
-    @Composable
-    fun LeavePage(
-        data: Confirmation,
-        onCancel: () -> Unit,
-        onConfirm: () -> Unit
-    ) {
-        ConfirmationDialog(
-            title = stringResource(data.titleRes),
-            message = stringResource(data.messageRes),
-            actions = { modifier ->
-                Button(
-                    onClick = onConfirm,
-                    modifier = modifier
-                ) {
-                    Text(text = stringResource(data.positiveLabelRes))
-                }
-                OutlinedButton(
-                    onClick = onCancel,
-                    modifier = modifier
-                ) {
-                    Text(text = stringResource(data.negativeLabelRes))
-                }
+@Composable
+fun ConfirmationLeavePage(
+    data: Confirmation,
+    onCancel: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    ConfirmationDialog(
+        title = stringResource(data.titleRes),
+        message = stringResource(data.messageRes),
+        actions = { modifier ->
+            Button(
+                onClick = onConfirm,
+                modifier = modifier
+            ) {
+                Text(text = stringResource(data.positiveLabelRes))
             }
-        )
-    }
+            OutlinedButton(
+                onClick = onCancel,
+                modifier = modifier
+            ) {
+                Text(text = stringResource(data.negativeLabelRes))
+            }
+        }
+    )
 }
