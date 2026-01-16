@@ -10,7 +10,7 @@ import com.navigation.NavRoute
 fun NavGraphBuilder.homeRoute() {
     composable<NavRoute.Home>(
         enterTransition = {
-            fadeIn(animationSpec = tween(600))
+            fadeIn(animationSpec = tween(300))
         }
     ) {
         HomeScreen()

@@ -12,7 +12,7 @@ import com.navigation.NavRoute
 fun NavGraphBuilder.authRoute() {
     composable<NavRoute.Login>(
         enterTransition = {
-            fadeIn(animationSpec = tween(600))
+            fadeIn(animationSpec = tween(300))
         }
     ) {
         LoginScreen()

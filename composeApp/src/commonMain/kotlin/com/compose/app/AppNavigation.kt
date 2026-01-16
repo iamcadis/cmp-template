@@ -12,7 +12,7 @@ import com.navigation.NavRoute
 fun NavGraphBuilder.buildNavigationRoutes() {
     composable<NavRoute.Splash>(
         exitTransition = {
-            fadeOut(animationSpec = tween(600))
+            fadeOut(animationSpec = tween(300))
         }
     ) {
         SplashScreen()
