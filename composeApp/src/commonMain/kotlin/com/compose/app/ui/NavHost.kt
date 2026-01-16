@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.backhandler.BackHandler
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.compose.app.buildNavigationRoutes
@@ -29,7 +28,10 @@ fun NavHost(scaffoldState: ScaffoldState) {
         BackPressHandlers(navController, scaffoldState::showLeaveConfirmation)
     }
 
-    CompositionLocalProvider(value = LocalSnackbarHostState provides snackbarHostState) {
+    CompositionLocalProvider(
+        LocalNavigator provides navController,
+        LocalSnackbarHostState provides snackbarHostState
+    ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
@@ -52,14 +54,12 @@ fun NavHost(scaffoldState: ScaffoldState) {
             },
         ) {
 
-            BackHandler(enabled = navController.canGoBack()) {
-                backPressHandlers.backPressed(scaffoldState.screenConfig.confirmOnBack)
+            NavHost(navController = navController, startDestination = NavRoute.Splash) {
+                buildNavigationRoutes()
             }
 
-            CompositionLocalProvider(value = LocalNavigator provides navController) {
-                NavHost(navController = navController, startDestination = NavRoute.Splash) {
-                    buildNavigationRoutes()
-                }
+            NavBack {
+                backPressHandlers.backPressed(scaffoldState.screenConfig.confirmOnBack)
             }
 
             if (scaffoldState.confirmOnBack) {
