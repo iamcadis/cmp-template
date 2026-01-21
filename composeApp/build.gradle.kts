@@ -16,6 +16,12 @@ kotlin {
             export(project(":firebase:analytics"))
         }
     }
+
+    android {
+        compileSdk {
+            version = release(findProperty("android.targetSdk").toString().toInt())
+        }
+    }
     
     sourceSets {
         commonMain.dependencies {

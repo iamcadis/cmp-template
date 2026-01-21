@@ -55,10 +55,10 @@ internal fun Project.configureAndroid(extension: ApplicationExtension) {
             targetSdk = getProperty("android.targetSdk").toInt()
         }
         buildTypes {
-            debug {
+            getByName("debug") {
                 applicationIdSuffix = ".debug"
             }
-            release {
+            getByName("release") {
                 isMinifyEnabled = true
                 isShrinkResources = true
                 proguardFiles(
@@ -77,7 +77,7 @@ internal fun Project.configureAndroid(extension: ApplicationExtension) {
             targetCompatibility = JavaVersion.VERSION_17
         }
         buildFeatures {
-            compose = true
+            resValues = true
         }
     }
 }

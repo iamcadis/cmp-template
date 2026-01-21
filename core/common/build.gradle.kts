@@ -7,7 +7,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(libs.bundles.kotlinx)
-            api(libs.bundles.lifecycle)
         }
     }
 }

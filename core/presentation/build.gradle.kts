@@ -8,6 +8,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.koin.core)
+            implementation(libs.bundles.lifecycle)
             implementation(projects.resources)
             implementation(projects.core.common)
             implementation(projects.firebase.analytics)

@@ -18,7 +18,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply(getPluginId(alias = "android-application"))
-                apply(getPluginId(alias = "kotlin-android"))
                 apply(getPluginId(alias = "compose-compiler"))
             }
 

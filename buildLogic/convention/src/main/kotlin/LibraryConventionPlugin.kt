@@ -1,4 +1,4 @@
-import com.android.build.api.dsl.androidLibrary
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import extension.addIosTarget
 import extension.getDynamicNameSpace
 import extension.getPluginId
@@ -7,6 +7,7 @@ import extension.suppressDefaultWarning
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 @Suppress("unused")
@@ -20,7 +21,10 @@ class LibraryConventionPlugin : Plugin<Project> {
 
             with(extensions) {
                 configure<KotlinMultiplatformExtension> {
-                    androidLibrary {
+                    suppressDefaultWarning()
+                    addIosTarget()
+
+                    targets.withType<KotlinMultiplatformAndroidLibraryTarget>().configureEach {
                         namespace = getDynamicNameSpace()
                         compileSdk = findProperty("android.targetSdk").toString().toInt()
                         minSdk = findProperty("android.minSdk").toString().toInt()
@@ -39,9 +43,6 @@ class LibraryConventionPlugin : Plugin<Project> {
                             setDefaultJvmTarget()
                         }
                     }
-
-                    addIosTarget()
-                    suppressDefaultWarning()
                 }
             }
         }

@@ -15,10 +15,10 @@ android {
     buildTypes {
         val name = findProperty("app.name").toString()
 
-        debug {
+        getByName("debug") {
             resValue("string", "display_name", "$name Debug")
         }
-        release {
+        getByName("release") {
             resValue("string", "display_name", name)
         }
     }
