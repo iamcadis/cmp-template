@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.core.presentation.component.Form
 import com.core.presentation.component.Group
+import com.core.presentation.component.PasswordInput
 import com.core.presentation.component.TextInput
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.validate
@@ -85,7 +86,7 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 ),
                 modifier = modifier
             )
-            TextInput(
+            PasswordInput(
                 label = stringResource(Res.string.password),
                 value = state.password,
                 onValueChange = {
