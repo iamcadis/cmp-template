@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.core.presentation.component.Form
 import com.core.presentation.component.Group
-import com.core.presentation.component.TextField
+import com.core.presentation.component.TextInput
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.validate
 import com.resources.Res
@@ -71,9 +71,10 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 .offset(y = -(AppTheme.dimens.medium))
         )
         Group { modifier ->
-            TextField(
+            TextInput(
                 label = stringResource(Res.string.email),
                 value = state.email,
+                placeholder = "Enter your email",
                 onValueChange = {
                     onAction(LoginAction.UpdateData.Email(it))
                 },
@@ -84,7 +85,7 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 ),
                 modifier = modifier
             )
-            TextField(
+            TextInput(
                 label = stringResource(Res.string.password),
                 value = state.password,
                 onValueChange = {

@@ -22,7 +22,7 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-fun TextField(
+fun TextInput(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
