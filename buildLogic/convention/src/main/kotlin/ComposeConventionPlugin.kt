@@ -1,8 +1,10 @@
 import extension.getBundle
+import extension.getLibrary
 import extension.getPluginId
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -29,6 +31,10 @@ class ComposeConventionPlugin : Plugin<Project> {
                         optIn.add("androidx.compose.material3.ExperimentalMaterial3Api")
                     }
                 }
+            }
+
+            dependencies {
+                "androidRuntimeClasspath"(getLibrary("compose-uiTooling"))
             }
         }
     }

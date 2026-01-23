@@ -38,7 +38,7 @@ import com.resources.password
 import com.resources.register
 import org.jetbrains.compose.resources.stringResource
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginAction) -> Unit = {}) {
     val validators by getLoginValidators(state.email, state.password)
