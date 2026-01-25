@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shield
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -25,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.core.presentation.component.Form
 import com.core.presentation.component.Group
-import com.core.presentation.component.PasswordInput
 import com.core.presentation.component.TextInput
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.validate
@@ -42,7 +43,10 @@ import org.jetbrains.compose.resources.stringResource
 @Preview(showBackground = true)
 @Composable
 internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginAction) -> Unit = {}) {
-    val validators by getLoginValidators(state.email, state.password)
+    val validators by getLoginValidators(
+        email = state.emailField.text.toString(),
+        password = state.passwordField.text.toString()
+    )
 
     Form(
         clearFocus = state.loading,
@@ -74,11 +78,7 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
         Group { modifier ->
             TextInput(
                 label = stringResource(Res.string.email),
-                value = state.email,
-                placeholder = "Enter your email",
-                onValueChange = {
-                    onAction(LoginAction.UpdateData.Email(it))
-                },
+                state = state.emailField,
                 validators = validators.getValue("email"),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next,
@@ -86,24 +86,31 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 ),
                 modifier = modifier
             )
-            PasswordInput(
+            TextInput(
                 label = stringResource(Res.string.password),
-                value = state.password,
-                onValueChange = {
-                    onAction(LoginAction.UpdateData.Password(it))
-                },
+                state = state.passwordField,
                 validators = validators.getValue("password"),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done,
                     keyboardType = KeyboardType.Password
                 ),
+                trailingIcon = {
+                    IconButton(onClick = {
+
+                    }) {
+                        Icon(
+                            imageVector = Icons.Filled.Visibility,
+                            contentDescription = "Show password"
+                        )
+                    }
+                },
                 modifier = modifier
             )
         }
         Button(
             enabled = validators.validate(),
             onClick = {
-                onAction(LoginAction.CallApi.Login)
+                onAction(LoginAction.Login)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -123,7 +130,7 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
             )
             TextButton(
                 onClick = {
-                    onAction(LoginAction.SideEffect.OpenRegister)
+                    onAction(LoginAction.OpenRegister)
                 },
                 contentPadding = PaddingValues(
                     horizontal = AppTheme.dimens.extraSmall,

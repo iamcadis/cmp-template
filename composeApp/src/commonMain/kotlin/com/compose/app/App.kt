@@ -1,6 +1,5 @@
 package com.compose.app
 
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -16,10 +15,8 @@ fun App() {
     }
 
     AppTheme {
-        Surface {
-            CompositionLocalProvider(value = LocalScaffoldState provides scaffoldState) {
-                NavHost(scaffoldState = scaffoldState)
-            }
+        CompositionLocalProvider(value = LocalScaffoldState provides scaffoldState) {
+            NavHost(scaffoldState = scaffoldState)
         }
     }
 }

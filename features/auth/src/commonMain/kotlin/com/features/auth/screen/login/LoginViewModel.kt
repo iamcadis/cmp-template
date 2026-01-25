@@ -4,7 +4,6 @@ import com.core.common.extension.onFinally
 import com.core.common.extension.onSuccessNavigate
 import com.core.data.repository.api.AuthRepository
 import com.core.presentation.base.BaseViewModel
-import com.core.presentation.base.ViewAction
 import com.features.auth.mapper.toDto
 import com.navigation.NavRoute
 import org.koin.android.annotation.KoinViewModel
@@ -14,22 +13,10 @@ class LoginViewModel (
     private val authRepository: AuthRepository
 ) : BaseViewModel<LoginState, LoginAction, LoginEffect>(initialState = LoginState()) {
 
-    override fun onCallApi(action: ViewAction.CallApi) = action.runAs<LoginAction.CallApi> {
-        when(it) {
-            LoginAction.CallApi.Login -> login()
-        }
-    }
-
-    override fun onSideEffect(action: ViewAction.SideEffect) = action.runAs<LoginAction.SideEffect> {
-        when(it) {
-            LoginAction.SideEffect.OpenRegister -> navigateToRegisterScreen()
-        }
-    }
-
-    override fun onUpdateData(action: ViewAction.UpdateData) = action.runAs<LoginAction.UpdateData> {
-        when(it) {
-            is LoginAction.UpdateData.Email -> updateState { copy(email = it.email) }
-            is LoginAction.UpdateData.Password -> updateState { copy(password = it.password) }
+    override fun handleAction(action: LoginAction) {
+        when(action) {
+            LoginAction.Login -> login()
+            LoginAction.OpenRegister -> navigateToRegisterScreen()
         }
     }
 

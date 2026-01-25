@@ -1,5 +1,6 @@
 package com.features.auth.screen.login
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Immutable
 import com.core.presentation.base.ViewAction
 import com.core.presentation.base.ViewEffect
@@ -8,24 +9,14 @@ import com.navigation.NavRoute
 
 @Immutable
 data class LoginState(
-    val email: String = "",
     val loading: Boolean = false,
-    val password: String = "",
+    val emailField: TextFieldState = TextFieldState(),
+    val passwordField: TextFieldState = TextFieldState(),
 ) : ViewState
 
 sealed interface LoginAction: ViewAction {
-    sealed interface CallApi: LoginAction, ViewAction.CallApi {
-        data object Login: CallApi
-    }
-
-    sealed interface SideEffect: LoginAction, ViewAction.SideEffect {
-        data object OpenRegister: SideEffect
-    }
-
-    sealed interface UpdateData: LoginAction, ViewAction.UpdateData {
-        data class Email(val email: String): UpdateData
-        data class Password(val password: String): UpdateData
-    }
+    data object Login: LoginAction
+    data object OpenRegister: LoginAction
 }
 
 sealed interface LoginEffect: ViewEffect {
