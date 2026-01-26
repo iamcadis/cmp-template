@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shield
-import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -27,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.core.presentation.component.Form
 import com.core.presentation.component.Group
+import com.core.presentation.component.SecureTextInput
 import com.core.presentation.component.TextInput
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.validate
@@ -86,24 +85,11 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
                 ),
                 modifier = modifier
             )
-            TextInput(
+            SecureTextInput(
                 label = stringResource(Res.string.password),
                 state = state.passwordField,
                 validators = validators.getValue("password"),
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Password
-                ),
-                trailingIcon = {
-                    IconButton(onClick = {
-
-                    }) {
-                        Icon(
-                            imageVector = Icons.Filled.Visibility,
-                            contentDescription = "Show password"
-                        )
-                    }
-                },
+                imeAction = ImeAction.Done,
                 modifier = modifier
             )
         }

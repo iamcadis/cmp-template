@@ -19,7 +19,10 @@ import com.core.presentation.theme.AppTheme
 fun Form(
     clearFocus: Boolean = false,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
+    verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(
+        space = AppTheme.dimens.default,
+        alignment = Alignment.Top
+    ),
     content: @Composable ColumnScope.() -> Unit
 ) {
     val focusManager = LocalFocusManager.current

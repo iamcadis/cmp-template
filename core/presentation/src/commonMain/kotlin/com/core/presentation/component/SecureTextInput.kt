@@ -3,23 +3,32 @@ package com.core.presentation.component
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.BasicSecureTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.KeyboardActionHandler
-import androidx.compose.foundation.text.input.OutputTransformation
-import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Density
 import com.core.presentation.data.Validator
 import com.core.presentation.theme.AppTheme
@@ -28,7 +37,7 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-fun TextInput(
+fun SecureTextInput(
     label: String,
     state: TextFieldState,
     modifier: Modifier = Modifier,
@@ -39,14 +48,9 @@ fun TextInput(
     placeholder: String? = null,
     supportingText: String? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    prefix: @Composable (() -> Unit)? = null,
-    suffix: @Composable (() -> Unit)? = null,
     inputTransformation: InputTransformation? = null,
-    outputTransformation: OutputTransformation? = null,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    imeAction: ImeAction = ImeAction.Default,
     onKeyboardAction: KeyboardActionHandler? = null,
-    lineLimits: TextFieldLineLimits = TextFieldLineLimits.MultiLine(),
     onTextLayout: (Density.(getResult: () -> TextLayoutResult?) -> Unit)? = null,
     scrollState: ScrollState = rememberScrollState(),
     colors: TextFieldColors = TextFieldDefaults.colors(
@@ -67,30 +71,50 @@ fun TextInput(
         placeholder = placeholder
     )
 
+    var obfuscationMode by remember { mutableStateOf(TextObfuscationMode.RevealLastTyped) }
+    val toggleVisibility = {
+        obfuscationMode = if (obfuscationMode == TextObfuscationMode.RevealLastTyped) {
+            TextObfuscationMode.Visible
+        } else {
+            TextObfuscationMode.RevealLastTyped
+        }
+    }
+
+    val isHidden = obfuscationMode == TextObfuscationMode.RevealLastTyped
+    val iconVisibility = if (isHidden) Icons.Default.Visibility else Icons.Default.VisibilityOff
+
     CompositionLocalProvider(LocalTextSelectionColors provides colors.textSelectionColors) {
-        BasicTextField(
+        BasicSecureTextField(
             state = state,
             modifier = modifier,
             enabled = enabled,
             readOnly = readOnly,
-            inputTransformation = inputTransformation,
             textStyle = uiState.mergedTextStyle,
-            keyboardOptions = keyboardOptions,
+            keyboardOptions = KeyboardOptions(
+                autoCorrectEnabled = false,
+                keyboardType = KeyboardType.Password,
+                imeAction = imeAction
+            ),
             onKeyboardAction = onKeyboardAction,
-            lineLimits = lineLimits,
             onTextLayout = onTextLayout,
             interactionSource = interactionSource,
             cursorBrush = SolidColor(uiState.cursorColor),
-            outputTransformation = outputTransformation,
+            inputTransformation = inputTransformation,
+            textObfuscationMode = obfuscationMode,
             decorator = TextInputDefaults.decorator(
                 state = state,
                 colors = colors,
                 uiState = uiState,
                 enabled = enabled,
                 leadingIcon = leadingIcon,
-                trailingIcon = trailingIcon,
-                prefix = prefix,
-                suffix = suffix
+                trailingIcon = {
+                    IconButton(onClick = toggleVisibility) {
+                        Icon(
+                            imageVector = iconVisibility,
+                            contentDescription = if (isHidden) "Show password" else "Hide password"
+                        )
+                    }
+                },
             ),
             scrollState = scrollState
         )
