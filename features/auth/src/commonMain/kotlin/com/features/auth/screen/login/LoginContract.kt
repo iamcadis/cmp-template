@@ -8,11 +8,13 @@ import com.core.presentation.base.ViewState
 import com.navigation.NavRoute
 
 @Immutable
-data class LoginState(
-    val loading: Boolean = false,
-    val emailField: TextFieldState = TextFieldState(),
-    val passwordField: TextFieldState = TextFieldState(),
-) : ViewState
+data class LoginField(
+    val username: TextFieldState = TextFieldState(),
+    val password: TextFieldState = TextFieldState(),
+)
+
+@Immutable
+data class LoginState(val field: LoginField = LoginField(), val loading: Boolean = false): ViewState
 
 sealed interface LoginAction: ViewAction {
     data object Login: LoginAction

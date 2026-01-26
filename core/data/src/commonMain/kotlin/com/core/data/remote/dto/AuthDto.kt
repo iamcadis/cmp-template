@@ -10,7 +10,7 @@ data class AuthTokenDto(
 
 @Serializable
 data class LoginRequestDto(
-    val email: String,
+    val username: String,
     val password: String
 )
 

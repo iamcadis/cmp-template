@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.core.presentation.component.Form
@@ -30,22 +29,19 @@ import com.core.presentation.component.TextInput
 import com.core.presentation.theme.AppTheme
 import com.core.presentation.util.validate
 import com.resources.Res
-import com.resources.email
 import com.resources.login
 import com.resources.login_asking_for_register
 import com.resources.login_instruction
 import com.resources.login_instruction_caption
 import com.resources.password
 import com.resources.register
+import com.resources.username
 import org.jetbrains.compose.resources.stringResource
 
 @Preview(showBackground = true)
 @Composable
 internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginAction) -> Unit = {}) {
-    val validators by getLoginValidators(
-        email = state.emailField.text.toString(),
-        password = state.passwordField.text.toString()
-    )
+    val validators by getLoginValidators(state.field)
 
     Form(
         clearFocus = state.loading,
@@ -76,18 +72,15 @@ internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginActi
         )
         Group { modifier ->
             TextInput(
-                label = stringResource(Res.string.email),
-                state = state.emailField,
-                validators = validators.getValue("email"),
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Next,
-                    keyboardType = KeyboardType.Email
-                ),
+                label = stringResource(Res.string.username),
+                state = state.field.username,
+                validators = validators.getValue("username"),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 modifier = modifier
             )
             SecureTextInput(
                 label = stringResource(Res.string.password),
-                state = state.passwordField,
+                state = state.field.password,
                 validators = validators.getValue("password"),
                 imeAction = ImeAction.Done,
                 modifier = modifier

@@ -22,7 +22,7 @@ class LoginViewModel (
 
     private fun login() {
         launchWithRetry(onRetry = ::login, onStart = ::showLoading) {
-            authRepository.login(data = currentState.toDto())
+            authRepository.login(data = currentState.field.toDto())
                 .onFailure(action = ::sendError)
                 .onFinally(action = ::hideLoading)
                 .onSuccessNavigate(navigate = ::navigateToHomeScreen)
