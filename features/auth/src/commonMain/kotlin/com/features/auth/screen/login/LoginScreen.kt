@@ -12,7 +12,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun LoginScreen() {
-    val navController = LocalNavigator.current
+    val navigator = LocalNavigator.current
     val viewModel = koinViewModel<LoginViewModel>()
 
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -21,10 +21,10 @@ internal fun LoginScreen() {
     LaunchedViewEffect(viewModel.effect) { effect ->
         when(effect) {
             is LoginEffect.NavigateToHome -> {
-                navController.navigateAsTop(destination = effect.route)
+                navigator.navigateAsTop(destination = effect.route)
             }
             is LoginEffect.NavigateToRegister -> {
-                navController.navigate(destination = effect.route)
+                navigator.navigate(destination = effect.route)
             }
         }
     }

@@ -40,7 +40,10 @@ import org.jetbrains.compose.resources.stringResource
 
 @Preview(showBackground = true)
 @Composable
-internal fun LoginContent(state: LoginState = LoginState(), onAction: (LoginAction) -> Unit = {}) {
+internal fun LoginContent(
+    state: LoginState = LoginState(),
+    onAction: (LoginAction) -> Unit = {}
+) {
     val validators by getLoginValidators(state.field)
 
     Form(
