@@ -28,7 +28,7 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.core.presentation.component.CaptionTex
+import com.core.presentation.component.CaptionText
 import com.core.presentation.data.Validator
 import com.core.presentation.theme.AppTheme
 import com.resources.Res
@@ -102,7 +102,7 @@ internal object TextInputDefaults {
             if (isError) {
                 validator?.let {
                     @Composable {
-                        CaptionTex(
+                        CaptionText(
                             value = resolveValidatorMessage(it),
                             color = colors.errorSupportingTextColor,
                             modifier = Modifier.padding(top = AppTheme.dimens.extraSmall)
@@ -112,7 +112,7 @@ internal object TextInputDefaults {
             } else {
                 supportingText?.let {
                     @Composable {
-                        CaptionTex(
+                        CaptionText(
                             value = it,
                             color = when {
                                 !enabled -> colors.disabledSupportingTextColor

@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 import com.core.presentation.theme.AppTheme
 
 @Composable
-fun CaptionTex(
+fun CaptionText(
     value: String,
     color: Color = AppTheme.colors.surfaceVariant,
     modifier: Modifier = Modifier
