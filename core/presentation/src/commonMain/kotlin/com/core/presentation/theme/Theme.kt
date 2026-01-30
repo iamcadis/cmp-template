@@ -3,7 +3,6 @@ package com.core.presentation.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -20,9 +19,7 @@ fun AppTheme(
     val extendedColorScheme = if (isDarkMode) extendedDarkColorScheme else extendedLightColorScheme
 
     CompositionLocalProvider(value = LocalExtendedColorScheme provides extendedColorScheme) {
-        MaterialTheme(colorScheme = colors) {
-            Surface(content = content)
-        }
+        MaterialTheme(colorScheme = colors, content = content)
     }
 }
 

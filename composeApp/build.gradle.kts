@@ -26,6 +26,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.firebase.analytics)
+            implementation(projects.resources)
             implementation(projects.navigation)
             implementation(projects.core.common)
             implementation(projects.core.data)
@@ -34,6 +35,7 @@ kotlin {
             // dependencies
             implementation(libs.backhandler)
             implementation(libs.koin.compose)
+            implementation(libs.bundles.material3.adaptive)
 
             // features
             implementation(projects.features.auth)

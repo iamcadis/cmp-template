@@ -10,11 +10,11 @@ class HomeViewModel : BaseViewModel<HomeState, HomeAction, HomeEffect>(
 ) {
     override fun handleAction(action: HomeAction) {
         when(action) {
-            HomeAction.OpenProfile -> navigateToProfile()
+            HomeAction.OpenTestPage -> navigateToTestPage()
         }
     }
 
-    private fun navigateToProfile() {
-        postEffect(effect = HomeEffect.NavigateToProfile(route = NavRoute.Profile))
+    private fun navigateToTestPage() {
+        postEffect(effect = HomeEffect.NavigateToTestPage(route = NavRoute.Test))
     }
 }

@@ -47,7 +47,7 @@ fun rememberScreenType(): ScreenType {
     return remember(screenSize) {
         when {
             screenSize.width < 600.dp -> ScreenType.Compact
-            screenSize.width < 840.dp -> ScreenType.Medium
+            screenSize.width < 840.dp || screenSize.width < 840.dp -> ScreenType.Medium
             else -> ScreenType.Expanded
         }
     }

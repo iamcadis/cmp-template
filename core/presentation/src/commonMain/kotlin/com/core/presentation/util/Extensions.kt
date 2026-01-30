@@ -1,5 +1,6 @@
 package com.core.presentation.util
 
+import androidx.compose.ui.Modifier
 import com.core.common.error.AppException
 import com.core.presentation.data.AppError
 import com.resources.Res
@@ -21,4 +22,13 @@ internal suspend fun Throwable.toAppError(onClear: () -> Unit, onRetry: () -> Un
         message = message ?: "An unknown error occurred",
         clearError = onClear,
     )
+}
+
+inline fun Modifier.applyIf(
+    condition: Boolean,
+    block: Modifier.() -> Modifier
+): Modifier = if (condition) {
+    then(block(Modifier))
+} else {
+    this
 }

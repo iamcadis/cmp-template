@@ -1,9 +1,9 @@
 package com.features.home.screen
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -27,7 +27,7 @@ internal fun HomeScreen() {
 
     LaunchedViewEffect(viewModel.effect) { effect ->
         when(effect) {
-            is HomeEffect.NavigateToProfile -> {
+            is HomeEffect.NavigateToTestPage -> {
                 navigator.navigate(destination = effect.route)
             }
         }
@@ -36,10 +36,10 @@ internal fun HomeScreen() {
     BaseScreen(
         error = error,
         pageTitle = stringResource(Res.string.home),
-        topBarActions = {
-            IconButton(onClick = { viewModel.handleAction(action = HomeAction.OpenProfile) }) {
+        floatingButton = {
+            FloatingActionButton(onClick = { viewModel.handleAction(action = HomeAction.OpenTestPage) }) {
                 Icon(
-                    imageVector = Icons.Filled.AccountCircle,
+                    imageVector = Icons.Filled.Add,
                     contentDescription = stringResource(Res.string.my_profile)
                 )
             }

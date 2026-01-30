@@ -10,9 +10,9 @@ import com.navigation.NavRoute
 data class HomeState(val shimmer: Boolean = false): ViewState
 
 sealed interface HomeAction: ViewAction {
-    data object OpenProfile: HomeAction
+    data object OpenTestPage: HomeAction
 }
 
 sealed interface HomeEffect: ViewEffect {
-    data class NavigateToProfile(val route: NavRoute): HomeEffect
+    data class NavigateToTestPage(val route: NavRoute): HomeEffect
 }

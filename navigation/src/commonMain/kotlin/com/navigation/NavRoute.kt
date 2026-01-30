@@ -25,5 +25,5 @@ sealed interface NavRoute {
     data object Profile : NavRoute
 
     @Serializable
-    data class PostDetails(val postId: Int) : NavRoute
+    data object Test : NavRoute
 }
