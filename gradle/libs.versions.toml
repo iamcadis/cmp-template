@@ -20,9 +20,9 @@ backhandler = "1.10.0"
 firebase = "34.8.0"
 navigation = "2.9.1"
 material-icons = "1.7.3"
-material3 = "1.9.0"
-material3-adaptive = "1.2.0"
-material3-windowSizeClass = "1.9.0"
+m3 = "1.9.0"
+m3-adaptive = "1.2.0"
+m3-adaptive-nav-suite = "1.9.0"
 
 #UNIT TEST
 mokkery = "3.1.1"
@@ -98,10 +98,9 @@ compose-resources = { module = "org.jetbrains.compose.components:components-reso
 compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose" }
 
 #MATERIAL3
-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3"}
-material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "material3-adaptive" }
-material3-adaptive-navigation = { module = "org.jetbrains.compose.material3:material3-adaptive-navigation-suite", version.ref = "material3-windowSizeClass" }
-material3-windowSizeClass = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "material3-windowSizeClass" }
+material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "m3"}
+material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "m3-adaptive" }
+material3-nav-suite = { module = "org.jetbrains.compose.material3:material3-adaptive-navigation-suite", version.ref = "m3-adaptive-nav-suite" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -133,4 +132,4 @@ test = ["koin-test", "kotlin-test", "kotlinx-coroutines-test", "turbine"]
 koin = ["koin-annotations", "koin-compose", "koin-viewmodel", "koin-viewmodel-navigation"]
 #noinspection UnusedVersionCatalogEntry
 compose = ["material3", "compose-foundation", "compose-material-icons", "compose-runtime", "compose-ui", "compose-ui-tooling-preview"]
-material3-adaptive = ["material3-adaptive", "material3-adaptive-navigation", "material3-windowSizeClass"]
+material3-adaptive = ["material3-adaptive", "material3-nav-suite"]
