@@ -143,7 +143,6 @@ internal object TextInputDefaults {
         )
     }
 
-    @Composable
     fun decorator(
         state: TextFieldState,
         colors: TextFieldColors,
@@ -154,6 +153,7 @@ internal object TextInputDefaults {
         prefix: @Composable (() -> Unit)? = null,
         suffix: @Composable (() -> Unit)? = null,
     ) = TextFieldDecorator { innerTextField ->
+
         Column(
             modifier = Modifier
         ) {
@@ -215,6 +215,7 @@ internal object TextInputDefaults {
                     }
                 }
             }
+
             uiState.supportingText?.invoke()
         }
     }
