@@ -23,12 +23,14 @@ class ComposeConventionPlugin : Plugin<Project> {
                     sourceSets {
                         commonMain.dependencies {
                             implementation(getBundle("compose"))
+                            implementation(getBundle("material3-adaptive"))
                         }
                     }
 
                     compilerOptions {
                         optIn.add("androidx.compose.ui.ExperimentalComposeUiApi")
                         optIn.add("androidx.compose.material3.ExperimentalMaterial3Api")
+                        optIn.add("androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi")
                     }
                 }
             }

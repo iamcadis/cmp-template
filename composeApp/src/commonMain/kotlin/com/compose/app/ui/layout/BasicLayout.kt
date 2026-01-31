@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.compose.app.ui.NavBack
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationEventHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 import com.compose.app.util.BackPressHandlers
 import com.core.presentation.component.CustomSnackbarHost
 import com.core.presentation.component.CustomSnackbarHostState
@@ -17,7 +19,6 @@ import com.core.presentation.util.ScaffoldState
 import com.core.presentation.util.ShowViewIf
 import com.core.presentation.widget.ConfirmationLeavePage
 import com.navigation.LocalNavigator
-import com.navigation.canGoBack
 
 @Composable
 fun BasicLayout(
@@ -30,6 +31,8 @@ fun BasicLayout(
     val backPressHandlers = remember(navigator) {
         BackPressHandlers(navigator, state::showLeaveConfirmation)
     }
+
+    val navEventState = rememberNavigationEventState(currentInfo = NavigationEventInfo.None)
 
     CompositionLocalProvider(LocalSnackbarHostState provides snackbarState) {
         Scaffold(
@@ -45,9 +48,9 @@ fun BasicLayout(
                 content()
             }
 
-            NavBack(
-                canGoBack = { navigator.canGoBack() },
-                onNavigateBack = {
+            NavigationEventHandler(
+                state = navEventState,
+                onBackCompleted = {
                     backPressHandlers.backPressed(state.screenConfig.confirmOnBack)
                 }
             )

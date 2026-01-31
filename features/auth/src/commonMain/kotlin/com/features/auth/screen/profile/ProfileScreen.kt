@@ -8,9 +8,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ProfileScreen() {
-    BaseScreen(
-        pageTitle = stringResource(Res.string.my_profile)
-    ) {
+    BaseScreen(pageTitle = stringResource(Res.string.my_profile)) {
 
     }
 }

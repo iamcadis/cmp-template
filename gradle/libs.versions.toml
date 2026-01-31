@@ -11,18 +11,17 @@ androidx-datastore = "1.2.0"
 kotlinx-collections = "0.4.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.7.1"
-kotlinx-serialization="1.10.0"
+kotlinx-serialization = "1.10.0"
 tink-android = "1.20.0"
 ktor = "3.4.0"
 koin = "4.1.1"
 koin-annotations = "2.3.1"
-backhandler = "1.10.0"
 firebase = "34.8.0"
 navigation = "2.9.1"
+navigation-event = "1.0.0"
 material-icons = "1.7.3"
 m3 = "1.9.0"
 m3-adaptive = "1.2.0"
-m3-adaptive-nav-suite = "1.9.0"
 
 #UNIT TEST
 mokkery = "3.1.1"
@@ -34,14 +33,14 @@ gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
 
-#ANDROIDX + BACKHANDLER
+#ANDROIDX + NAVIGATION
+navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
+navigation-event = { module = "org.jetbrains.androidx.navigationevent:navigationevent-compose", version.ref = "navigation-event" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidx-datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+
 #noinspection UnusedVersionCatalogEntry
 androidx-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
-#noinspection UnusedVersionCatalogEntry
-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "backhandler" }
-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 #LIFECYCLE
 lifecycle-runtime = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
@@ -99,8 +98,9 @@ compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.re
 
 #MATERIAL3
 material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "m3"}
-material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "m3-adaptive" }
-material3-nav-suite = { module = "org.jetbrains.compose.material3:material3-adaptive-navigation-suite", version.ref = "m3-adaptive-nav-suite" }
+material3-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "m3-adaptive" }
+material3-adaptive-layout = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-layout", version.ref = "m3-adaptive" }
+material3-adaptive-navigation = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "m3-adaptive" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -132,4 +132,5 @@ test = ["koin-test", "kotlin-test", "kotlinx-coroutines-test", "turbine"]
 koin = ["koin-annotations", "koin-compose", "koin-viewmodel", "koin-viewmodel-navigation"]
 #noinspection UnusedVersionCatalogEntry
 compose = ["material3", "compose-foundation", "compose-material-icons", "compose-runtime", "compose-ui", "compose-ui-tooling-preview"]
-material3-adaptive = ["material3-adaptive", "material3-nav-suite"]
+#noinspection UnusedVersionCatalogEntry
+material3-adaptive = ["material3-adaptive", "material3-adaptive-layout", "material3-adaptive-navigation"]

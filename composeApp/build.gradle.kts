@@ -33,9 +33,8 @@ kotlin {
             implementation(projects.core.presentation)
 
             // dependencies
-            implementation(libs.backhandler)
             implementation(libs.koin.compose)
-            implementation(libs.bundles.material3.adaptive)
+            implementation(libs.navigation.event)
 
             // features
             implementation(projects.features.auth)

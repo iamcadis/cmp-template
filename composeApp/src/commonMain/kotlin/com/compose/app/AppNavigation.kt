@@ -21,7 +21,7 @@ fun NavGraphBuilder.buildNavigationRoutes() {
     }
 
     composable<NavRoute.Test> {
-        BaseScreen {
+        BaseScreen(confirmOnBack = true) {
             Text("TEST SCREEN")
         }
     }
